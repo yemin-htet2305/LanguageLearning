@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using LanguageLearning.Domain;
+using LanguageLearning.Data;
 
 namespace LanguageLearning.Data
 {
-    public class LanguageLearningContext : DbContext
+    public class LanguageLearningContext(DbContextOptions<LanguageLearningContext> options) : IdentityDbContext<LanguageLearningUser>(options)
     {
-        public LanguageLearningContext (DbContextOptions<LanguageLearningContext> options)
-            : base(options)
-        {
-        }
 
         public DbSet<LanguageLearning.Domain.Language> Language { get; set; } = default!;
         public DbSet<LanguageLearning.Domain.Lesson> Lesson { get; set; } = default!;
@@ -22,5 +15,12 @@ namespace LanguageLearning.Data
         public DbSet<LanguageLearning.Domain.Progress> Progress { get; set; } = default!;
         public DbSet<LanguageLearning.Domain.Quession> Quession { get; set; } = default!;
         public DbSet<LanguageLearning.Domain.Quiz> Quiz { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+
+        }
     }
 }
