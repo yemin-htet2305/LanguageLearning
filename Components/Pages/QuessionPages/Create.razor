@@ -1,0 +1,94 @@
+﻿@page "/quessions/create"
+@using Microsoft.EntityFrameworkCore
+@using LanguageLearning.Domain
+@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Quession</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Quession" OnValidSubmit="AddQuession" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="text" class="form-label">Text:</label> 
+                <InputText id="text" @bind-Value="Quession.Text" class="form-control" /> 
+                <ValidationMessage For="() => Quession.Text" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="opta" class="form-label">OptA:</label> 
+                <InputText id="opta" @bind-Value="Quession.OptA" class="form-control" /> 
+                <ValidationMessage For="() => Quession.OptA" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="optb" class="form-label">OptB:</label> 
+                <InputText id="optb" @bind-Value="Quession.OptB" class="form-control" /> 
+                <ValidationMessage For="() => Quession.OptB" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="optc" class="form-label">OptC:</label> 
+                <InputText id="optc" @bind-Value="Quession.OptC" class="form-control" /> 
+                <ValidationMessage For="() => Quession.OptC" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="optd" class="form-label">OptD:</label> 
+                <InputText id="optd" @bind-Value="Quession.OptD" class="form-control" /> 
+                <ValidationMessage For="() => Quession.OptD" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="corrrectanswer" class="form-label">CorrrectAnswer:</label> 
+                <InputText id="corrrectanswer" @bind-Value="Quession.CorrrectAnswer" class="form-control" /> 
+                <ValidationMessage For="() => Quession.CorrrectAnswer" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="quizid" class="form-label">QuizId:</label> 
+                <InputNumber id="quizid" @bind-Value="Quession.QuizId" class="form-control" /> 
+                <ValidationMessage For="() => Quession.QuizId" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="datecreated" class="form-label">DateCreated:</label> 
+                <InputDate id="datecreated" @bind-Value="Quession.DateCreated" class="form-control" /> 
+                <ValidationMessage For="() => Quession.DateCreated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="dateupdated" class="form-label">DateUpdated:</label> 
+                <InputDate id="dateupdated" @bind-Value="Quession.DateUpdated" class="form-control" /> 
+                <ValidationMessage For="() => Quession.DateUpdated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="createdby" class="form-label">CreatedBy:</label> 
+                <InputText id="createdby" @bind-Value="Quession.CreatedBy" class="form-control" /> 
+                <ValidationMessage For="() => Quession.CreatedBy" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="updatedby" class="form-label">UpdatedBy:</label> 
+                <InputText id="updatedby" @bind-Value="Quession.UpdatedBy" class="form-control" /> 
+                <ValidationMessage For="() => Quession.UpdatedBy" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/quessions">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Quession Quession { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddQuession()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Quession.Add(Quession);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/quessions");
+    }
+}

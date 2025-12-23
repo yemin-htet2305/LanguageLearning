@@ -1,0 +1,62 @@
+﻿@page "/progresses/details"
+@using Microsoft.EntityFrameworkCore
+@using LanguageLearning.Domain
+@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Progress</h2>
+    <hr />
+    @if (progress is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">ProgressPer</dt>
+            <dd class="col-sm-10">@progress.ProgressPer</dd>
+            <dt class="col-sm-2">IsCompleted</dt>
+            <dd class="col-sm-10">@progress.IsCompleted</dd>
+            <dt class="col-sm-2">CompletedDate</dt>
+            <dd class="col-sm-10">@progress.CompletedDate</dd>
+            <dt class="col-sm-2">LessonId</dt>
+            <dd class="col-sm-10">@progress.LessonId</dd>
+            <dt class="col-sm-2">UserId</dt>
+            <dd class="col-sm-10">@progress.UserId</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@progress.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@progress.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@progress.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@progress.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/progresses/edit?id={progress.Id}")">Edit</a> |
+            <a href="@($"/progresses")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Progress? progress;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        progress = await context.Progress.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (progress is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

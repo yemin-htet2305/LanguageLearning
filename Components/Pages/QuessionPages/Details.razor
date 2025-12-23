@@ -1,0 +1,66 @@
+﻿@page "/quessions/details"
+@using Microsoft.EntityFrameworkCore
+@using LanguageLearning.Domain
+@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Quession</h2>
+    <hr />
+    @if (quession is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Text</dt>
+            <dd class="col-sm-10">@quession.Text</dd>
+            <dt class="col-sm-2">OptA</dt>
+            <dd class="col-sm-10">@quession.OptA</dd>
+            <dt class="col-sm-2">OptB</dt>
+            <dd class="col-sm-10">@quession.OptB</dd>
+            <dt class="col-sm-2">OptC</dt>
+            <dd class="col-sm-10">@quession.OptC</dd>
+            <dt class="col-sm-2">OptD</dt>
+            <dd class="col-sm-10">@quession.OptD</dd>
+            <dt class="col-sm-2">CorrrectAnswer</dt>
+            <dd class="col-sm-10">@quession.CorrrectAnswer</dd>
+            <dt class="col-sm-2">QuizId</dt>
+            <dd class="col-sm-10">@quession.QuizId</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@quession.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@quession.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@quession.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@quession.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/quessions/edit?id={quession.Id}")">Edit</a> |
+            <a href="@($"/quessions")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Quession? quession;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        quession = await context.Quession.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (quession is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

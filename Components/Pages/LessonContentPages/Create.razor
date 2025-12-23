@@ -1,0 +1,74 @@
+﻿@page "/lessoncontents/create"
+@using Microsoft.EntityFrameworkCore
+@using LanguageLearning.Domain
+@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>LessonContent</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="LessonContent" OnValidSubmit="AddLessonContent" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="contenttype" class="form-label">ContentType:</label> 
+                <InputText id="contenttype" @bind-Value="LessonContent.ContentType" class="form-control" /> 
+                <ValidationMessage For="() => LessonContent.ContentType" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="positionorder" class="form-label">PositionOrder:</label> 
+                <InputNumber id="positionorder" @bind-Value="LessonContent.PositionOrder" class="form-control" /> 
+                <ValidationMessage For="() => LessonContent.PositionOrder" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="lessonid" class="form-label">LessonId:</label> 
+                <InputNumber id="lessonid" @bind-Value="LessonContent.LessonId" class="form-control" /> 
+                <ValidationMessage For="() => LessonContent.LessonId" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="datecreated" class="form-label">DateCreated:</label> 
+                <InputDate id="datecreated" @bind-Value="LessonContent.DateCreated" class="form-control" /> 
+                <ValidationMessage For="() => LessonContent.DateCreated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="dateupdated" class="form-label">DateUpdated:</label> 
+                <InputDate id="dateupdated" @bind-Value="LessonContent.DateUpdated" class="form-control" /> 
+                <ValidationMessage For="() => LessonContent.DateUpdated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="createdby" class="form-label">CreatedBy:</label> 
+                <InputText id="createdby" @bind-Value="LessonContent.CreatedBy" class="form-control" /> 
+                <ValidationMessage For="() => LessonContent.CreatedBy" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="updatedby" class="form-label">UpdatedBy:</label> 
+                <InputText id="updatedby" @bind-Value="LessonContent.UpdatedBy" class="form-control" /> 
+                <ValidationMessage For="() => LessonContent.UpdatedBy" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/lessoncontents">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private LessonContent LessonContent { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddLessonContent()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.LessonContent.Add(LessonContent);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/lessoncontents");
+    }
+}
