@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using LanguageLearning.Data;
+using LanguageLearning.Configurations.Entities;
 
 namespace LanguageLearning.Data
 {
@@ -20,6 +21,9 @@ namespace LanguageLearning.Data
         {
             base.OnModelCreating(builder);
 
+            builder.ApplyConfiguration(new RoleSeed());
+            builder.ApplyConfiguration(new UserRoleSeed());
+            builder.ApplyConfiguration(new UserSeed());
 
         }
     }
