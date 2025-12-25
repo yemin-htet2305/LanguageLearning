@@ -34,6 +34,7 @@ builder.Services.AddAuthentication(options =>
     .AddIdentityCookies();
 
 builder.Services.AddIdentityCore<LanguageLearningUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<LanguageLearningContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();

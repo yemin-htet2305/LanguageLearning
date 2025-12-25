@@ -32,22 +32,22 @@ else
                     <InputText id="description" @bind-Value="Language.Description" class="form-control" />
                     <ValidationMessage For="() => Language.Description" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="datecreated" class="form-label">DateCreated:</label>
                     <InputDate id="datecreated" @bind-Value="Language.DateCreated" class="form-control" />
                     <ValidationMessage For="() => Language.DateCreated" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="dateupdated" class="form-label">DateUpdated:</label>
                     <InputDate id="dateupdated" @bind-Value="Language.DateUpdated" class="form-control" />
                     <ValidationMessage For="() => Language.DateUpdated" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="createdby" class="form-label">CreatedBy:</label>
                     <InputText id="createdby" @bind-Value="Language.CreatedBy" class="form-control" />
                     <ValidationMessage For="() => Language.CreatedBy" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="updatedby" class="form-label">UpdatedBy:</label>
                     <InputText id="updatedby" @bind-Value="Language.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Language.UpdatedBy" class="text-danger" />
@@ -68,9 +68,21 @@ else
 
     [SupplyParameterFromForm]
     private Language? Language { get; set; }
+    //Create userId string to store the user id, default value is "System".
+    private string userId = "System";
+    //Inject the AuthenticationStateProvider to get the user id.
+    @inject AuthenticationStateProvider authenticationStateProvider
 
     protected override async Task OnInitializedAsync()
     {
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        // Get the userId claim
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
         using var context = DbFactory.CreateDbContext();
         Language ??= await context.Language.FirstOrDefaultAsync(m => m.Id == Id);
 
@@ -85,6 +97,11 @@ else
     private async Task UpdateLanguage()
     {
         using var context = DbFactory.CreateDbContext();
+
+        //Set the userId to the UpdatedBy fields.
+        Language.UpdatedBy = userId;
+        //Set the DateUpdated fields to the current date and time.
+        Language.DateUpdated = DateTime.Now;
         context.Attach(Language!).State = EntityState.Modified;
 
         try
