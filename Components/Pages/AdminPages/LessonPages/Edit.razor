@@ -1,4 +1,5 @@
 ﻿@page "/lessons/edit"
+@using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
@@ -38,10 +39,23 @@ else
                     <ValidationMessage For="() => Lesson.DifficultyLvl" class="text-danger" />
                 </div>
                 <div class="mb-3">
+                    <label for="languageid" class="form-lable">LanguageId:</label>
+                    <InputSelect id="languageid" @bind-Value="Lesson.LanguageId" class="form-control">
+                        <option value="">--Select Language--</option>
+                        @if (Languages != null)
+                        {
+                            foreach (var language in Languages)
+                            {
+                                <option value="@language.Id">@language.Name</option>
+                            }
+                        }
+                    </InputSelect>
+                </div>
+                @* <div class="mb-3">
                     <label for="languageid" class="form-label">LanguageId:</label>
                     <InputNumber id="languageid" @bind-Value="Lesson.LanguageId" class="form-control" />
                     <ValidationMessage For="() => Lesson.LanguageId" class="text-danger" />
-                </div>
+                </div> *@
                 <div class="mb-3">
                     <label for="datecreated" class="form-label">DateCreated:</label>
                     <InputDate id="datecreated" @bind-Value="Lesson.DateCreated" class="form-control" />
@@ -79,15 +93,32 @@ else
     [SupplyParameterFromForm]
     private Lesson? Lesson { get; set; }
 
+    //Create userId string to store the user id, default value is "System".
+    private string userId = "System";
+    //Inject the AuthenticationStateProvider to get the user id.
+    @inject AuthenticationStateProvider authenticationStateProvider
+
+    private IList<Language> Languages;
+
     protected override async Task OnInitializedAsync()
     {
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        // Get the userId claim
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
         using var context = DbFactory.CreateDbContext();
+        Languages = context.Language.ToList();
         Lesson ??= await context.Lesson.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Lesson is null)
         {
             NavigationManager.NavigateTo("notfound");
         }
+
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -95,6 +126,10 @@ else
     private async Task UpdateLesson()
     {
         using var context = DbFactory.CreateDbContext();
+
+        Lesson.UpdatedBy = userId;
+        Lesson.DateUpdated = DateTime.Now;
+
         context.Attach(Lesson!).State = EntityState.Modified;
 
         try

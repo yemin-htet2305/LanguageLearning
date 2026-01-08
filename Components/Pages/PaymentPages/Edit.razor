@@ -37,22 +37,22 @@ else
                     <InputText id="status" @bind-Value="Payment.Status" class="form-control" />
                     <ValidationMessage For="() => Payment.Status" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="datecreated" class="form-label">DateCreated:</label>
                     <InputDate id="datecreated" @bind-Value="Payment.DateCreated" class="form-control" />
                     <ValidationMessage For="() => Payment.DateCreated" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="dateupdated" class="form-label">DateUpdated:</label>
                     <InputDate id="dateupdated" @bind-Value="Payment.DateUpdated" class="form-control" />
                     <ValidationMessage For="() => Payment.DateUpdated" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="createdby" class="form-label">CreatedBy:</label>
                     <InputText id="createdby" @bind-Value="Payment.CreatedBy" class="form-control" />
                     <ValidationMessage For="() => Payment.CreatedBy" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="updatedby" class="form-label">UpdatedBy:</label>
                     <InputText id="updatedby" @bind-Value="Payment.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Payment.UpdatedBy" class="text-danger" />
@@ -74,8 +74,19 @@ else
     [SupplyParameterFromForm]
     private Payment? Payment { get; set; }
 
+    private string userId = "System";
+    @inject AuthenticationStateProvider authenticationStateProvider
+
     protected override async Task OnInitializedAsync()
     {
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        // Get the userId claim
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
         using var context = DbFactory.CreateDbContext();
         Payment ??= await context.Payment.FirstOrDefaultAsync(m => m.Id == Id);
 
@@ -90,6 +101,10 @@ else
     private async Task UpdatePayment()
     {
         using var context = DbFactory.CreateDbContext();
+
+        Payment.UpdatedBy = userId;
+        Payment.DateUpdated = DateTime.Now;
+
         context.Attach(Payment!).State = EntityState.Modified;
 
         try

@@ -61,6 +61,7 @@
     private string userId = "System";
     //Inject the AuthenticationStateProvider to get the user id.
     @inject AuthenticationStateProvider authenticationStateProvider
+
     //Override the OnInitialized method to get the user id.
     protected override async void OnInitialized()
     {
@@ -83,6 +84,7 @@
         //Set the DateCreated and DateUpdated fields to the current date and time.
         Language.DateCreated = DateTime.Now;
         Language.DateUpdated = DateTime.Now;
+
         using var context = DbFactory.CreateDbContext();
         context.Language.Add(Language);
         await context.SaveChangesAsync();

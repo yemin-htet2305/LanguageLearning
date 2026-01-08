@@ -37,22 +37,22 @@ else
                     <InputText id="billingcycle" @bind-Value="Plan.BillingCycle" class="form-control" />
                     <ValidationMessage For="() => Plan.BillingCycle" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="datecreated" class="form-label">DateCreated:</label>
                     <InputDate id="datecreated" @bind-Value="Plan.DateCreated" class="form-control" />
                     <ValidationMessage For="() => Plan.DateCreated" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="dateupdated" class="form-label">DateUpdated:</label>
                     <InputDate id="dateupdated" @bind-Value="Plan.DateUpdated" class="form-control" />
                     <ValidationMessage For="() => Plan.DateUpdated" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="createdby" class="form-label">CreatedBy:</label>
                     <InputText id="createdby" @bind-Value="Plan.CreatedBy" class="form-control" />
                     <ValidationMessage For="() => Plan.CreatedBy" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="updatedby" class="form-label">UpdatedBy:</label>
                     <InputText id="updatedby" @bind-Value="Plan.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Plan.UpdatedBy" class="text-danger" />
@@ -74,8 +74,19 @@ else
     [SupplyParameterFromForm]
     private Plan? Plan { get; set; }
 
+    private string userId = "System";
+    @inject AuthenticationStateProvider authenticationStateProvider
+
     protected override async Task OnInitializedAsync()
     {
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        // Get the userId claim
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
         using var context = DbFactory.CreateDbContext();
         Plan ??= await context.Plan.FirstOrDefaultAsync(m => m.Id == Id);
 
@@ -90,6 +101,10 @@ else
     private async Task UpdatePlan()
     {
         using var context = DbFactory.CreateDbContext();
+
+        Plan.UpdatedBy = userId;
+        Plan.DateUpdated = DateTime.Now;
+
         context.Attach(Plan!).State = EntityState.Modified;
 
         try

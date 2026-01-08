@@ -68,6 +68,7 @@ else
 
     [SupplyParameterFromForm]
     private Language? Language { get; set; }
+
     //Create userId string to store the user id, default value is "System".
     private string userId = "System";
     //Inject the AuthenticationStateProvider to get the user id.
@@ -93,7 +94,6 @@ else
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateLanguage()
     {
         using var context = DbFactory.CreateDbContext();
@@ -102,6 +102,7 @@ else
         Language.UpdatedBy = userId;
         //Set the DateUpdated fields to the current date and time.
         Language.DateUpdated = DateTime.Now;
+
         context.Attach(Language!).State = EntityState.Modified;
 
         try

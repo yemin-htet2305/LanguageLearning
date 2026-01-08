@@ -5,6 +5,7 @@
 @using LanguageLearning.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
+@rendermode InteractiveServer
 
 <PageTitle>Index</PageTitle>
 
@@ -14,13 +15,19 @@
     <a href="languages/create">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Language">
-    <PropertyColumn Property="language => language.Name" />
-    <PropertyColumn Property="language => language.Description" />
-    <PropertyColumn Property="language => language.DateCreated" />
-    <PropertyColumn Property="language => language.DateUpdated" />
-    <PropertyColumn Property="language => language.CreatedBy" />
-    <PropertyColumn Property="language => language.UpdatedBy" />
+<QuickGrid Class="table" Items="FilterdLanguages" Pagination="paginationState">
+    <PropertyColumn Property="language => language.Name" Sortable="true">
+        <ColumnOptions>
+            <div>
+            <input type="search" @bind="searchText" @bind:event="oninput" autofocus />
+            </div>
+        </ColumnOptions>
+    </PropertyColumn>
+    <PropertyColumn Property="language => language.Description" Sortable="true" />
+    <PropertyColumn Property="language => language.DateCreated" Sortable="true" />
+    <PropertyColumn Property="language => language.DateUpdated" Sortable="true" />
+    <PropertyColumn Property="language => language.CreatedBy" Sortable="true" />
+    <PropertyColumn Property="language => language.UpdatedBy" Sortable="true"/>
 
     <TemplateColumn Context="language">
         <a href="@($"languages/edit?id={language.Id}")">Edit</a> |
@@ -29,9 +36,15 @@
         
     </TemplateColumn>
 </QuickGrid>
+@* <Paginator State="paginationState"/> *@
 
 @code {
+
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 2 };
     private LanguageLearningContext context = default!;
+
+    private string searchText = "";
+    private IQueryable<Language> FilterdLanguages => context.Language.Where(l => l.Name.Contains(searchText));
 
     protected override void OnInitialized()
     {
