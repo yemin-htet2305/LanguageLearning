@@ -6,9 +6,13 @@ using LanguageLearning.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContextFactory<LanguageLearningContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LanguageLearningContext") ?? throw new InvalidOperationException("Connection string 'LanguageLearningContext' not found.")));
+
+//Add the API controller
+builder.Services.AddControllers();
 
 builder.Services.AddQuickGridEntityFrameworkAdapter();
 
@@ -25,6 +29,13 @@ builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri("https://localhost:7238/")
+}
+);
+
 
 builder.Services.AddAuthentication(options =>
     {
@@ -43,6 +54,9 @@ builder.Services.AddSingleton<IEmailSender<LanguageLearningUser>, IdentityNoOpEm
 
 var app = builder.Build();
 
+//Add the Default controller route
+app.MapDefaultControllerRoute();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -56,6 +70,8 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

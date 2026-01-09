@@ -3,19 +3,17 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using LanguageLearning.Domain
 @using LanguageLearning.Data
-@implements IAsyncDisposable
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @rendermode InteractiveServer
+@inject HttpClient httpClient
 
 <PageTitle>Index</PageTitle>
-
 <h1>Index</h1>
 
 <p>
     <a href="languages/create">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="FilterdLanguages" Pagination="paginationState">
+<QuickGrid Class="table" Items="FilteredLanguages" Pagination="paginationState">
     <PropertyColumn Property="language => language.Name" Sortable="true">
         <ColumnOptions>
             <div>
@@ -35,21 +33,18 @@
         <a href="@($"languages/delete?id={language.Id}")">Delete</a>
         
     </TemplateColumn>
-</QuickGrid>
-@* <Paginator State="paginationState"/> *@
+</QuickGrid> 
+<Paginator State="paginationState"/>
 
 @code {
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };
 
-    PaginationState paginationState = new PaginationState { ItemsPerPage = 2 };
-    private LanguageLearningContext context = default!;
+    List<Language> Languages = new();
+    string searchText = "";
+    IQueryable<Language> FilteredLanguages => Languages.Where(l => l.Name.Contains(searchText)).AsQueryable();
 
-    private string searchText = "";
-    private IQueryable<Language> FilterdLanguages => context.Language.Where(l => l.Name.Contains(searchText));
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        context = DbFactory.CreateDbContext();
+        Languages = await httpClient.GetFromJsonAsync<List<Language>>("api/languages") ?? new List<Language>();
     }
-
-    public async ValueTask DisposeAsync() => await context.DisposeAsync();
 }
