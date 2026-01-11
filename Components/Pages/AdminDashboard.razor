@@ -1,0 +1,141 @@
+﻿@page "/admin/dashboard"
+
+<div class="admin-page">
+
+    <h2 class="page-title">Admin Dashboard</h2>
+    <p class="dashboard-subtitle">
+        Overview of OurLingua system.
+    </p>
+
+    <!-- ================= CORE LEARNING ================= -->
+    <div class="section-title">Core Learning</div>
+    <div class="stats-grid core-grid">
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon">👤</div>
+            </div>
+            <div class="stat-number">20</div>
+            <div class="stat-label">Users</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon">🌐</div>
+            </div>
+            <div class="stat-number">3</div>
+            <div class="stat-label">Languages</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon">📚</div>
+            </div>
+            <div class="stat-number">15</div>
+            <div class="stat-label">Lessons</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <div class="stat-icon">📄</div>
+            </div>
+            <div class="stat-number">45</div>
+            <div class="stat-label">Lesson Contents</div>
+        </div>
+    </div>
+
+    <!-- ================= BILLING ================= -->
+    <div class="section-title">Billing</div>
+
+    <div class="stats-grid billing-grid">
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-number">—</div>
+            <div class="stat-label">Plans</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">💳</div>
+            <div class="stat-number">—</div>
+            <div class="stat-label">Payments</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🧾</div>
+            <div class="stat-number">—</div>
+            <div class="stat-label">Pending Payments</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title">Recent Payments</div>
+        <div class="panel-body">
+            <table class="simple-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>User</th>
+                        <th>Plan</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5" class="table-empty">
+                            Payment data will appear here (frontend placeholder)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- ================= TRACKING & REPORTS ================= -->
+    <div class="section-title">Tracking & Reports</div>
+
+    <div class="panel">
+        <div class="panel-title">Active Learners by Language</div>
+        <div class="panel-body">
+
+            <!-- BAR CHART -->
+            <div class="bar-chart">
+                <div class="bar-row">
+                    <span class="bar-label">English</span>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 80%"></div>
+                    </div>
+                    <span class="bar-value">80</span>
+                </div>
+
+                <div class="bar-row">
+                    <span class="bar-label">Korean</span>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 55%"></div>
+                    </div>
+                    <span class="bar-value">55</span>
+                </div>
+
+                <div class="bar-row">
+                    <span class="bar-label">Japanese</span>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 40%"></div>
+                    </div>
+                    <span class="bar-value">40</span>
+                </div>
+
+                <div class="bar-row">
+                    <span class="bar-label">Chinese</span>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 25%"></div>
+                    </div>
+                    <span class="bar-value">25</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,217 @@
+﻿/* ---------- Page ---------- */
+.admin-page {
+    padding: 14px 14px 34px;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.page-title {
+    font-weight: 900;
+    margin-bottom: 6px;
+    color: #2563eb;
+}
+
+.dashboard-subtitle {
+    color: #2563eb;
+    margin-bottom: 18px;
+}
+
+
+
+/* ---------- Section titles ---------- */
+.section-title {
+    font-weight: 900;
+    margin: 26px 0 12px;
+    font-size: 13px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #2563eb;
+}
+
+/* ---------- Stats grid ---------- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+/* Billing uses 3 cards only */
+.billing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ---------- Stat cards (default = white) ---------- */
+.stat-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 14px rgba(0,0,0,.05);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+    .stat-card:hover {
+        transform: translateY(-2px);
+        border-color: #cbd5e1;
+        box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    }
+
+/* ---------- Card top (default style) ---------- */
+.stat-card-top {
+    width: 100%;
+    height: 70px;
+    background: #eff6ff;
+    border-radius: 14px 14px 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+    .stat-card-top .stat-icon {
+        font-size: 32px;
+        color: #2563eb;
+    }
+
+/* ---------- Text (default) ---------- */
+.stat-number {
+    font-size: 26px;
+    font-weight: 900;
+    color: #0f172a;
+}
+
+.stat-label {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* =======================================================
+   CORE LEARNING: FULL BLUE CARD (this makes red box blue)
+   Apply only to <div class="stats-grid core-grid">
+   ======================================================= */
+
+.core-grid .stat-card {
+    background: linear-gradient( 135deg, #dbeafe, /* very light blue */
+    #eaf2ff /* almost grey-blue */
+    );
+    border: 1px solid #c7d2fe;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
+}
+
+    .core-grid .stat-card:hover {
+        box-shadow: 0 16px 36px rgba(37, 99, 235, .35);
+        border-color: rgba(255,255,255,.35);
+    }
+
+.core-grid .stat-card-top {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+    .core-grid .stat-card-top .stat-icon {
+        color: #ffffff;
+    }
+
+.core-grid .stat-number {
+    color: #1e3a8a;
+}
+
+.core-grid .stat-label {
+    color: #475569;
+}
+
+/* ---------- Panels ---------- */
+.panel {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 22px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+
+.panel-title {
+    padding: 14px 18px;
+    font-weight: 900;
+    color: #1e40af;
+    background: #eff6ff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.panel-body {
+    padding: 18px;
+}
+
+/* ---------- Table (Billing) ---------- */
+.simple-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+    .simple-table th,
+    .simple-table td {
+        text-align: left;
+        padding: 10px 10px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .simple-table th {
+        font-weight: 900;
+        color: #1e40af;
+        background: #f1f5f9;
+    }
+
+    .simple-table td {
+        color: #0f172a;
+    }
+
+.table-empty {
+    text-align: center;
+    padding: 18px 8px;
+    color: #64748b;
+}
+
+/* ---------- Bar Chart ---------- */
+.bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.bar-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 40px;
+    align-items: center;
+    gap: 12px;
+}
+
+.bar-label {
+    font-weight: 800;
+    color: #0f172a;
+    opacity: .85;
+}
+
+.bar-track {
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 999px;
+}
+
+.bar-value {
+    text-align: right;
+    font-weight: 900;
+    color: #334155;
+}
