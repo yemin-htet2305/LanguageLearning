@@ -1,8 +1,8 @@
 ﻿@page "/payments/delete"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Delete</PageTitle>
 
@@ -60,20 +60,26 @@
 
     protected override async Task OnInitializedAsync()
     {
-        using var context = DbFactory.CreateDbContext();
-        payment = await context.Payment.FirstOrDefaultAsync(m => m.Id == Id);
-
-        if (payment is null)
-        {
-            NavigationManager.NavigateTo("notfound");
-        }
+        payment = await httpClient.GetFromJsonAsync<Payment>($"api/payments/{Id}");
     }
 
     private async Task DeletePayment()
     {
-        using var context = DbFactory.CreateDbContext();
-        context.Payment.Remove(payment!);
-        await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/payments");
+        var response = await httpClient.DeleteAsync($"api/payments/{payment.Id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/payments");
+        }
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Error deleting payment: {errorMessage}");
+        }
     }
 }

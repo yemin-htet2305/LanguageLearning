@@ -1,8 +1,8 @@
 ﻿@page "/quessions/delete"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Delete</PageTitle>
 
@@ -76,20 +76,26 @@
 
     protected override async Task OnInitializedAsync()
     {
-        using var context = DbFactory.CreateDbContext();
-        quession = await context.Quession.FirstOrDefaultAsync(m => m.Id == Id);
-
-        if (quession is null)
-        {
-            NavigationManager.NavigateTo("notfound");
-        }
+        quession = await httpClient.GetFromJsonAsync<Quession>($"api/quessions/{Id}");
     }
 
     private async Task DeleteQuession()
     {
-        using var context = DbFactory.CreateDbContext();
-        context.Quession.Remove(quession!);
-        await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/quessions");
+        var response = await httpClient.DeleteAsync($"api/quessions/{quession.Id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/quessions");
+        }
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Error deleting quession: {errorMessage}");
+        }
     }
 }

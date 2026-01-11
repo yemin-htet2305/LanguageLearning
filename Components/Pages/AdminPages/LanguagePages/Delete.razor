@@ -1,9 +1,8 @@
 ﻿@page "/languages/delete"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
-
+@inject HttpClient httpClient
 
 <PageTitle>Delete</PageTitle>
 
@@ -57,20 +56,26 @@
 
     protected override async Task OnInitializedAsync()
     {
-        using var context = DbFactory.CreateDbContext();
-        language = await context.Language.FirstOrDefaultAsync(m => m.Id == Id);
-
-        if (language is null)
-        {
-            NavigationManager.NavigateTo("notfound");
-        }
+        language = await httpClient.GetFromJsonAsync<Language>($"api/languages/{Id}");
     }
 
     private async Task DeleteLanguage()
     {
-        using var context = DbFactory.CreateDbContext();
-        context.Language.Remove(language!);
-        await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/languages");
+        var response = await httpClient.DeleteAsync($"api/languages/{language.Id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/languages");
+        }
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Error deleting language: {errorMessage}");
+        }
     }
 }

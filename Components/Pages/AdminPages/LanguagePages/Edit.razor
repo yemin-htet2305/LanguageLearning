@@ -3,6 +3,7 @@
 @using LanguageLearning.Domain
 @inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Edit</PageTitle>
 
@@ -84,49 +85,44 @@ else
         {
             userId = userIdClaim.Value;
         }
-        using var context = DbFactory.CreateDbContext();
-        Language ??= await context.Language.FirstOrDefaultAsync(m => m.Id == Id);
 
+        // Only load from API if Language is not already bound from form
         if (Language is null)
         {
-            NavigationManager.NavigateTo("notfound");
+            Language = await httpClient.GetFromJsonAsync<Language>($"api/languages/{Id}");
+
+            if (Language is null)
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
         }
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     private async Task UpdateLanguage()
     {
-        using var context = DbFactory.CreateDbContext();
-
         //Set the userId to the UpdatedBy fields.
         Language.UpdatedBy = userId;
         //Set the DateUpdated fields to the current date and time.
         Language.DateUpdated = DateTime.Now;
 
-        context.Attach(Language!).State = EntityState.Modified;
+        var response = await httpClient.PutAsJsonAsync($"api/languages/{Language.Id}", Language);
 
-        try
+        if (response.IsSuccessStatusCode)
         {
-            await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/languages");
         }
-        catch (DbUpdateConcurrencyException)
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
-            if (!LanguageExists(Language!.Id))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
+            NavigationManager.NavigateTo("notfound");
         }
-
-        NavigationManager.NavigateTo("/languages");
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            // You could show an error message to the user here
+            Console.WriteLine($"Error updating language: {errorMessage}");
+        }
     }
 
-    private bool LanguageExists(int id)
-    {
-        using var context = DbFactory.CreateDbContext();
-        return context.Language.Any(e => e.Id == id);
-    }
 }

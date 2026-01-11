@@ -1,8 +1,8 @@
 ﻿@page "/progresses/delete"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Delete</PageTitle>
 
@@ -68,20 +68,26 @@
 
     protected override async Task OnInitializedAsync()
     {
-        using var context = DbFactory.CreateDbContext();
-        progress = await context.Progress.FirstOrDefaultAsync(m => m.Id == Id);
-
-        if (progress is null)
-        {
-            NavigationManager.NavigateTo("notfound");
-        }
+        progress = await httpClient.GetFromJsonAsync<Progress>($"api/progresses/{Id}");
     }
 
     private async Task DeleteProgress()
     {
-        using var context = DbFactory.CreateDbContext();
-        context.Progress.Remove(progress!);
-        await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/progresses");
+        var response = await httpClient.DeleteAsync($"api/progresses/{progress.Id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/progresses");
+        }
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Error deleting progress: {errorMessage}");
+        }
     }
 }

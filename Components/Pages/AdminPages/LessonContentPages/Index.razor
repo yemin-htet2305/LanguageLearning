@@ -3,9 +3,9 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using LanguageLearning.Domain
 @using LanguageLearning.Data
-@implements IAsyncDisposable
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @rendermode InteractiveServer
+@inject HttpClient httpClient
+
 
 <PageTitle>Index</PageTitle>
 
@@ -39,30 +39,32 @@
 <Paginator State="paginationState" />
 
 @code {
-    PaginationState paginationState = new PaginationState { ItemsPerPage = 1 };
-    private LanguageLearningContext context = default!;
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };
 
-    private string searchText = "";
-
-    private IQueryable<LessonContent> FilteredLessonContents
+    List<LessonContent> LessonContents = new();
+    string searchText = "";
+    IQueryable<LessonContent> FilteredLessonContents
     {
         get
         {
-            if (int.TryParse(searchText, out int lessonId))
+            if (string.IsNullOrWhiteSpace(searchText))
             {
-                return context.LessonContent
-                              .Where(lc => lc.LessonId == lessonId);
+                return LessonContents.AsQueryable();
             }
 
-            // If input is not a valid number, return no results
+            if (int.TryParse(searchText, out int lessonId))
+            {
+                return LessonContents.Where(lc => lc.LessonId == lessonId).AsQueryable();
+            }
+
             return Enumerable.Empty<LessonContent>().AsQueryable();
         }
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        context = DbFactory.CreateDbContext();
+        LessonContents = await httpClient.GetFromJsonAsync<List<LessonContent>>("api/lessoncontents") ?? new List<LessonContent>();
     }
-
-    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+    // amendable
 }
+
