@@ -2,8 +2,8 @@
 @using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Create</PageTitle>
 
@@ -86,7 +86,7 @@
     private IList<Lesson> Lessons;
 
     
-    protected override async void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
@@ -96,21 +96,22 @@
         {
             userId = userIdClaim.Value;
         }
-        context = DbFactory.CreateDbContext();
-        Lessons = context.Lesson.ToList();
+        Lessons = await httpClient.GetFromJsonAsync<IList<Lesson>>("api/lessons");
+        StateHasChanged();
     }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddLessonContent()
     {
+        //Set the userId to the CreatedBy and UpdatedBy fields.
         LessonContent.CreatedBy = userId;
         LessonContent.UpdatedBy = userId;
-
+        //Set the DateCreated and DateUpdated fields to the current date and time.
         LessonContent.DateCreated = DateTime.Now;
         LessonContent.DateUpdated = DateTime.Now;
-        using var context = DbFactory.CreateDbContext();
-        context.LessonContent.Add(LessonContent);
-        await context.SaveChangesAsync();
+
+        var repsonse = await httpClient.PostAsJsonAsync("api/lessoncontents", LessonContent);
+
         NavigationManager.NavigateTo("/lessoncontents");
     }
 }

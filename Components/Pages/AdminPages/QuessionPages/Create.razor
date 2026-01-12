@@ -2,8 +2,8 @@
 @using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Create</PageTitle>
 
@@ -102,11 +102,10 @@
     //Inject the AuthenticationStateProvider to get the user id.
 @inject AuthenticationStateProvider authenticationStateProvider
 
-    private LanguageLearningContext context = default!;
     private IList<Quiz> Quizzes;
 
     //Override the OnInitialized method to get the user id.
-    protected override async void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
@@ -116,7 +115,8 @@
         {
             userId = userIdClaim.Value;
         }
-        Quizzes = context.Quiz.ToList();
+        Quizzes = await httpClient.GetFromJsonAsync<IList<Quiz>>("api/quizs");
+        StateHasChanged();
     }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
@@ -128,9 +128,8 @@
         Quession.DateCreated = DateTime.Now;
         Quession.DateUpdated = DateTime.Now;
 
-        using var context = DbFactory.CreateDbContext();
-        context.Quession.Add(Quession);
-        await context.SaveChangesAsync();
+        var response = await httpClient.PostAsJsonAsync("api/quessions", Quession);
+
         NavigationManager.NavigateTo("/quessions");
     }
 }

@@ -1,8 +1,8 @@
 ﻿@page "/plans/create"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Create</PageTitle>
 
@@ -88,9 +88,7 @@
         Plan.DateUpdated = DateTime.Now;
         Plan.DateCreated = DateTime.Now;
 
-        using var context = DbFactory.CreateDbContext();
-        context.Plan.Add(Plan);
-        await context.SaveChangesAsync();
+        var response = await httpClient.PostAsJsonAsync("api/plans", Plan);
         NavigationManager.NavigateTo("/plans");
     }
 }
