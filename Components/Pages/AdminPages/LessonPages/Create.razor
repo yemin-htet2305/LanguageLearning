@@ -5,14 +5,13 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet" />
 <PageTitle>Create</PageTitle>
 
+<div style="color: #845007;" class="d-flex align-items-center justify-content-center flex-column p-5 trans-bg rounded trans-bg w-50 gap-1">
 <h1>Create</h1>
-
-<h2>Lesson</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="w-100 bg-transparent">
         <EditForm method="post" Model="Lesson" OnValidSubmit="AddLesson" FormName="create" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
@@ -27,13 +26,13 @@
                 <ValidationMessage For="() => Lesson.Description" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="difficultylvl" class="form-label">DifficultyLvl:</label> 
-                <InputNumber id="difficultylvl" @bind-Value="Lesson.DifficultyLvl" class="form-control" /> 
-                <ValidationMessage For="() => Lesson.DifficultyLvl" class="text-danger" /> 
+                    <label style="color: #845007;" for="difficultylvl" class="form-label">DifficultyLvl:</label>
+                    <InputNumber style="color: #845007;" id="difficultylvl" @bind-Value="Lesson.DifficultyLvl" class="form-control" />
+                    <ValidationMessage For="() => Lesson.DifficultyLvl" class="text-danger" /> 
             </div>  
             <div class="mb-3">
-                <label for="languageid" class="form-lable">LanguageId:</label>
-                <InputSelect id="languageid" @bind-Value="Lesson.LanguageId" class="form-control">
+                    <label style="color: #845007;" for="languageid" class="form-lable">LanguageId:</label>
+                    <InputSelect style="color: #845007;" id="languageid" @bind-Value="Lesson.LanguageId" class="form-control">
                     <option value="">--Select Language--</option>
                     @if(Languages != null)
                     {
@@ -68,14 +67,17 @@
                 <label for="updatedby" class="form-label">UpdatedBy:</label> 
                 <InputText id="updatedby" @bind-Value="Lesson.UpdatedBy" class="form-control" /> 
                 <ValidationMessage For="() => Lesson.UpdatedBy" class="text-danger" /> 
-            </div>        
-            <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+                <div class="w-100 d-flex align-items-center justify-content-center my-2">
+                    <button type="submit" class="btn log-btn">Create</button>
+                </div>
         </EditForm>
     </div>
 </div>
 
 <div>
-    <a href="/admin/lessons">Back to List</a>
+    <a class="log-link" href="/admin/lessons">Back to List</a>
+</div>
 </div>
 
     @code {

@@ -6,15 +6,13 @@
 @rendermode InteractiveServer
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet" />
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
-
-<p>
-    <a href="lessons/create">Create New</a>
-</p>
-
-<QuickGrid Class="table" Items="FilteredLessons" Pagination="paginationState">
+<div class="w-100 d-flex justify-content-end align-items-center">
+    <a class="btn create-btn text-center" href="admin/lessons/create">Create New Lesson <i class="bi bi-plus-circle"></i></a>
+</div>
+<QuickGrid Class="table table-hover" Items="FilteredLessons" Pagination="paginationState">
     <PropertyColumn Property="lesson => lesson.Title" Sortable="true">
         <ColumnOptions>
             <div>
@@ -25,18 +23,17 @@
     <PropertyColumn Property="lesson => lesson.Description" Sortable="true" />
     <PropertyColumn Property="lesson => lesson.DifficultyLvl" Sortable="true" />
     <PropertyColumn Property="lesson => lesson.LanguageId" Sortable="true" />
-    <PropertyColumn Property="lesson => lesson.DateCreated" Sortable="true" />
-    <PropertyColumn Property="lesson => lesson.DateUpdated" Sortable="true" />
-    <PropertyColumn Property="lesson => lesson.CreatedBy" Sortable="true" />
-    <PropertyColumn Property="lesson => lesson.UpdatedBy" Sortable="true" />
-
+    
     <TemplateColumn Context="lesson">
-        <a href="@($"admin/lessons/edit?id={lesson.Id}")">Edit</a> |
-        <a href="@($"admin/lessons/details?id={lesson.Id}")">Details</a> |
-        <a href="@($"admin/lessons/delete?id={lesson.Id}")">Delete</a>
+        <a class="btn edit-btn" href="@($"admin/lessons/edit?id={lesson.Id}")"><i class="bi bi-pencil-square"></i></a>
+        <a class="btn detail-btn" href="@($"admin/lessons/details?id={lesson.Id}")"><i class="bi bi-ticket-detailed"></i></a>
+        <a class="btn delete-btn" href="@($"admin/lessons/delete?id={lesson.Id}")"><i class="bi bi-trash"></i></a>
     </TemplateColumn>
 </QuickGrid>
-<Paginator State="paginationState" />
+<div style="color: #845007;">
+    <Paginator State="paginationState" />
+</div>
+
 
 @code {
     PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };

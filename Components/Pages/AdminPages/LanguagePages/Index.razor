@@ -8,11 +8,7 @@
 
 <link href="Manage.css" rel="stylesheet"/>
 <PageTitle>Index</PageTitle>
-@* <h1>Index</h1>
 
-<p>
-    <a href="admin/languages/create">Create New</a>
-</p> *@
 <div class="w-100 d-flex justify-content-end align-items-center">
     <a class="btn create-btn text-center" href="admin/languages/create">Create New Language <i class="bi bi-plus-circle"></i></a>
 </div>
@@ -36,8 +32,9 @@
     </TemplateColumn>
 </QuickGrid>
 
-
+<div style="color: #845007;">
 <Paginator State="paginationState"/>
+</div>
 
 @code {
     PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };
