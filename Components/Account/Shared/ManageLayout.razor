@@ -1,17 +1,19 @@
 ﻿@inherits LayoutComponentBase
 @layout AccountLayout
 
-<h1>Manage your account</h1>
-
+<link href="Manage.css" rel="stylesheet" />
+<div class="d-flex align-items-center justify-content-center flex-column p-5 trans-bg rounded trans-bg w-50 gap-1">
+<h1 style="color: #845007;">Manage your account</h1>
 <div>
-    <h2>Change your account settings</h2>
+    <h2 style="color: #845007;">Change your account settings</h2>
     <hr />
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-5">
             <ManageNavMenu />
         </div>
-        <div class="col-md-9">
+        <div class="col-md-7">
             @Body
         </div>
     </div>
+</div>
 </div>

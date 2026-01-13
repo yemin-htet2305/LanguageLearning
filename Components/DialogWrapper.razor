@@ -1,16 +1,8 @@
 ﻿@rendermode InteractiveServer
 @inject NavigationManager Navigation
 
-
-<button type="button" class="btn btn-light px-3 py-1" style="color: #845007; font-weight: bold;
-font-size: 1.25rem;
-border: 1px solid black;"
-        onmouseover="
-        this.style.backgroundColor='#A9A9A9';
-    "
-        onmouseout="
-        this.style.backgroundColor='#ffffff';
-    "
+<link href="Manage.css" rel="stylesheet" />
+<button type="button" class="btn log-btn fs-5 fw-bold px-3 py-1"
 @onclick="OpenDialog">
     Getting Started
 </button>
@@ -25,12 +17,12 @@ border: 1px solid black;"
                     
                 </div>
                 <div class="modal-body d-flex flex-column gap-3" >
-                    <button type="button" class="btn btn-primary px-4" @onclick="HandleSignIn">Sign In</button>
-                    <button type="button" class="btn btn-success px-4" @onclick="HandleRegister">Register</button>
+                    <button type="button" class="btn log-btn px-4" @onclick="HandleSignIn">Sign In</button>
+                    <button type="button" class="btn log-btn px-4" @onclick="HandleRegister">Register</button>
                     <p class="text-center" style="color: #845007;">Please choose an option to continue</p>
                 </div>
                 <div class="modal-footer justify-content-center" >
-                    <button type="button" class="btn btn-dark" @onclick="CloseDialog">Close</button>
+                    <button type="button" class="btn btn-dark close-btn" @onclick="CloseDialog">Close</button>
                 </div>
             </div>
         </div>

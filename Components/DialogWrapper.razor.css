@@ -1,0 +1,13 @@
+﻿.log-btn {
+    background-color: rgba(211, 211, 211, 1);
+    color: #845007;
+}
+
+    .log-btn:hover {
+        background-color: #845007;
+        color: white;
+        font: bold;
+    }
+.close-btn:hover {
+    background-color: gray;
+}

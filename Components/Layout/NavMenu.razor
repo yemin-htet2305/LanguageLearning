@@ -3,60 +3,44 @@
 @inject NavigationManager NavigationManager
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">OurLingua <i class="bi bi-yin-yang"></i></a>
+        <a class="log-link fs-4 text-center fw-bold" href="">OurLingua <i class="bi bi-brilliance fs-2"></i></a>
     </div>
 </div>
 
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="admin/dashboard" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> DashBoard
+<div class="nav-scrollable border-top border-1" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column gap-2">
+        <div class="px-3 mt-3 mb-2">
+            <NavLink class="btn nav-btn w-100" href="admin/dashboard" Match="NavLinkMatch.All">
+                <i class="bi bi-speedometer fs-5"></i> DashBoard
             </NavLink>
         </div>
         <AuthorizeView Roles="Administrator">
-        <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/languages">
-                    <span class="bi bi-airplane-fill-nav-menu" aria-hidden="true"></span> Language
+            <div class="px-3 mb-2">
+                <NavLink class="btn nav-btn w-100" href="admin/languages">
+                    <i class="bi bi-translate fs-5"></i> Language
             </NavLink>
         </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/lessons">
-                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Lesson
+            <div class="px-3 mb-2">
+                <NavLink class="btn nav-btn w-100" href="admin/lessons">
+                    <i class="bi bi-journals fs-5"></i> Lesson
                 </NavLink>
             </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/lessoncontents">
-                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Lesson Content
+            <div class="px-3 mb-2">
+                <NavLink class="btn nav-btn w-100" href="admin/lessoncontents">
+                    <i class="bi bi-journal-text fs-5"></i> Lesson Content
                 </NavLink>
             </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/plans">
-                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Plan
-                </NavLink>
-            </div>
-
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/progresses">
-                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Progress
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/payments">
-                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Payment
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/quessions">
-                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Quession
+            <div class="px-3 mb-2">
+                <NavLink class="btn nav-btn w-100" href="admin/quessions">
+                    <i class="bi bi-question-square fs-5"></i> Quession
                 </NavLink>
             </div>
 
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="admin/quizzes">
-                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Quiz
+            <div class="px-3 mb-2">
+                <NavLink class="btn nav-btn w-100" href="admin/quizzes">
+                    <i class="bi bi-hurricane fs-5"></i> Quiz
                 </NavLink>
             </div>
         </AuthorizeView>

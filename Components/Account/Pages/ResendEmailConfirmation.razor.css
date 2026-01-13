@@ -1,0 +1,31 @@
+﻿.trans-bg {
+    background-color: rgba(211, 211, 211, 0.3);
+}
+
+.log-btn {
+    background-color: rgba(211, 211, 211, 1);
+    color: #845007;
+}
+
+    .log-btn:hover {
+        background-color: #845007;
+        color: white;
+        font: bold;
+    }
+
+.bi-yin-yang {
+    font-size: 50px;
+}
+
+.log-link {
+    color: #845007;
+    text-decoration: none;
+}
+
+    .log-link:hover {
+        color: navy;
+    }
+
+.close-btn:hover {
+    background-color: gray;
+}
