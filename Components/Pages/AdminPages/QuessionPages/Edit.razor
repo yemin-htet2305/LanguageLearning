@@ -4,57 +4,57 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet"/>
+
 <PageTitle>Edit</PageTitle>
 
-<h1>Edit</h1>
-
-<h2>Quession</h2>
-<hr />
 @if (Quession is null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <div class="row">
-        <div class="col-md-4">
+    <div style="color: #845007;" class="d-flex align-items-center justify-content-center flex-column p-5 trans-bg rounded trans-bg w-50 gap-1">
+        <h1 >Edit Langauage</h1>
+        <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="w-100 bg-transparent">
             <EditForm method="post" Model="Quession" OnValidSubmit="UpdateQuession" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
                 <input type="hidden" name="Quession.Id" value="@Quession.Id" />
                 <div class="mb-3">
                     <label for="text" class="form-label">Text:</label>
-                    <InputText id="text" @bind-Value="Quession.Text" class="form-control" />
+                        <InputText style="color: #845007;" id="text" @bind-Value="Quession.Text" class="form-control" />
                     <ValidationMessage For="() => Quession.Text" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="opta" class="form-label">OptA:</label>
-                    <InputText id="opta" @bind-Value="Quession.OptA" class="form-control" />
+                        <InputText style="color: #845007;" id="opta" @bind-Value="Quession.OptA" class="form-control" />
                     <ValidationMessage For="() => Quession.OptA" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="optb" class="form-label">OptB:</label>
-                    <InputText id="optb" @bind-Value="Quession.OptB" class="form-control" />
+                        <InputText style="color: #845007;" id="optb" @bind-Value="Quession.OptB" class="form-control" />
                     <ValidationMessage For="() => Quession.OptB" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="optc" class="form-label">OptC:</label>
-                    <InputText id="optc" @bind-Value="Quession.OptC" class="form-control" />
+                        <InputText style="color: #845007;" id="optc" @bind-Value="Quession.OptC" class="form-control" />
                     <ValidationMessage For="() => Quession.OptC" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="optd" class="form-label">OptD:</label>
-                    <InputText id="optd" @bind-Value="Quession.OptD" class="form-control" />
+                        <InputText style="color: #845007;" id="optd" @bind-Value="Quession.OptD" class="form-control" />
                     <ValidationMessage For="() => Quession.OptD" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="corrrectanswer" class="form-label">CorrrectAnswer:</label>
-                    <InputText id="corrrectanswer" @bind-Value="Quession.CorrrectAnswer" class="form-control" />
+                        <InputText style="color: #845007;" id="corrrectanswer" @bind-Value="Quession.CorrrectAnswer" class="form-control" />
                     <ValidationMessage For="() => Quession.CorrrectAnswer" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="quizid" class="form-lable">QuizId:</label>
-                    <InputSelect id="Quizid" @bind-Value="Quession.QuizId" class="form-control">
+                        <InputSelect style="color: #845007;" id="Quizid" @bind-Value="Quession.QuizId" class="form-control">
                         <option value="">--Select Quiz--</option>
                         @if (Quizzes != null)
                         {
@@ -90,15 +90,20 @@ else
                     <InputText id="updatedby" @bind-Value="Quession.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Quession.UpdatedBy" class="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="w-100 d-flex align-items-center justify-content-center my-2">
+                    <button type="submit" class="btn log-btn">Save</button>
+                </div>
             </EditForm>
+        </div>
+        
+    </div>
+        <div>
+            <a class="log-link" href="/admin/quessions">Back to List</a>
         </div>
     </div>
 }
 
-<div>
-    <a href="/admin/quessions">Back to List</a>
-</div>
+
 
 @code {
     [SupplyParameterFromQuery]

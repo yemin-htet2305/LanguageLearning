@@ -7,29 +7,27 @@
 
 <PageTitle>Create</PageTitle>
 
-<h1>Create</h1>
-
-<h2>Quiz</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div style="color: #845007;" class="d-flex align-items-center justify-content-center flex-column p-5 trans-bg rounded trans-bg w-50 gap-1">
+    <h1 >Create Quiz</h1>
+    <div style="color: #845007;" class="d-flex align-items-center justify-content-center w-100">
+        <div class="w-100 bg-transparent">
         <EditForm method="post" Model="Quiz" OnValidSubmit="AddQuiz" FormName="create" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
-                <label for="title" class="form-label">Title:</label> 
-                <InputText id="title" @bind-Value="Quiz.Title" class="form-control" /> 
-                <ValidationMessage For="() => Quiz.Title" class="text-danger" /> 
+                    <label style="color: #845007;" for="title" class="form-label">Title:</label>
+                    <InputText style="color: #845007;" id="title" @bind-Value="Quiz.Title" class="form-control" />
+                    <ValidationMessage For="() => Quiz.Title" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="iscompleted" class="form-label">IsCompleted:</label> 
-                <InputCheckbox id="iscompleted" @bind-Value="Quiz.IsCompleted" class="form-check-input" /> 
-                <ValidationMessage For="() => Quiz.IsCompleted" class="text-danger" /> 
+                    <label style="color: #845007;" for="iscompleted" class="form-label">IsCompleted:</label>
+                    <InputCheckbox style="color: #845007;" id="iscompleted" @bind-Value="Quiz.IsCompleted" class="form-check-input" />
+                    <ValidationMessage For="() => Quiz.IsCompleted" class="text-danger" /> 
             </div>
 
             <div class="mb-3">
-                <label for="lessonid" class="form-label">LessonId:</label>
-                <InputSelect id="lessonid" @bind-Value="Quiz.LessonId" class="form-control">
+                    <label style="color: #845007;" for="lessonid" class="form-label">LessonId:</label>
+                    <InputSelect style="color: #845007;" id="lessonid" @bind-Value="Quiz.LessonId" class="form-control">
                     <option value="">-- Select Lesson --</option>
                     @if (Lessons != null)
                     {
@@ -65,14 +63,17 @@
                 <label for="updatedby" class="form-label">UpdatedBy:</label> 
                 <InputText id="updatedby" @bind-Value="Quiz.UpdatedBy" class="form-control" /> 
                 <ValidationMessage For="() => Quiz.UpdatedBy" class="text-danger" /> 
-            </div>        
-            <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            <div class="d-flex align-content-center justify-content-center">
+                <button type="submit" class="btn log-btn">Create</button>
+            </div>
         </EditForm>
     </div>
 </div>
 
-<div>
-    <a href="/admin/quizzes">Back to List</a>
+<div class="mt-2">
+    <a class="log-link" href="/admin/quizzes">Back to List</a>
+</div>
 </div>
 
 @code {

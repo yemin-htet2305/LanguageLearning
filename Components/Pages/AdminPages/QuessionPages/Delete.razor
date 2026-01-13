@@ -4,12 +4,13 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet" />
 <PageTitle>Delete</PageTitle>
 
-<h1>Delete</h1>
+<h1 style="color: red">Delete</h1>
 
-<p>Are you sure you want to delete this?</p>
-<div>
+<p style="color: red">Are you sure you want to delete this?</p>
+<div style="color: #845007" class="w-100">
     <h2>Quession</h2>
     <hr />
     @if (quession is null)
@@ -63,7 +64,7 @@
         </dl>
         <EditForm method="post" Model="quession" OnValidSubmit="DeleteQuession" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(quession is null)">Delete</button> |
-            <a href="/admin/quessions">Back to List</a>
+            <a class="btn log-btn" href="/admin/quessions">Back to List</a>
         </EditForm>
     }
 </div>

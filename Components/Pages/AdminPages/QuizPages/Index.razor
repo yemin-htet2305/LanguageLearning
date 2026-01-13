@@ -6,13 +6,12 @@
 @rendermode InteractiveServer
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet"/>
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
-
-<p>
-    <a href="quizzes/create">Create New</a>
-</p>
+<div class="w-100 d-flex justify-content-end align-items-center">
+    <a class="btn create-btn text-center" href="admin/quizzes/create">Create New Quiz<i class="bi bi-plus-circle"></i></a>
+</div>
 
 <QuickGrid Class="table" Items="FilteredQuizzes" Pagination="paginationState">
     <PropertyColumn Property="quiz => quiz.Title" Sortable="true">
@@ -24,18 +23,16 @@
     </PropertyColumn>
     <PropertyColumn Property="quiz => quiz.IsCompleted" Sortable="true"/>
     <PropertyColumn Property="quiz => quiz.LessonId" Sortable="true" />
-    <PropertyColumn Property="quiz => quiz.DateCreated" Sortable="true" />
-    <PropertyColumn Property="quiz => quiz.DateUpdated" Sortable="true" />
-    <PropertyColumn Property="quiz => quiz.CreatedBy" Sortable="true" />
-    <PropertyColumn Property="quiz => quiz.UpdatedBy" Sortable="true" />
-
+    
     <TemplateColumn Context="quiz">
-        <a href="@($"admin/quizzes/edit?id={quiz.Id}")">Edit</a> |
-        <a href="@($"admin/quizzes/details?id={quiz.Id}")">Details</a> |
-        <a href="@($"admin/quizzes/delete?id={quiz.Id}")">Delete</a>
+        <a class="btn edit-btn" href="@($"admin/quizzes/edit?id={quiz.Id}")"><i class="bi bi-pencil-square"></i></a> |
+        <a class="btn detail-btn" href="@($"admin/quizzes/details?id={quiz.Id}")"><i class="bi bi-ticket-detailed"></i></a> |
+        <a class="btn delete-btn" href="@($"admin/quizzes/delete?id={quiz.Id}")"><i class="bi bi-trash"></i></a>
     </TemplateColumn>
 </QuickGrid>
-<Paginator State="paginationState" />
+<div style="color: #845007;">
+    <Paginator State="paginationState" />
+</div>
 
 @code {
     PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };

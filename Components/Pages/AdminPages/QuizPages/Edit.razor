@@ -4,37 +4,35 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet" />
 <PageTitle>Edit</PageTitle>
-
-<h1>Edit</h1>
-
-<h2>Quiz</h2>
-<hr />
 @if (Quiz is null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <div class="row">
-        <div class="col-md-4">
+    <div style="color: #845007;" class="d-flex align-items-center justify-content-center flex-column p-5 trans-bg rounded trans-bg w-50 gap-1">
+        <h1 >Edit Langauage</h1>
+        <div class="d-flex align-items-center justify-content-center w-100">
+            <div class="w-100 bg-transparent">
             <EditForm method="post" Model="Quiz" OnValidSubmit="UpdateQuiz" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
                 <input type="hidden" name="Quiz.Id" value="@Quiz.Id" />
                 <div class="mb-3">
                     <label for="title" class="form-label">Title:</label>
-                    <InputText id="title" @bind-Value="Quiz.Title" class="form-control" />
+                        <InputText style="color: #845007;" id="title" @bind-Value="Quiz.Title" class="form-control" />
                     <ValidationMessage For="() => Quiz.Title" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="iscompleted" class="form-label">IsCompleted:</label>
-                    <InputCheckbox id="iscompleted" @bind-Value="Quiz.IsCompleted" class="form-check-input" />
+                        <InputCheckbox style="color: #845007;" id="iscompleted" @bind-Value="Quiz.IsCompleted" class="form-check-input" />
                     <ValidationMessage For="() => Quiz.IsCompleted" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="lessonid" class="form-label">LessonId:</label>
-                    <InputSelect id="lessonid" @bind-Value="Quiz.LessonId" class="form-control">
+                        <InputSelect style="color: #845007;" id="lessonid" @bind-Value="Quiz.LessonId" class="form-control">
                         <option value="">-- Select Lesson --</option>
                         @if (Lessons != null)
                         {
@@ -70,15 +68,20 @@ else
                     <InputText id="updatedby" @bind-Value="Quiz.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Quiz.UpdatedBy" class="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                    <div class ="w-100 d-flex align-items-center justify-content-center my-2">
+                        <button type="submit" class="btn log-btn">Save</button>
+                    </div>
+                
             </EditForm>
         </div>
     </div>
+    <div>
+        <a class="log-link" href="/admin/quizzes">Back to List</a>
+    </div>
+    </div>
 }
 
-<div>
-    <a href="/admin/quizzes">Back to List</a>
-</div>
+
 
 @code {
     [SupplyParameterFromQuery]

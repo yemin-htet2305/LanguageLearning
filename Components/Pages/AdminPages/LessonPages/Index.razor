@@ -25,8 +25,8 @@
     <PropertyColumn Property="lesson => lesson.LanguageId" Sortable="true" />
     
     <TemplateColumn Context="lesson">
-        <a class="btn edit-btn" href="@($"admin/lessons/edit?id={lesson.Id}")"><i class="bi bi-pencil-square"></i></a>
-        <a class="btn detail-btn" href="@($"admin/lessons/details?id={lesson.Id}")"><i class="bi bi-ticket-detailed"></i></a>
+        <a class="btn edit-btn" href="@($"admin/lessons/edit?id={lesson.Id}")"><i class="bi bi-pencil-square"></i></a> |
+        <a class="btn detail-btn" href="@($"admin/lessons/details?id={lesson.Id}")"><i class="bi bi-ticket-detailed"></i></a> |
         <a class="btn delete-btn" href="@($"admin/lessons/delete?id={lesson.Id}")"><i class="bi bi-trash"></i></a>
     </TemplateColumn>
 </QuickGrid>

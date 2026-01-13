@@ -4,12 +4,13 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet" />
 <PageTitle>Delete</PageTitle>
 
-<h1>Delete</h1>
+<h1 style="color: red">Delete</h1>
 
-<p>Are you sure you want to delete this?</p>
-<div>
+<p style ="color: red">Are you sure you want to delete this?</p>
+<div style="color: #845007" class="w-100">
     <h2>Quiz</h2>
     <hr />
     @if (quiz is null)
@@ -47,7 +48,7 @@
         </dl>
         <EditForm method="post" Model="quiz" OnValidSubmit="DeleteQuiz" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(quiz is null)">Delete</button> |
-            <a href="/admin/quizzes">Back to List</a>
+            <a class="btn log-btn" href="/admin/quizzes">Back to List</a>
         </EditForm>
     }
 </div>
@@ -60,16 +61,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        quiz = await httpClient.GetFromJsonAsync<Quiz>($"api/quizzes/{Id}");
+        quiz = await httpClient.GetFromJsonAsync<Quiz>($"api/quizs/{Id}");
     }
 
     private async Task DeleteQuiz()
     {
-        var response = await httpClient.DeleteAsync($"api/quizzes/{quiz.Id}");
+        var response = await httpClient.DeleteAsync($"api/quizs/{quiz.Id}");
 
         if (response.IsSuccessStatusCode)
         {
-            NavigationManager.NavigateTo("/admin/quizzes");
+            NavigationManager.NavigateTo("/admin/quizs");
         }
         else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {

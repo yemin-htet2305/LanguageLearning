@@ -4,37 +4,36 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet" />
 <PageTitle>Edit</PageTitle>
 
-<h1>Edit</h1>
-
-<h2>LessonContent</h2>
-<hr />
 @if (LessonContent is null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <div class="row">
-        <div class="col-md-4">
+    <div style="color: #845007;" class="d-flex align-items-center justify-content-center flex-column p-5 trans-bg rounded trans-bg w-50 gap-1">
+        <h1 >Edit Langauage</h1>
+        <div class="d-flex align-items-center justify-content-center w-100">
+            <div class="w-100 bg-transparent">
             <EditForm method="post" Model="LessonContent" OnValidSubmit="UpdateLessonContent" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
                 <input type="hidden" name="LessonContent.Id" value="@LessonContent.Id" />
                 <div class="mb-3">
-                    <label for="contenttype" class="form-label">ContentType:</label>
-                    <InputText id="contenttype" @bind-Value="LessonContent.ContentType" class="form-control" />
+                        <label style="color: #845007;" for="contenttype" class="form-label">ContentType:</label>
+                        <InputText style="color: #845007;" id="contenttype" @bind-Value="LessonContent.ContentType" class="form-control" />
                     <ValidationMessage For="() => LessonContent.ContentType" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="positionorder" class="form-label">PositionOrder:</label>
-                    <InputNumber id="positionorder" @bind-Value="LessonContent.PositionOrder" class="form-control" />
+                        <label style="color: #845007;" for="positionorder" class="form-label">PositionOrder:</label>
+                        <InputNumber style="color: #845007;" id="positionorder" @bind-Value="LessonContent.PositionOrder" class="form-control" />
                     <ValidationMessage For="() => LessonContent.PositionOrder" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="lessonid" class="form-label">LessonId:</label>
-                    <InputSelect id="lessonid" @bind-Value="LessonContent.LessonId" class="form-control">
+                        <label style="color: #845007;" for="lessonid" class="form-label">LessonId:</label>
+                        <InputSelect style="color: #845007;" id="lessonid" @bind-Value="LessonContent.LessonId" class="form-control">
                         <option value="">-- Select Lesson --</option>
                         @if (Lessons != null)
                         {
@@ -70,15 +69,19 @@ else
                     <InputText id="updatedby" @bind-Value="LessonContent.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => LessonContent.UpdatedBy" class="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn log-btn">Save</button>
+                </div>
             </EditForm>
+        </div>
+    </div>
+        <div class="mt-2">
+            <a class="log-link" href="/admin/lessoncontents">Back to List</a>
         </div>
     </div>
 }
 
-<div>
-    <a href="/admin/lessoncontents">Back to List</a>
-</div>
+
 
 @code {
     [SupplyParameterFromQuery]

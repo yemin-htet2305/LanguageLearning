@@ -6,13 +6,12 @@
 @rendermode InteractiveServer
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet"/>
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
-
-<p>
-    <a href="quessions/create">Create New</a>
-</p>
+<div class="w-100 d-flex justify-content-end align-items-center">
+    <a class="btn create-btn text-center" href="admin/quessions/create">Create New Quession <i class="bi bi-plus-circle"></i></a>
+</div>
 
 <QuickGrid Class="table" Items="FilteredQuessions" Pagination="paginationState">
     <PropertyColumn Property="quession => quession.Text" Sortable="true">
@@ -28,18 +27,16 @@
     <PropertyColumn Property="quession => quession.OptD" Sortable="true" />
     <PropertyColumn Property="quession => quession.CorrrectAnswer" Sortable="true" />
     <PropertyColumn Property="quession => quession.QuizId" Sortable="true" />
-    <PropertyColumn Property="quession => quession.DateCreated" Sortable="true" />
-    <PropertyColumn Property="quession => quession.DateUpdated" Sortable="true" />
-    <PropertyColumn Property="quession => quession.CreatedBy" Sortable="true" />
-    <PropertyColumn Property="quession => quession.UpdatedBy" Sortable="true" />
 
     <TemplateColumn Context="quession">
-        <a href="@($"admin/quessions/edit?id={quession.Id}")">Edit</a> |
-        <a href="@($"admin/quessions/details?id={quession.Id}")">Details</a> |
-        <a href="@($"admin/quessions/delete?id={quession.Id}")">Delete</a>
+        <a class="btn edit-btn" href="@($"admin/quessions/edit?id={quession.Id}")"><i class="bi bi-pencil-square"></i></a> |
+        <a class="btn detail-btn" href="@($"admin/quessions/details?id={quession.Id}")"><i class="bi bi-ticket-detailed"></i></a> |
+        <a class="btn delete-btn" href="@($"admin/quessions/delete?id={quession.Id}")"><i class="bi bi-trash"></i></a>
     </TemplateColumn>
 </QuickGrid>
+<div style="color: #845007">
 <Paginator State="paginationState" />
+</div>
 
 @code {
     PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };
