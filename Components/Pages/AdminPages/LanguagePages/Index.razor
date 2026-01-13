@@ -6,14 +6,17 @@
 @rendermode InteractiveServer
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet"/>
 <PageTitle>Index</PageTitle>
-<h1>Index</h1>
+@* <h1>Index</h1>
 
 <p>
     <a href="admin/languages/create">Create New</a>
-</p>
-
-<QuickGrid Class="table" Items="FilteredLanguages" Pagination="paginationState">
+</p> *@
+<div class="w-100 d-flex justify-content-end align-items-center">
+    <a class="btn create-btn text-center" href="admin/languages/create">Create New Language <i class="bi bi-plus-circle"></i></a>
+</div>
+<QuickGrid Class="table table-hover" Items="FilteredLanguages" Pagination="paginationState">
     <PropertyColumn Property="language => language.Name" Sortable="true">
         <ColumnOptions>
             <div>
@@ -21,19 +24,19 @@
             </div>
         </ColumnOptions>
     </PropertyColumn>
-    <PropertyColumn Property="language => language.Description" Sortable="true" />
-    <PropertyColumn Property="language => language.DateCreated" Sortable="true" />
-    <PropertyColumn Property="language => language.DateUpdated" Sortable="true" />
-    <PropertyColumn Property="language => language.CreatedBy" Sortable="true" />
-    <PropertyColumn Property="language => language.UpdatedBy" Sortable="true"/>
+    <PropertyColumn  Property="language => language.Description" Sortable="true" />
 
     <TemplateColumn Context="language">
-        <a href="@($"admin/languages/edit?id={language.Id}")">Edit</a> |
-        <a href="@($"admin/languages/details?id={language.Id}")">Details</a> |
-        <a href="@($"admin/languages/delete?id={language.Id}")">Delete</a>
+        <a class="btn edit-btn" href="@($"admin/languages/edit?id={language.Id}")"><i class="bi bi-pencil-square"></i></a>
+        
+        <a class="btn detail-btn" href="@($"admin/languages/details?id={language.Id}")"><i class="bi bi-ticket-detailed"></i></a>
+
+        <a class="btn delete-btn" href="@($"admin/languages/delete?id={language.Id}")"><i class="bi bi-trash"></i></a>
         
     </TemplateColumn>
-</QuickGrid> 
+</QuickGrid>
+
+
 <Paginator State="paginationState"/>
 
 @code {

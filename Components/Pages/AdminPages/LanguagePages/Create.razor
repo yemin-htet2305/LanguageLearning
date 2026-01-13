@@ -4,26 +4,25 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
+<link href="Manage.css" rel="stylesheet" />
 <PageTitle>Create</PageTitle>
 
-<h1>Create</h1>
-
-<h2>Language</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="d-flex align-items-center justify-content-center flex-column p-5 trans-bg rounded trans-bg w-50 gap-1">
+    <h1 style="color: #845007;">Create Language</h1>
+    <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="w-100 bg-transparent">
         <EditForm method="post" Model="Language" OnValidSubmit="AddLanguage" FormName="create" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label> 
-                <InputText id="name" @bind-Value="Language.Name" class="form-control" /> 
-                <ValidationMessage For="() => Language.Name" class="text-danger" /> 
+                    <label style="color: #845007;" for="name" class="form-label">Name:</label>
+                    <InputText style="color: #845007;" id="name" @bind-Value="Language.Name" class="form-control" />
+                    <ValidationMessage For="() => Language.Name" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="description" class="form-label">Description:</label> 
-                <InputText id="description" @bind-Value="Language.Description" class="form-control" /> 
-                <ValidationMessage For="() => Language.Description" class="text-danger" /> 
+                    <label style="color: #845007;" for="description" class="form-label">Description:</label>
+                    <InputText style="color: #845007;" id="description" @bind-Value="Language.Description" class="form-control" />
+                    <ValidationMessage For="() => Language.Description" class="text-danger" /> 
             </div>        
             <div class="mb-3" hidden>
                 <label for="datecreated" class="form-label">DateCreated:</label> 
@@ -44,14 +43,18 @@
                 <label for="updatedby" class="form-label">UpdatedBy:</label> 
                 <InputText id="updatedby" @bind-Value="Language.UpdatedBy" class="form-control" /> 
                 <ValidationMessage For="() => Language.UpdatedBy" class="text-danger" /> 
-            </div>        
-            <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            <div class="w-100 d-flex align-items-center justify-content-center my-2">
+                    <button type="submit" class="btn log-btn">Create</button>
+            </div>
+            
         </EditForm>
     </div>
 </div>
 
-<div>
-    <a href="/admin/languages">Back to List</a>
+<div class="mt-2">
+    <a class="log-link" href="/admin/languages">Back to List</a>
+</div>
 </div>
 
 @code {

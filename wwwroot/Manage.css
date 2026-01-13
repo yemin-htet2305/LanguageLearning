@@ -44,3 +44,50 @@
         color: white;
         font: bold;
     }
+
+
+
+.table {
+    color: #845007;
+}
+    
+    .table td {
+        line-height: 5;
+    }
+
+.edit-btn{
+    background-color: dimgrey;
+    color: ivory;
+}
+ .edit-btn:hover{
+     background-color: black;
+     color:ivory;
+ }
+
+ .detail-btn{
+     background-color: yellow;
+     color: black;
+ }
+    .detail-btn:hover {
+        background-color: darkgoldenrod;
+        color: black;
+    }
+
+.delete-btn {
+    background-color: indianred;
+    color: ivory;
+}
+    .delete-btn:hover {
+        background-color: darkred;
+        color: ivory;
+    }
+
+.create-btn {
+    background-color: forestgreen;
+    color: khaki;
+    margin-right: 200px;
+}
+    .create-btn:hover {
+        background-color: khaki;
+        color: #845007;
+    }
