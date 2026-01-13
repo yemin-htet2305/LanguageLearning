@@ -1,4 +1,4 @@
-﻿@page "/quizzes/create"
+﻿@page "/admin/quizzes/create"
 @using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
@@ -72,7 +72,7 @@
 </div>
 
 <div>
-    <a href="/quizzes">Back to List</a>
+    <a href="/admin/quizzes">Back to List</a>
 </div>
 
 @code {
@@ -112,6 +112,6 @@
         Quiz.DateUpdated = DateTime.Now;
 
         var repsonse = await httpClient.PostAsJsonAsync("api/quizs", Quiz);
-        NavigationManager.NavigateTo("/quizzes");
+        NavigationManager.NavigateTo("/admin/quizzes");
     }
 }

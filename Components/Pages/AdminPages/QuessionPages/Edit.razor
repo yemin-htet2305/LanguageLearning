@@ -1,4 +1,4 @@
-﻿@page "/quessions/edit"
+﻿@page "/admin/quessions/edit"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
@@ -97,7 +97,7 @@ else
 }
 
 <div>
-    <a href="/quessions">Back to List</a>
+    <a href="/admin/quessions">Back to List</a>
 </div>
 
 @code {
@@ -162,7 +162,7 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/quessions");
+        NavigationManager.NavigateTo("/admin/quessions");
     }
 
     private bool QuessionExists(int id)

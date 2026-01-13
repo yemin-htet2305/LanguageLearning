@@ -1,4 +1,4 @@
-﻿@page "/lessoncontents/delete"
+﻿@page "/admin/lessoncontents/delete"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject NavigationManager NavigationManager
@@ -47,7 +47,7 @@
         </dl>
         <EditForm method="post" Model="lessoncontent" OnValidSubmit="DeleteLessonContent" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(lessoncontent is null)">Delete</button> |
-            <a href="/lessoncontents">Back to List</a>
+            <a href="/admin/lessoncontents">Back to List</a>
         </EditForm>
     }
 </div>
@@ -69,7 +69,7 @@
 
         if (response.IsSuccessStatusCode)
         {
-            NavigationManager.NavigateTo("/lessoncontents");
+            NavigationManager.NavigateTo("/admin/lessoncontents");
         }
         else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {

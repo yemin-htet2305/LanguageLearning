@@ -1,4 +1,4 @@
-﻿@page "/plans/create"
+﻿@page "/admin/plans/create"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject NavigationManager NavigationManager
@@ -56,7 +56,7 @@
 </div>
 
 <div>
-    <a href="/plans">Back to List</a>
+    <a href="/admin/plans">Back to List</a>
 </div>
 
 @code {
@@ -89,6 +89,6 @@
         Plan.DateCreated = DateTime.Now;
 
         var response = await httpClient.PostAsJsonAsync("api/plans", Plan);
-        NavigationManager.NavigateTo("/plans");
+        NavigationManager.NavigateTo("/admin/plans");
     }
 }

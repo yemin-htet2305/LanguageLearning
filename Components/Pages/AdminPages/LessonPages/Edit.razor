@@ -1,4 +1,4 @@
-﻿@page "/lessons/edit"
+﻿@page "/admin/lessons/edit"
 @using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
@@ -83,7 +83,7 @@ else
 }
 
 <div>
-    <a href="/lessons">Back to List</a>
+    <a href="/admin/lessons">Back to List</a>
 </div>
 
 @code {
@@ -148,7 +148,7 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/lessons");
+        NavigationManager.NavigateTo("/admin/lessons");
     }
 
     private bool LessonExists(int id)

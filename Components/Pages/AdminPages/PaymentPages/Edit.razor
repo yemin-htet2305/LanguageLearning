@@ -1,4 +1,4 @@
-﻿@page "/payments/edit"
+﻿@page "/admin/payments/edit"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
@@ -64,7 +64,7 @@ else
 }
 
 <div>
-    <a href="/payments">Back to List</a>
+    <a href="/admin/payments">Back to List</a>
 </div>
 
 @code {
@@ -123,7 +123,7 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/payments");
+        NavigationManager.NavigateTo("/admin/payments");
     }
 
     private bool PaymentExists(int id)

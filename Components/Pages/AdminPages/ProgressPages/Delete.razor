@@ -1,4 +1,4 @@
-﻿@page "/progresses/delete"
+﻿@page "/admin/progresses/delete"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject NavigationManager NavigationManager
@@ -55,7 +55,7 @@
         </dl>
         <EditForm method="post" Model="progress" OnValidSubmit="DeleteProgress" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(progress is null)">Delete</button> |
-            <a href="/progresses">Back to List</a>
+            <a href="/admin/progresses">Back to List</a>
         </EditForm>
     }
 </div>
@@ -77,7 +77,7 @@
 
         if (response.IsSuccessStatusCode)
         {
-            NavigationManager.NavigateTo("/progresses");
+            NavigationManager.NavigateTo("/admin/progresses");
         }
         else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {

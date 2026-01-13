@@ -1,4 +1,4 @@
-﻿@page "/progresses/edit"
+﻿@page "/admin/progresses/edit"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
@@ -87,7 +87,7 @@ else
 }
 
 <div>
-    <a href="/progresses">Back to List</a>
+    <a href="/admin/progresses">Back to List</a>
 </div>
 
 @code {
@@ -151,7 +151,7 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/progresses");
+        NavigationManager.NavigateTo("/admin/progresses");
     }
 
     private bool ProgressExists(int id)

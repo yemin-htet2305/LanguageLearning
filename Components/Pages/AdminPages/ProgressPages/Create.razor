@@ -1,4 +1,4 @@
-﻿@page "/progresses/create"
+﻿@page "/admin/progresses/create"
 @using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
@@ -80,7 +80,7 @@
 </div>
 
 <div>
-    <a href="/progresses">Back to List</a>
+    <a href="/admin/progresses">Back to List</a>
 </div>
 
 @code {
@@ -122,6 +122,6 @@
 
         var response = await httpClient.PostAsJsonAsync("api/progresses", Progress);
 
-        NavigationManager.NavigateTo("/progresses");
+        NavigationManager.NavigateTo("/admin/progresses");
     }
 }

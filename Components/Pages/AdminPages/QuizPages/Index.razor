@@ -1,4 +1,4 @@
-﻿@page "/quizzes"
+﻿@page "/admin/quizzes"
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using LanguageLearning.Domain
@@ -30,9 +30,9 @@
     <PropertyColumn Property="quiz => quiz.UpdatedBy" Sortable="true" />
 
     <TemplateColumn Context="quiz">
-        <a href="@($"quizzes/edit?id={quiz.Id}")">Edit</a> |
-        <a href="@($"quizzes/details?id={quiz.Id}")">Details</a> |
-        <a href="@($"quizzes/delete?id={quiz.Id}")">Delete</a>
+        <a href="@($"admin/quizzes/edit?id={quiz.Id}")">Edit</a> |
+        <a href="@($"admin/quizzes/details?id={quiz.Id}")">Details</a> |
+        <a href="@($"admin/quizzes/delete?id={quiz.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 <Paginator State="paginationState" />

@@ -1,4 +1,4 @@
-﻿@page "/languages/create"
+﻿@page "/admin/languages/create"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
 @inject NavigationManager NavigationManager
@@ -51,7 +51,7 @@
 </div>
 
 <div>
-    <a href="/languages">Back to List</a>
+    <a href="/admin/languages">Back to List</a>
 </div>
 
 @code {
@@ -87,6 +87,6 @@
 
         var repsonse = await httpClient.PostAsJsonAsync("api/languages", Language);
 
-        NavigationManager.NavigateTo("/languages");
+        NavigationManager.NavigateTo("/admin/languages");
     }
 }

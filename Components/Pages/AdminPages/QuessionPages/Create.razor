@@ -1,4 +1,4 @@
-﻿@page "/quessions/create"
+﻿@page "/admin/quessions/create"
 @using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
@@ -90,7 +90,7 @@
 </div>
 
 <div>
-    <a href="/quessions">Back to List</a>
+    <a href="/admin/quessions">Back to List</a>
 </div>
 
 @code {
@@ -130,6 +130,6 @@
 
         var response = await httpClient.PostAsJsonAsync("api/quessions", Quession);
 
-        NavigationManager.NavigateTo("/quessions");
+        NavigationManager.NavigateTo("/admin/quessions");
     }
 }
