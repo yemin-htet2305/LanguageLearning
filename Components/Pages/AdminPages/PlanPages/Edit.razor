@@ -1,8 +1,8 @@
 ﻿@page "/admin/plans/edit"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Edit</PageTitle>
 
@@ -75,7 +75,7 @@ else
     private Plan? Plan { get; set; }
 
     private string userId = "System";
-    @inject AuthenticationStateProvider authenticationStateProvider
+@inject AuthenticationStateProvider authenticationStateProvider
 
     protected override async Task OnInitializedAsync()
     {
@@ -87,12 +87,17 @@ else
         {
             userId = userIdClaim.Value;
         }
-        using var context = DbFactory.CreateDbContext();
-        Plan ??= await context.Plan.FirstOrDefaultAsync(m => m.Id == Id);
 
+        // Only load from API if Language is not already bound from form
         if (Plan is null)
         {
-            NavigationManager.NavigateTo("notfound");
+            Plan = await httpClient.GetFromJsonAsync<Plan>($"api/plans/{Id}");
+            StateHasChanged();
+
+            if (Plan is null)
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
         }
     }
 
@@ -100,35 +105,28 @@ else
     // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdatePlan()
     {
-        using var context = DbFactory.CreateDbContext();
-
+        //Set the userId to the UpdatedBy fields.
         Plan.UpdatedBy = userId;
+        //Set the DateUpdated fields to the current date and time.
         Plan.DateUpdated = DateTime.Now;
 
-        context.Attach(Plan!).State = EntityState.Modified;
+        var response = await httpClient.PutAsJsonAsync($"api/plans/{Plan.Id}", Plan);
 
-        try
+        if (response.IsSuccessStatusCode)
         {
-            await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/admin/plans");
         }
-        catch (DbUpdateConcurrencyException)
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
-            if (!PlanExists(Plan!.Id))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
+            NavigationManager.NavigateTo("notfound");
         }
-
-        NavigationManager.NavigateTo("/admin/plans");
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            // You could show an error message to the user here
+            Console.WriteLine($"Error updating plan: {errorMessage}");
+        }
     }
 
-    private bool PlanExists(int id)
-    {
-        using var context = DbFactory.CreateDbContext();
-        return context.Plan.Any(e => e.Id == id);
-    }
 }

@@ -1,8 +1,8 @@
 ﻿@page "/admin/quessions/edit"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Edit</PageTitle>
 
@@ -124,50 +124,50 @@ else
         {
             userId = userIdClaim.Value;
         }
-        using var context = DbFactory.CreateDbContext();
-        Quession ??= await context.Quession.FirstOrDefaultAsync(m => m.Id == Id);
 
+        // Only load from API if Language is not already bound from form
         if (Quession is null)
         {
-            NavigationManager.NavigateTo("notfound");
+            Quession = await httpClient.GetFromJsonAsync<Quession>($"api/quessions/{Id}");
+            StateHasChanged();
+
+            if (Quession is null)
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
         }
-        Quizzes = context.Quiz.ToList();
+        Quizzes = await httpClient.GetFromJsonAsync<IList<Quiz>>("api/quizs");
+        StateHasChanged();
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateQuession()
     {
-        using var context = DbFactory.CreateDbContext();
 
+        //Set the userId to the UpdatedBy fields.
         Quession.UpdatedBy = userId;
+        //Set the DateUpdated fields to the current date and time.
         Quession.DateUpdated = DateTime.Now;
 
+        var response = await httpClient.PutAsJsonAsync($"api/quessions/{Quession.Id}", Quession);
 
-        context.Attach(Quession!).State = EntityState.Modified;
-
-        try
+        if (response.IsSuccessStatusCode)
         {
-            await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/admin/quessions");
         }
-        catch (DbUpdateConcurrencyException)
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
-            if (!QuessionExists(Quession!.Id))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
+            NavigationManager.NavigateTo("notfound");
         }
-
-        NavigationManager.NavigateTo("/admin/quessions");
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            // You could show an error message to the user here
+            Console.WriteLine($"Error updating quession: {errorMessage}");
+        }
     }
 
-    private bool QuessionExists(int id)
-    {
-        using var context = DbFactory.CreateDbContext();
-        return context.Quession.Any(e => e.Id == id);
-    }
+    
 }

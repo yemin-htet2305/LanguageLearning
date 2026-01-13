@@ -1,8 +1,8 @@
 ﻿@page "/admin/quizzes/edit"
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Edit</PageTitle>
 
@@ -104,49 +104,49 @@ else
         {
             userId = userIdClaim.Value;
         }
-        using var context = DbFactory.CreateDbContext();
-        Quiz ??= await context.Quiz.FirstOrDefaultAsync(m => m.Id == Id);
 
+        // Only load from API if Language is not already bound from form
         if (Quiz is null)
         {
-            NavigationManager.NavigateTo("notfound");
+            Quiz = await httpClient.GetFromJsonAsync<Quiz>($"api/quizs/{Id}");
+            StateHasChanged();
+
+            if (Quiz is null)
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
         }
-        Lessons = context.Lesson.ToList();
+        Lessons = await httpClient.GetFromJsonAsync<IList<Lesson>>("api/lessons");
+        StateHasChanged();
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateQuiz()
     {
-        using var context = DbFactory.CreateDbContext();
-
+        //Set the userId to the UpdatedBy fields.
         Quiz.UpdatedBy = userId;
+        //Set the DateUpdated fields to the current date and time.
         Quiz.DateUpdated = DateTime.Now;
 
-        context.Attach(Quiz!).State = EntityState.Modified;
+        var response = await httpClient.PutAsJsonAsync($"api/quizs/{Quiz.Id}", Quiz);
 
-        try
+        if (response.IsSuccessStatusCode)
         {
-            await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/admin/quizzes");
         }
-        catch (DbUpdateConcurrencyException)
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
-            if (!QuizExists(Quiz!.Id))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
+            NavigationManager.NavigateTo("notfound");
         }
-
-        NavigationManager.NavigateTo("/admin/quizzes");
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            // You could show an error message to the user here
+            Console.WriteLine($"Error updating quiz: {errorMessage}");
+        }
     }
 
-    private bool QuizExists(int id)
-    {
-        using var context = DbFactory.CreateDbContext();
-        return context.Quiz.Any(e => e.Id == id);
-    }
+   
 }

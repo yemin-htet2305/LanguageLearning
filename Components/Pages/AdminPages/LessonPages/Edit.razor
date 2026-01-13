@@ -2,8 +2,8 @@
 @using LanguageLearning.Data
 @using Microsoft.EntityFrameworkCore
 @using LanguageLearning.Domain
-@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject HttpClient httpClient
 
 <PageTitle>Edit</PageTitle>
 
@@ -110,14 +110,20 @@ else
         {
             userId = userIdClaim.Value;
         }
-        using var context = DbFactory.CreateDbContext();
-        Languages = context.Language.ToList();
-        Lesson ??= await context.Lesson.FirstOrDefaultAsync(m => m.Id == Id);
 
+        // Only load from API if Language is not already bound from form
         if (Lesson is null)
         {
-            NavigationManager.NavigateTo("notfound");
+            Lesson = await httpClient.GetFromJsonAsync<Lesson>($"api/lessons/{Id}");
+            StateHasChanged();
+
+            if (Lesson is null)
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
         }
+        Languages = await httpClient.GetFromJsonAsync<IList<Language>>("api/languages");
+        StateHasChanged();
 
     }
 
@@ -125,35 +131,27 @@ else
     // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateLesson()
     {
-        using var context = DbFactory.CreateDbContext();
-
+        //Set the userId to the UpdatedBy fields.
         Lesson.UpdatedBy = userId;
+        //Set the DateUpdated fields to the current date and time.
         Lesson.DateUpdated = DateTime.Now;
 
-        context.Attach(Lesson!).State = EntityState.Modified;
+        var response = await httpClient.PutAsJsonAsync($"api/lessons/{Lesson.Id}", Lesson);
 
-        try
+        if (response.IsSuccessStatusCode)
         {
-            await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/admin/lessons");
         }
-        catch (DbUpdateConcurrencyException)
+        else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
-            if (!LessonExists(Lesson!.Id))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
+            NavigationManager.NavigateTo("notfound");
         }
-
-        NavigationManager.NavigateTo("/admin/lessons");
-    }
-
-    private bool LessonExists(int id)
-    {
-        using var context = DbFactory.CreateDbContext();
-        return context.Lesson.Any(e => e.Id == id);
+        else
+        {
+            // Handle other errors (optional)
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            // You could show an error message to the user here
+            Console.WriteLine($"Error updating lesson: {errorMessage}");
+        }
     }
 }
