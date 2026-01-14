@@ -1,0 +1,28 @@
+﻿@rendermode InteractiveServer
+@inject NavigationManager Navigation
+<a class="card-link w-25 rounded-3">
+    <div class="card text-start w-100">
+        @* Option 1: Using @($"...") *@
+        <img src="@($"https://flagcdn.com/w320/{Description}.png")"
+             class="card-img-top" 
+             style="height:250px;"/>
+   <div class="card-body">
+        <h3 class="card-title">@Name</h3>
+        <hr />
+        <h5 class="card-texttext-center">Click To Learn @Name!</h5>
+        <div class="d-flex justify-content-around align-content-center">
+                <p class="fw-bolder">Premium</p>
+                <p>Rating: ⭐⭐⭐⭐⭐</p>
+        </div>
+        
+   </div>
+</div>
+</a>
+
+@code {
+    [Parameter]
+    public string Name { get; set; } = "Guest";
+
+    [Parameter]
+    public string Description { get; set; } = "ua";
+}

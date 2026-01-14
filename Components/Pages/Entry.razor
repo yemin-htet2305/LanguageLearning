@@ -1,0 +1,44 @@
+﻿@page "/courses"
+@using LanguageLearning.Components.Layout
+@using LanguageLearning.Domain
+@rendermode InteractiveServer
+@layout UserLayout
+@inject HttpClient httpClient
+
+<link href="Manage.css" rel="stylesheet" />
+
+<div class="d-flex align-items-center justify-content-center flex-column">
+    <h1 style="color:#845007">Build Language Skills </h1>
+    <h2 style="color:#845007">Master Language You Want To Learn With Us.</h2>
+</div>
+<div class="w-100 h-25 d-flex align-items-center justify-content-center">
+    <input style="outline: none; box-shadow: none;"
+        class="my-3 rounded-2 w-25 h-100 entry-search" 
+    type="search" @bind="searchText" @bind:event="oninput" placeholder="Search" autofocus />
+</div>
+<div class="container"> 
+    <div class="row g-4">
+        @foreach (var language in FilteredLanguages)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <Card Name=@language.Name Description=@language.Description />
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    List<Language> Languages = new();
+    string searchText = "";
+
+    // Computed property that filters based on searchText
+    List<Language> FilteredLanguages => string.IsNullOrWhiteSpace(searchText)
+        ? Languages
+        : Languages.Where(l => l.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Languages = await httpClient.GetFromJsonAsync<List<Language>>("api/languages") ?? new List<Language>();
+    }
+}

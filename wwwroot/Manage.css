@@ -91,3 +91,21 @@
         background-color: khaki;
         color: #845007;
     }
+.card-link {
+    background-color: #f4f6f8;
+    border: 1px solid #e7e5e4;
+    color: #854007;
+    text-decoration: none;
+}
+.card:hover{
+    border: 3px solid #845007;
+    background: #fbf7ef;
+}
+
+.entry-search {
+    color: #845007;
+    border: 1px solid #845007;
+}
+    .entry-search:focus {
+        border: 2px solid #845007;
+    }
