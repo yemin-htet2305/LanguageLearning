@@ -52,6 +52,7 @@ builder.Services.AddIdentityCore<LanguageLearningUser>(options => options.SignIn
 
 builder.Services.AddSingleton<IEmailSender<LanguageLearningUser>, IdentityNoOpEmailSender>();
 
+
 var app = builder.Build();
 
 //Add the Default controller route

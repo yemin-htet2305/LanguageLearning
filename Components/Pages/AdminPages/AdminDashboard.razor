@@ -1,141 +1,80 @@
 ﻿@page "/admin/dashboard"
+@inject LanguageLearningContext DbContext
+@using LanguageLearning.Data
+@using LanguageLearning.Domain
+@using Microsoft.EntityFrameworkCore
 
-<div class="admin-page">
-
-    <h2 class="page-title">Admin Dashboard</h2>
-    <p class="dashboard-subtitle">
-        Overview of OurLingua system.
-    </p>
-
-    <!-- ================= CORE LEARNING ================= -->
-    <div class="section-title">Core Learning</div>
-    <div class="stats-grid core-grid">
-        <div class="stat-card">
-            <div class="stat-card-top">
-                <div class="stat-icon">👤</div>
+<div class="d-flex align-content-center justify-content-center flex-column gap-5 w-100">
+    <h1 style="color: #845007;" class="text-center">DashBoard</h1>
+    
+    <div class="d-flex align-content-center justify-content-around flex-row">
+        <div style="width:350px; height:175px; background-color: rgba(132, 80, 7, 0.5) "
+             class="rounded-3 d-flex align-content-center justify-content-around flex-row text-white">
+             <div class="align-content-center">
+                <h5>Total Languages</h5>
+                <h1 class="fw-bold">@languages.Count</h1>
             </div>
-            <div class="stat-number">20</div>
-            <div class="stat-label">Users</div>
+            <div class="align-content-center">
+                <i style="font-size: 70px;" class="bi bi-database"></i>
+            </div>
+
+        </div>
+        <div style="width:350px; height:175px; background-color: rgba(132, 80, 7, 0.5) "
+             class="rounded-3 d-flex align-content-center justify-content-around flex-row text-white">
+            <div class="align-content-center">
+                <h5>Total Users</h5>
+                <h1 class="fw-bold">@users.Count</h1>
+            </div>
+            <div class="align-content-center">
+                <i style="font-size: 70px;" class="bi bi-person"></i>
+            </div>
+
+        </div>
+        <div style="width:350px; height:175px; background-color: rgba(132, 80, 7, 0.5) "
+             class="rounded-3 d-flex align-content-center justify-content-around flex-row text-white">
+            <div class="align-content-center">
+                <h5>Total Earnings</h5>
+                <h1 class="fw-bold">@payments.Count</h1>
+            </div>
+            <div class="align-content-center">
+                <i style="font-size: 70px;" class="bi bi-currency-dollar"></i>
+            </div>
+
         </div>
 
-        <div class="stat-card">
-            <div class="stat-card-top">
-                <div class="stat-icon">🌐</div>
-            </div>
-            <div class="stat-number">3</div>
-            <div class="stat-label">Languages</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-card-top">
-                <div class="stat-icon">📚</div>
-            </div>
-            <div class="stat-number">15</div>
-            <div class="stat-label">Lessons</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-card-top">
-                <div class="stat-icon">📄</div>
-            </div>
-            <div class="stat-number">45</div>
-            <div class="stat-label">Lesson Contents</div>
-        </div>
     </div>
-
-    <!-- ================= BILLING ================= -->
-    <div class="section-title">Billing</div>
-
-    <div class="stats-grid billing-grid">
-        <div class="stat-card">
-            <div class="stat-icon">⭐</div>
-            <div class="stat-number">—</div>
-            <div class="stat-label">Plans</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">💳</div>
-            <div class="stat-number">—</div>
-            <div class="stat-label">Payments</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">🧾</div>
-            <div class="stat-number">—</div>
-            <div class="stat-label">Pending Payments</div>
-        </div>
-    </div>
-
-    <div class="panel">
-        <div class="panel-title">Recent Payments</div>
-        <div class="panel-body">
-            <table class="simple-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>User</th>
-                        <th>Plan</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="5" class="table-empty">
-                            Payment data will appear here (frontend placeholder)
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-    <!-- ================= TRACKING & REPORTS ================= -->
-    <div class="section-title">Tracking & Reports</div>
-
-    <div class="panel">
-        <div class="panel-title">Active Learners by Language</div>
-        <div class="panel-body">
-
-            <!-- BAR CHART -->
-            <div class="bar-chart">
-                <div class="bar-row">
-                    <span class="bar-label">English</span>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 80%"></div>
-                    </div>
-                    <span class="bar-value">80</span>
-                </div>
-
-                <div class="bar-row">
-                    <span class="bar-label">Korean</span>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 55%"></div>
-                    </div>
-                    <span class="bar-value">55</span>
-                </div>
-
-                <div class="bar-row">
-                    <span class="bar-label">Japanese</span>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 40%"></div>
-                    </div>
-                    <span class="bar-value">40</span>
-                </div>
-
-                <div class="bar-row">
-                    <span class="bar-label">Chinese</span>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 25%"></div>
-                    </div>
-                    <span class="bar-value">25</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
+    <table class="table table-borderless ">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Id</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.FirstName @user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Id</td>
+                    <td>@user.PhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+@code {
+    private List<LanguageLearningUser> users = new();
+    private List<Language> languages = new();
+    private List<Payment> payments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await DbContext.Users.ToListAsync(); // Users is DbSet<LanguageLearningUser>
+        languages = await DbContext.Language.ToListAsync();
+        payments = await DbContext.Payment.ToListAsync();
+    }
+}

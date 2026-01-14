@@ -21,7 +21,7 @@ else{<div class="lp-page w-100">
     </div>
 
     <!-- CONTENT -->
-    <div class=" w-100">
+    <div style="color:#845007" class=" w-100">
 
         <!-- LEFT CARD -->
         <section class="lp-card lp-left w-100">
@@ -29,38 +29,21 @@ else{<div class="lp-page w-100">
                 <h1>@Language.Name</h1>
             </div>
 
-            <!-- Lesson 1 -->
-            <div class="lesson-row">
-                <div class="lesson-left">
-                    <h1 class="lesson-title">Unit 1</h1>
-                    <h2 class="lesson-name">Greetings</h2>
-                    
-                </div>
+       
 
-                <button class="start-btn">Start lesson</button>
-            </div>
+                @foreach(var lesson in Lessons)
+                {
+                    <div class="lesson-row">
+                        <div class="lesson-left">
+                            <h1 class="lesson-title">@lesson.Title</h1>
+                            <h2 class="lesson-name">@lesson.Description</h2>
 
-            <div class="divider"></div>
+                        </div>
 
-            <!-- Lesson 2 -->
-            <div class="lesson-row">
-                <div class="lesson-left">
-                        <h1 class="lesson-title">Unit 1</h1>
-                        <h2 class="lesson-name">Greetings</h2>
-                </div>
-                    <button class="start-btn">Start lesson</button>
-            </div>
-
-            <div class="divider"></div>
-
-            <!-- Lesson 3 -->
-            <div class="lesson-row">
-                <div class="lesson-left">
-                        <h1 class="lesson-title">Unit 1</h1>
-                        <h2 class="lesson-name">Greetings</h2>
-                </div>
-                    <button class="start-btn">Start lesson</button>
-            </div>
+                        <button class="start-btn">Start lesson</button>
+                    </div>
+                    <div class= "divider" ></div>
+                }
 
         </section>
 
@@ -71,8 +54,13 @@ else{<div class="lp-page w-100">
 @code{
     private Language? Language;
 
+    private List<Lesson> Lessons;
+
     [SupplyParameterFromQuery]
     private int Id { get; set; }
+
+    List<Lesson> FilteredLessons => Language is not null && Lessons is not null
+            ? Lessons : Lessons.Where(l => l.LanguageId == Language.Id).ToList();
 
     protected override async Task OnInitializedAsync()
     {
@@ -87,5 +75,6 @@ else{<div class="lp-page w-100">
                 NavigationManager.NavigateTo("notfound");
             }
         }
+        Lessons = await httpClient.GetFromJsonAsync<List<Lesson>>($"api/lessons") ?? new List<Lesson>();
     }
 }

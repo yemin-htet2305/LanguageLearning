@@ -40,6 +40,7 @@
     PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };
 
     List<Language> Languages = new();
+
     string searchText = "";
     IQueryable<Language> FilteredLanguages => Languages.Where(l => l.Name.Contains(searchText)).AsQueryable();
 
