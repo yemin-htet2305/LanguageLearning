@@ -3,7 +3,68 @@
 @layout UserLayout
 
 <PageTitle>Home</PageTitle>
+<link href="css/home.css" rel="stylesheet" /> 
 
-<h1>Hello, world!</h1>
+<div class="home-container">
+    <section class="left-section">
+        <h1 class="main-heading">
+            Which is <span class="highlight">language</span> do<br />you want to learn?
+        </h1>
 
-Welcome to your new app.
+        <div class="language-grid">
+            <button class="language-btn" type="button">
+                <img src="https://flagcdn.com/w80/mx.png" alt="Mexico flag" />
+                <div class="language-text">
+                    <span class="language-name">Spanish</span>
+                    <span class="language-region">(Mexico)</span>
+                </div>
+            </button>
+
+            <button class="language-btn" type="button">
+                <img src="https://flagcdn.com/w80/es.png" alt="Spain flag" />
+                <div class="language-text">
+                    <span class="language-name">Spanish</span>
+                    <span class="language-region">(Spain)</span>
+                </div>
+            </button>
+
+            <button class="language-btn" type="button">
+                <img src="https://flagcdn.com/w80/fr.png" alt="France flag" />
+                <div class="language-text">
+                    <span class="language-name">French</span>
+                </div>
+            </button>
+
+            <button class="language-btn" type="button">
+                <img src="https://flagcdn.com/w80/de.png" alt="Germany flag" />
+                <div class="language-text">
+                    <span class="language-name">German</span>
+                </div>
+            </button>
+
+            <button class="language-btn" type="button">
+                <img src="https://flagcdn.com/w80/it.png" alt="Italy flag" />
+                <div class="language-text">
+                    <span class="language-name">Italian</span>
+                </div>
+            </button>
+
+            <button class="language-btn" type="button">
+                <img src="https://flagcdn.com/w80/jp.png" alt="Japan flag" />
+                <div class="language-text">
+                    <span class="language-name">Japan</span>
+                </div>
+            </button>
+
+        </div>
+    </section>
+
+    <section class="right-section">
+        <img src="language-learning.jpeg"
+             alt="Language learning illustration"
+             class="hero-image" />
+             
+    </section>
+
+
+</div>
