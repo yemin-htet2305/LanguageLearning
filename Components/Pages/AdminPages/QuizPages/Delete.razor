@@ -68,9 +68,10 @@
     {
         var response = await httpClient.DeleteAsync($"api/quizs/{quiz.Id}");
 
+
         if (response.IsSuccessStatusCode)
         {
-            NavigationManager.NavigateTo("/admin/quizs");
+            NavigationManager.NavigateTo("/admin/quizzes");
         }
         else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         {

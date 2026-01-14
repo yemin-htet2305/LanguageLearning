@@ -10,17 +10,14 @@
            
            <a class="log-link fs-4 text-center fw-bold" href="">OurLingua <i class="bi bi-brilliance fs-2"></i></a>
             
-         
-            @* <a class="log-link fs-5 fw-bold ml-10">Language</a> *@
-
             <AuthorizeView Roles="Administrator">
                 <NavLink href="/admin/dashboard" class="btn fs-5 px-3 py-1 fw-bold log-btn">
                     DashBoard
                 </NavLink>
             </AuthorizeView>
             <AuthorizeView>
-                <NavLink href="/courses" class="btn fs-5 px-3 py-1 fw-bold log-btn">
-                    Courses
+                <NavLink href="/languages" class="btn fs-5 px-3 py-1 fw-bold log-btn">
+                    Languages
                 </NavLink>
             </AuthorizeView>
             <div class="d-flex align-items-end justify-content-center gap-2">
@@ -48,7 +45,19 @@
     </nav>
     <section class="user-content d-flex align-items-center justify-content-start flex-column">
         @Body
+       
     </section>
+    <footer class="footer-bar d-flex align-items-center justify-content-around">
+        <a class="foot-link fs-4 text-center fw-bold" href="">Learn with <i class="bi bi-brilliance fs-2"></i></a>
+        <div class="d-flex align-items-end gap-3">
+            <a class="foot-link text-center fw-bold" href=""><i class="bi bi-facebook fs-3"></i></a>
+            <a class="foot-link text-center fw-bold" href=""><i class="bi bi-twitter fs-3"></i></a>
+            <a class="foot-link text-center fw-bold" href=""><i class="bi bi-youtube fs-3"></i></a>
+            <a class="foot-link text-center fw-bold" href=""><i class="bi bi-linkedin fs-3"></i></a>
+            <a class="foot-link text-center fw-bold" href=""><i class="bi bi-meta fs-3"></i></a>
+        </div>
+        <a class="foot-link fs-5 text-center fw-light" href="">Our Policy</a>
+    </footer>
 </div>
 
 

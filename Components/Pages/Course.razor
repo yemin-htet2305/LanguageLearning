@@ -1,0 +1,91 @@
+﻿@page "/language"
+@using LanguageLearning.Components.Layout
+@using LanguageLearning.Domain
+@rendermode InteractiveServer
+@layout UserLayout
+@inject HttpClient httpClient
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components.Authorization
+
+@if (Language is null)
+{
+    <p>Loading...</p>
+}
+else{<div class="lp-page w-100">
+
+    <!-- HEADER -->
+    <div class="lp-header">
+         <AuthorizeView>
+            <h1>Hi there, @context.User.Identity?.Name</h1>
+        </AuthorizeView>
+    </div>
+
+    <!-- CONTENT -->
+    <div class=" w-100">
+
+        <!-- LEFT CARD -->
+        <section class="lp-card lp-left w-100">
+            <div class="lp-unit">
+                <h1>@Language.Name</h1>
+            </div>
+
+            <!-- Lesson 1 -->
+            <div class="lesson-row">
+                <div class="lesson-left">
+                    <h1 class="lesson-title">Unit 1</h1>
+                    <h2 class="lesson-name">Greetings</h2>
+                    
+                </div>
+
+                <button class="start-btn">Start lesson</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Lesson 2 -->
+            <div class="lesson-row">
+                <div class="lesson-left">
+                        <h1 class="lesson-title">Unit 1</h1>
+                        <h2 class="lesson-name">Greetings</h2>
+                </div>
+                    <button class="start-btn">Start lesson</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Lesson 3 -->
+            <div class="lesson-row">
+                <div class="lesson-left">
+                        <h1 class="lesson-title">Unit 1</h1>
+                        <h2 class="lesson-name">Greetings</h2>
+                </div>
+                    <button class="start-btn">Start lesson</button>
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+}
+@code{
+    private Language? Language;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+     
+        // Only load from API if Language is not already bound from form
+        if (Language is null)
+        {
+            Language = await httpClient.GetFromJsonAsync<Language>($"api/languages/{Id}");
+
+            if (Language is null)
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+        }
+    }
+}
