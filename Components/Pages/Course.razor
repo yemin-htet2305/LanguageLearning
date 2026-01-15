@@ -27,7 +27,7 @@ else{<div class="lp-page w-100">
                 @for (int i = 0; i < FilteredLessons.Count; i++)
                 {
                     var lesson = FilteredLessons[i];
-                    var isLocked = i > 0 && !IsAdmin;
+                    var isLocked = i > 0 && (!IsAdmin && !IsPremium);
 
                     <div class="lesson-row">
                         <div class="lesson-left">
@@ -51,9 +51,11 @@ else{<div class="lp-page w-100">
                         }
                         else
                         {
-                            <a class="btn purchase-btn">
-                                Purchase Memberships
-                            </a>
+                            <AuthorizeView>
+                                <a href="/subscribe" class="btn purchase-btn">
+                                    Purchase Memberships
+                                </a>
+                            </AuthorizeView>
                         }
                         
                     </div>
@@ -88,6 +90,7 @@ else{<div class="lp-page w-100">
     private List<Lesson> Lessons;
 
     private bool IsAdmin = false;
+    private bool IsPremium = false;
 
     [SupplyParameterFromQuery]
     private int Id { get; set; }
@@ -96,10 +99,12 @@ else{<div class="lp-page w-100">
 
     protected override async Task OnInitializedAsync()
     {
-     
+
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         IsAdmin = user.IsInRole("Administrator");
+        IsPremium = user.IsInRole("Premium");
+
         // Only load from API if Language is not already bound from form
         if (Language is null)
         {

@@ -15,6 +15,11 @@
                     DashBoard
                 </NavLink>
             </AuthorizeView>
+            <AuthorizeView Roles="User">
+                <NavLink href="/subscribe" class="btn fs-5 px-3 py-1 fw-bold log-btn">
+                    Upgrade To Premium
+                </NavLink>
+            </AuthorizeView>
             <AuthorizeView>
                 <NavLink href="/languages" class="btn fs-5 px-3 py-1 fw-bold log-btn">
                     Languages
@@ -45,7 +50,6 @@
     </nav>
     <section class="user-content d-flex align-items-center justify-content-start flex-column">
         @Body
-       
     </section>
     <footer class="footer-bar d-flex align-items-center justify-content-around">
         <a class="foot-link fs-4 text-center fw-bold" href="">Learn with <i class="bi bi-brilliance fs-2"></i></a>

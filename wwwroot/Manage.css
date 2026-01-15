@@ -97,6 +97,9 @@
     color: #854007;
     text-decoration: none;
 }
+.card {
+    box-shadow: 5px 5px 5px #845007;
+}
 .card:hover{
     border: 3px solid #845007;
     background: #fbf7ef;
@@ -105,6 +108,7 @@
 .entry-search {
     color: #845007;
     border: 1px solid #845007;
+    box-shadow: 5px 5px 5px #845007;
 }
     .entry-search:focus {
         border: 2px solid #845007;
@@ -125,4 +129,24 @@
 }
     .foot-link:hover {
         color: #845007;
+    }
+
+.purchase-btn {
+    align-self: center;
+    background: navy;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+    .purchase-btn:hover {
+        background-color: #845007;
+    }
+
+    .purchase-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
     }

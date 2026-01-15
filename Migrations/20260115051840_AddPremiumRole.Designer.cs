@@ -4,6 +4,7 @@ using LanguageLearning.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LanguageLearning.Migrations
 {
     [DbContext(typeof(LanguageLearningContext))]
-    partial class LanguageLearningContextModelSnapshot : ModelSnapshot
+    [Migration("20260115051840_AddPremiumRole")]
+    partial class AddPremiumRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,7 +100,7 @@ namespace LanguageLearning.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "28610dc1-aaef-4cf2-bfca-133836c38f10",
+                            ConcurrencyStamp = "1a74d2ca-d513-41ef-8c01-5df4c9e7f0b2",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -105,9 +108,9 @@ namespace LanguageLearning.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBsYUYlr4Tj1xUL0jb6o1ScavLFjjPMVzTmXjmD7jTXG0Q497BJbQ+IN9dro2Vit2g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECJU/BDPalmKKbDby9bQoGKWbudFNHbA/Lo7YT7j8nShFmc1g1wR/BJKjtechDGi8g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5bd49c50-79b4-442b-ad19-35fd5d1052ff",
+                            SecurityStamp = "f1964bdc-0da8-49af-acad-37b0f5f68133",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -189,9 +192,6 @@ namespace LanguageLearning.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContentText")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ContentType")
                         .HasColumnType("nvarchar(max)");
 
@@ -205,6 +205,9 @@ namespace LanguageLearning.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PositionOrder")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")

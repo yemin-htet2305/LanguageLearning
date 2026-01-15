@@ -34,7 +34,7 @@
              class="rounded-3 d-flex align-content-center justify-content-around flex-row text-white">
             <div class="align-content-center">
                 <h5>Total Earnings</h5>
-                <h1 class="fw-bold">@payments.Count</h1>
+                <h1 class="fw-bold">@payments.Sum(payments => payments.Amount)</h1>
             </div>
             <div class="align-content-center">
                 <i style="font-size: 70px;" class="bi bi-currency-dollar"></i>

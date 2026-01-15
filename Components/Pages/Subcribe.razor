@@ -1,0 +1,204 @@
+﻿@page "/subscribe"
+@using LanguageLearning.Components.Layout
+@using LanguageLearning.Data
+@using LanguageLearning.Domain
+@layout UserLayout
+@inject HttpClient httpClient
+@rendermode InteractiveServer 
+@inject NavigationManager NavigationManager
+@inject RoleManager<IdentityRole> RoleManager
+@inject UserManager<LanguageLearningUser> UserManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
+
+<h1 style="color:#854007;" class="mb-5 fs-1">Choose Your Plan</h1>
+<div class="d-flex justify-content-center align-content-center gap-5 flex-wrap w-100 flex-row-reverse">
+    @foreach(var plan in Plans)
+    {
+        var price = plan.Price;
+
+        <div style="height:350px; color:#854007;" class="card w-25 text-center">
+            <div class="card-header text-center mb-3 h-25
+                d-flex align-content-center justify-content-center flex-column gap-2">
+                <span class="d-block fs-6">@plan.Name</span>
+                <h3>$@plan.Price</h3>
+            </div>
+            <div class="card-body d-flex justify-content-around flex-column align-items-center">
+                <p>@plan.BillingCycle</p>
+                <ul class="list-unstyled mt-3">
+                    <li>✓ Advanced content</li>
+                    <li>✓ Certificate included</li>
+                    <li>✓ Priority support</li>
+                </ul>
+                @if(price == 0 || IsAdmin || IsPremium)
+                {
+                    <a href="" class="btn log-btn w-75"> Current Plan</a>
+                }
+                else
+                {
+                    <button type="button" class="btn purchase-btn w-75" @onclick="() => PurchasePlan(plan.Id)"> Purchases</button>
+                }
+                
+            </div>
+        </div>
+    }
+</div>
+<hr/>
+<div class="d-flex flex-row align-items-center justify-content-center w-100 mt-5 card" 
+     style="height:900px;color: #845007;">
+    <div class="w-50 h-100  d-flex flex-column align-items-start gap-3 p-5" style="border-right: 1px solid black">
+        <h3>Checkout</h3>
+        <h4 class="fw-light">Billing Address</h4>
+        <div class="w-100">
+            <p class="fw-lighter">Country</p>
+            <div class="border border-1 w-50 rounded-3 align-content-center fw-lighter px-3" style="height:40px; font-size:20px;">
+                <i class="bi bi-globe"></i>  <p class="d-inline">Singapore</p>
+            </div>
+        </div>
+        <h3 class="mt-5">Credit Card Payment</h3>
+        <div class="d-flex align-items-center justify-content-center w-100">
+            <div class="w-100 bg-transparent">
+                <EditForm id="myForm" method="post" Model="Payment" OnValidSubmit="AddPayment" FormName="create" Enhance>
+                    <DataAnnotationsValidator />
+                    <ValidationSummary class="text-danger" role="alert" />
+                    <div class="mb-3">
+                        <label style="color: #845007;" for="amount" class="form-label">Amount</label>
+                        <InputNumber style="color: #845007;" id="name" @bind-Value="Payment.Amount" class="form-control" disabled/>
+                        <ValidationMessage For="() => Payment.Amount" class="text-danger" />
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: #845007;" for="method" class="form-label">Method</label>
+                        <InputText style="color: #845007;" id="description" @bind-Value="Payment.Method" class="form-control" disabled/>
+                        <ValidationMessage For="() => Payment.Method" class="text-danger" />
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: #845007;" for="method" class="form-label">Credit Card</label>
+                        <InputText style="color: #845007;" id="description" @bind-Value="@card" class="form-control" />
+                        <ValidationMessage For="() => card" class="text-danger" />
+                    </div>
+                    <div class="mb-3 d-flex flex-row justify-content-evenly">
+                        <div class="w-25">
+                            <label style="color: #845007;" for="method" class="form-label">Expiry Date</label>
+                            <InputText style="color: #845007;" id="description" @bind-Value="@exDate" class="form-control" />
+                            <ValidationMessage For="() => exDate" class="text-danger" />
+                        </div>
+                        <div class="w-25">
+                            <label style="color: #845007;" for="method" class="form-label">CVC/CVV</label>
+                            <InputText style="color: #845007;" id="description" @bind-Value="@cvv" class="form-control" />
+                            <ValidationMessage For="() => cvv" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: #845007;" for="method" class="form-label">Name On Card</label>
+                        <InputText style="color: #845007;" id="description" @bind-Value="@cardName" class="form-control" />
+                        <ValidationMessage For="() => cardName" class="text-danger" />
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+    <div class="w-50 h-100  d-flex flex-column align-items-center justify-content-center p-5">
+        <h1>Order Summary</h1>
+        <p class="mt-2">Original Price:      S$@selectedPlan.Price</p>
+        <p>Tax:                 S$@(selectedPlan.Price * 0.08)</p>
+        <hr/>
+        <h3>Total:   S$@(selectedPlan.Price + selectedPlan.Price *0.08)</h3>
+        @if(IsAdmin || IsPremium)
+        {
+            <h3 class="text-success mt-5">You are already a Premium User.</h3>
+        }
+        else
+        {
+            <button type="submit" form="myForm" class="btn btn-success w-75 mt-5 fs-3">Pay</button>
+        }
+        @if (!string.IsNullOrEmpty(message))
+        {
+            <div class="alert alert-info mt-3">@message</div>
+        }
+    </div>
+</div>
+
+
+@code {
+    [SupplyParameterFromForm]
+    private Payment Payment{ get; set; } = new();
+    private string card = "";
+    private string exDate = "";
+    private string cvv = "";
+    private string cardName = "";
+
+    //Create userId string to store the user id, default value is "System".
+    private string userId = "System";
+
+    private string message = "";
+
+
+    List<Plan> Plans = new();
+    Plan selectedPlan = new Plan();
+    private bool IsAdmin = false;
+    private bool IsPremium = false;
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        IsAdmin = user.IsInRole("Administrator");
+        IsPremium = user.IsInRole("Premium");
+        // Get the userId claim
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
+        Plans = await httpClient.GetFromJsonAsync<List<Plan>>("api/plans") ?? new List<Plan>();
+    }
+    private async Task AddPayment()
+    {
+        //Set the userId to the CreatedBy and UpdatedBy fields.
+        Payment.CreatedBy = userId;
+        Payment.UpdatedBy = userId;
+        //Set the DateCreated and DateUpdated fields to the current date and time.
+        Payment.DateCreated = DateTime.Now;
+        Payment.DateUpdated = DateTime.Now;
+
+        Payment.Status = "Completed";
+
+        var response = await httpClient.PostAsJsonAsync("api/payments", Payment);
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = await UserManager.GetUserAsync(authState.User);
+
+        if (user != null)
+        {
+            // Remove from User role
+            if (await UserManager.IsInRoleAsync(user, "User"))
+            {
+                await UserManager.RemoveFromRoleAsync(user, "User");
+            }
+           
+            // Add to Administrator role
+            if (!await UserManager.IsInRoleAsync(user, "Premium"))
+            {
+                var result = await UserManager.AddToRoleAsync(user, "Premium");
+            }
+            else
+            {
+                message = "You are already a Premium user!";
+            }
+        }
+        else
+        {
+            message = "User not found!";
+        }
+
+    }
+    private async Task PurchasePlan(int planId)
+    {
+        selectedPlan = Plans.FirstOrDefault(p => p.Id == planId);
+        if (selectedPlan != null)
+        {
+            Payment.Amount = selectedPlan.Price;
+            Payment.Method = "Credit Card Payment";
+        }
+    }
+ }

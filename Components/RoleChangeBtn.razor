@@ -7,7 +7,7 @@
 @rendermode InteractiveServer
 
 
-<button @onclick="ChangeToAdmin" class="btn btn-primary">Make Me Admin</button>
+<button @onclick="ChangeToPremium" class="btn btn-primary">Make Me Admin</button>
 
 @if (!string.IsNullOrEmpty(message))
 {
@@ -17,7 +17,7 @@
 @code {
     private string message = "";
 
-    private async Task ChangeToAdmin()
+    private async Task ChangeToPremium()
     {
         try
         {
@@ -31,24 +31,20 @@
                 {
                     await UserManager.RemoveFromRoleAsync(user, "User");
                 }
+                //Remove from Admin role
+                if (await UserManager.IsInRoleAsync(user, "Administrator"))
+                {
+                    await UserManager.RemoveFromRoleAsync(user, "Administrator");
+                }
 
                 // Add to Administrator role
-                if (!await UserManager.IsInRoleAsync(user, "Administrator"))
+                if (!await UserManager.IsInRoleAsync(user, "Premium"))
                 {
-                    var result = await UserManager.AddToRoleAsync(user, "Administrator");
-
-                    if (result.Succeeded)
-                    {
-                        message = "Successfully changed to Administrator! Please log out and log back in.";
-                    }
-                    else
-                    {
-                        message = $"Error: {string.Join(", ", result.Errors.Select(e => e.Description))}";
-                    }
+                    var result = await UserManager.AddToRoleAsync(user, "Premium");
                 }
                 else
                 {
-                    message = "You are already an Administrator!";
+                    message = "You are already a Premium user!";
                 }
             }
             else
