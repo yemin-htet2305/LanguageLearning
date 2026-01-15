@@ -1,0 +1,64 @@
+﻿@using LanguageLearning.Data
+@using Microsoft.AspNetCore.Identity
+@inject AuthenticationStateProvider AuthState
+@inject RoleManager<IdentityRole> RoleManager
+@inject UserManager<LanguageLearningUser> UserManager
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+
+<button @onclick="ChangeToAdmin" class="btn btn-primary">Make Me Admin</button>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-info mt-3">@message</div>
+}
+
+@code {
+    private string message = "";
+
+    private async Task ChangeToAdmin()
+    {
+        try
+        {
+            var authState = await AuthState.GetAuthenticationStateAsync();
+            var user = await UserManager.GetUserAsync(authState.User);
+
+            if (user != null)
+            {
+                // Remove from User role
+                if (await UserManager.IsInRoleAsync(user, "User"))
+                {
+                    await UserManager.RemoveFromRoleAsync(user, "User");
+                }
+
+                // Add to Administrator role
+                if (!await UserManager.IsInRoleAsync(user, "Administrator"))
+                {
+                    var result = await UserManager.AddToRoleAsync(user, "Administrator");
+
+                    if (result.Succeeded)
+                    {
+                        message = "Successfully changed to Administrator! Please log out and log back in.";
+                    }
+                    else
+                    {
+                        message = $"Error: {string.Join(", ", result.Errors.Select(e => e.Description))}";
+                    }
+                }
+                else
+                {
+                    message = "You are already an Administrator!";
+                }
+            }
+            else
+            {
+                message = "User not found!";
+            }
+        }
+        catch (Exception ex)
+        {
+            message = $"Error: {ex.Message}";
+        }
+    }
+}

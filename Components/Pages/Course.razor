@@ -5,6 +5,7 @@
 @layout UserLayout
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
 
 @if (Language is null)
@@ -12,26 +13,56 @@
     <p>Loading...</p>
 }
 else{<div class="lp-page w-100">
-
-    <!-- HEADER -->
     <div class="lp-header">
          <AuthorizeView>
             <h1>Hi there, @context.User.Identity?.Name</h1>
         </AuthorizeView>
     </div>
 
-    <!-- CONTENT -->
     <div style="color:#845007" class=" w-100">
-
-        <!-- LEFT CARD -->
         <section class="lp-card lp-left w-100">
             <div class="lp-unit">
                 <h1>@Language.Name</h1>
             </div>
+                @for (int i = 0; i < FilteredLessons.Count; i++)
+                {
+                    var lesson = FilteredLessons[i];
+                    var isLocked = i > 0 && !IsAdmin;
+
+                    <div class="lesson-row">
+                        <div class="lesson-left">
+                            <h1 class="lesson-title">
+                                @lesson.Title
+                                
+                            </h1>
+                            <h2 class="lesson-name">@lesson.Description
+                                @if (isLocked)
+                                {
+                                    <span style="margin-left: 10px; color:red;"><i class="bi bi-lock-fill fs-3"></i></span>
+                                }
+                            </h2>
+                        </div>
+                        
+                        @if (!isLocked)
+                        {
+                            <a class="btn start-btn">
+                                Start lesson
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn purchase-btn">
+                                Purchase Memberships
+                            </a>
+                        }
+                        
+                    </div>
+                    <div class="divider"></div>
+                }
 
        
 
-                @foreach(var lesson in Lessons)
+                @* @foreach(var lesson in FilteredLessons)
                 {
                     <div class="lesson-row">
                         <div class="lesson-left">
@@ -43,7 +74,7 @@ else{<div class="lp-page w-100">
                         <button class="start-btn">Start lesson</button>
                     </div>
                     <div class= "divider" ></div>
-                }
+                } *@
 
         </section>
 
@@ -56,15 +87,19 @@ else{<div class="lp-page w-100">
 
     private List<Lesson> Lessons;
 
+    private bool IsAdmin = false;
+
     [SupplyParameterFromQuery]
     private int Id { get; set; }
 
-    List<Lesson> FilteredLessons => Language is not null && Lessons is not null
-            ? Lessons : Lessons.Where(l => l.LanguageId == Language.Id).ToList();
+    List<Lesson> FilteredLessons => Lessons?.Where(l => l.LanguageId == Id).ToList() ?? new List<Lesson>();
 
     protected override async Task OnInitializedAsync()
     {
      
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        IsAdmin = user.IsInRole("Administrator");
         // Only load from API if Language is not already bound from form
         if (Language is null)
         {
@@ -78,3 +113,6 @@ else{<div class="lp-page w-100">
         Lessons = await httpClient.GetFromJsonAsync<List<Lesson>>($"api/lessons") ?? new List<Lesson>();
     }
 }
+
+       
+                
