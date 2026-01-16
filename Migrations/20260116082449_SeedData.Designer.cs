@@ -4,6 +4,7 @@ using LanguageLearning.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LanguageLearning.Migrations
 {
     [DbContext(typeof(LanguageLearningContext))]
-    partial class LanguageLearningContextModelSnapshot : ModelSnapshot
+    [Migration("20260116082449_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,7 +100,7 @@ namespace LanguageLearning.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b195c71d-ccd6-423e-8f91-d4f0d5481d9d",
+                            ConcurrencyStamp = "0ce43eaa-c1aa-45f5-9cdd-bc5d16741774",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -105,9 +108,9 @@ namespace LanguageLearning.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKaOk/+Bwe5HDFlmpO4sGBvJZx+7pQLvjCURci6/QtouTGd3vkL8I02cuRWLhyDJXw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELhZg5X5TuH585H+q1fD0AIoKKMpATXzULpnO3r4G/6o3R7fh+MBKaI94tf6XW2qpA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "050f6013-09f4-4825-a78d-39dd631b5c14",
+                            SecurityStamp = "02a54682-94d3-4b5b-a9bd-63d4be7f0a89",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -147,172 +150,138 @@ namespace LanguageLearning.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2865),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2872),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "br",
-                            Name = "Brazilian",
-                            UpdatedBy = "System"
+                            Name = "Brazilian"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2874),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2875),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "cn",
-                            Name = "Mandarin",
-                            UpdatedBy = "System"
+                            Name = "Mandarin"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2876),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2876),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "de",
-                            Name = "German",
-                            UpdatedBy = "System"
+                            Name = "German"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2877),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2877),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "es",
-                            Name = "Spanish",
-                            UpdatedBy = "System"
+                            Name = "Spanish"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2878),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2879),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "fr",
-                            Name = "French",
-                            UpdatedBy = "System"
+                            Name = "French"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2880),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2880),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "gb",
-                            Name = "English",
-                            UpdatedBy = "System"
+                            Name = "English"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2882),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2882),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "gr",
-                            Name = "Greece",
-                            UpdatedBy = "System"
+                            Name = "Greece"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2883),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2883),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "id",
-                            Name = "Indonesian",
-                            UpdatedBy = "System"
+                            Name = "Indonesian"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2885),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2885),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "in",
-                            Name = "Indian",
-                            UpdatedBy = "System"
+                            Name = "Indian"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2886),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2887),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "it",
-                            Name = "Italian",
-                            UpdatedBy = "System"
+                            Name = "Italian"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2888),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2888),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "jp",
-                            Name = "Japanese",
-                            UpdatedBy = "System"
+                            Name = "Japanese"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2889),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2890),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "kr",
-                            Name = "Korean",
-                            UpdatedBy = "System"
+                            Name = "Korean"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2891),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2891),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "mn",
-                            Name = "Mongolian",
-                            UpdatedBy = "System"
+                            Name = "Mongolian"
                         },
                         new
                         {
                             Id = 14,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2892),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2892),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "pt",
-                            Name = "Portuguese",
-                            UpdatedBy = "System"
+                            Name = "Portuguese"
                         },
                         new
                         {
                             Id = 15,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2893),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2894),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "ru",
-                            Name = "Russian",
-                            UpdatedBy = "System"
+                            Name = "Russian"
                         },
                         new
                         {
                             Id = 16,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2894),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2895),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "vn",
-                            Name = "Vietnamese",
-                            UpdatedBy = "System"
+                            Name = "Vietnamese"
                         },
                         new
                         {
                             Id = 17,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2896),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(2896),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "mm",
-                            Name = "Myanmar",
-                            UpdatedBy = "System"
+                            Name = "Myanmar"
                         });
                 });
 
@@ -356,614 +325,512 @@ namespace LanguageLearning.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3556),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3557),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 1,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3559),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3559),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 1,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3560),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3561),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 1,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3562),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3562),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 2,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3563),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3564),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 2,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3565),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3565),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 2,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3567),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3567),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 3,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3568),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3568),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 3,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3570),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3570),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 3,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3571),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3571),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 4,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3573),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3573),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 4,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3574),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3574),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 4,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3575),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3576),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 5,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 14,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3577),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3577),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 5,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 15,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3578),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3579),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 5,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 16,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3580),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3580),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 6,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 17,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3581),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3582),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 6,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 18,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3583),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3583),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 6,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 19,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3584),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3585),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 7,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 20,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3586),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3586),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 7,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 21,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3587),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3588),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 7,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 22,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3589),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3589),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 8,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 23,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3590),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3591),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 8,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 24,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3592),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3592),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 8,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 25,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3593),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3594),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 9,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 26,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3595),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3595),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 9,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 27,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3596),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3597),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 9,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 28,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3598),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3598),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 10,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 29,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3599),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3599),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 10,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 30,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3601),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3601),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 10,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 31,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3602),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3602),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 11,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 32,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3604),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3604),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 11,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 33,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3605),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3605),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 11,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 34,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3607),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3607),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 12,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 35,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3608),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3608),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 12,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 36,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3610),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3610),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 12,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 37,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3611),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3611),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 13,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 38,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3613),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3613),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 13,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 39,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3614),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3614),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 13,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 40,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3616),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3616),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 14,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 41,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3617),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3617),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 14,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 42,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3618),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3619),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 14,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 43,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3620),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3620),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 15,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 44,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3621),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3622),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 15,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 45,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3623),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3623),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 15,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 46,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3624),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3625),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 16,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 47,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3626),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3626),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 16,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 48,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3627),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3628),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 16,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         },
                         new
                         {
                             Id = 49,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3629),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3629),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Learn how to greet people in different situations.",
                             DifficultyLvl = 1,
                             LanguageId = 17,
-                            Title = "Basic Greetings",
-                            UpdatedBy = "System"
+                            Title = "Basic Greetings"
                         },
                         new
                         {
                             Id = 50,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3630),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3631),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize body parts.",
                             DifficultyLvl = 1,
                             LanguageId = 17,
-                            Title = "Body Parts",
-                            UpdatedBy = "System"
+                            Title = "Body Parts"
                         },
                         new
                         {
                             Id = 51,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3632),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3632),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Familiarize many sports.",
                             DifficultyLvl = 2,
                             LanguageId = 17,
-                            Title = "Sports",
-                            UpdatedBy = "System"
+                            Title = "Sports"
                         });
                 });
 
@@ -1006,198 +873,162 @@ namespace LanguageLearning.Migrations
                             Id = 1,
                             ContentText = "Welcome to Lesson 1: Introduction to Language Learning.",
                             ContentType = "Greetings.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3724),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3724),
-                            LessonId = 16,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 16
                         },
                         new
                         {
                             Id = 2,
                             ContentText = "In this lesson, we will cover the body parts of human beings.",
                             ContentType = "BodyParts.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3726),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3726),
-                            LessonId = 17,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 17
                         },
                         new
                         {
                             Id = 3,
                             ContentText = "Welcome to Lesson 2: Many kind of sports.",
                             ContentType = "Sports.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3727),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3727),
-                            LessonId = 18,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 18
                         },
                         new
                         {
                             Id = 4,
                             ContentText = "Welcome to Lesson 1: Introduction to Language Learning.",
                             ContentType = "Greetings.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3728),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3729),
-                            LessonId = 10,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 10
                         },
                         new
                         {
                             Id = 5,
                             ContentText = "In this lesson, we will cover the body parts of human beings.",
                             ContentType = "BodyParts.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3730),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3730),
-                            LessonId = 11,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 11
                         },
                         new
                         {
                             Id = 6,
                             ContentText = "Welcome to Lesson 2: Many kind of sports.",
                             ContentType = "Sports.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3731),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3731),
-                            LessonId = 12,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 12
                         },
                         new
                         {
                             Id = 7,
                             ContentText = "Welcome to Lesson 1: Introduction to Language Learning.",
                             ContentType = "Greetings.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3733),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3733),
-                            LessonId = 13,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 13
                         },
                         new
                         {
                             Id = 8,
                             ContentText = "In this lesson, we will cover the body parts of human beings.",
                             ContentType = "BodyParts.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3734),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3734),
-                            LessonId = 14,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 14
                         },
                         new
                         {
                             Id = 9,
                             ContentText = "Welcome to Lesson 2: Many kind of sports.",
                             ContentType = "Sports.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3735),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3736),
-                            LessonId = 15,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 15
                         },
                         new
                         {
                             Id = 10,
                             ContentText = "Welcome to Lesson 1: Introduction to Language Learning.",
                             ContentType = "Greetings.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3737),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3737),
-                            LessonId = 28,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 28
                         },
                         new
                         {
                             Id = 11,
                             ContentText = "In this lesson, we will cover the body parts of human beings.",
                             ContentType = "BodyParts.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3738),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3738),
-                            LessonId = 29,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 29
                         },
                         new
                         {
                             Id = 12,
                             ContentText = "Welcome to Lesson 2: Many kind of sports.",
                             ContentType = "Sports.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3739),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3740),
-                            LessonId = 30,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 30
                         },
                         new
                         {
                             Id = 13,
                             ContentText = "Welcome to Lesson 1: Introduction to Language Learning.",
                             ContentType = "Greetings.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3741),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3741),
-                            LessonId = 7,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 7
                         },
                         new
                         {
                             Id = 14,
                             ContentText = "In this lesson, we will cover the body parts of human beings.",
                             ContentType = "BodyParts.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3742),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3743),
-                            LessonId = 8,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 8
                         },
                         new
                         {
                             Id = 15,
                             ContentText = "Welcome to Lesson 2: Many kind of sports.",
                             ContentType = "Sports.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3744),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3744),
-                            LessonId = 9,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 9
                         },
                         new
                         {
                             Id = 16,
                             ContentText = "Welcome to Lesson 1: Introduction to Language Learning.",
                             ContentType = "Greetings.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3745),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3745),
-                            LessonId = 31,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 31
                         },
                         new
                         {
                             Id = 17,
                             ContentText = "In this lesson, we will cover the body parts of human beings.",
                             ContentType = "BodyParts.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3746),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3747),
-                            LessonId = 32,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 32
                         },
                         new
                         {
                             Id = 18,
                             ContentText = "Welcome to Lesson 2: Many kind of sports.",
                             ContentType = "Sports.jpg",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3748),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3748),
-                            LessonId = 33,
-                            UpdatedBy = "System"
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LessonId = 33
                         });
                 });
 
@@ -1359,271 +1190,235 @@ namespace LanguageLearning.Migrations
                         {
                             Id = 1,
                             CorrrectAnswer = "C",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3959),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3959),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Landon",
                             OptD = "Rome",
                             QuizId = 1,
-                            Text = "What is the capital of England?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of England?"
                         },
                         new
                         {
                             Id = 2,
                             CorrrectAnswer = "C",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3961),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3962),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Landon",
                             OptD = "Rome",
                             QuizId = 2,
-                            Text = "What is the capital of England?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of England?"
                         },
                         new
                         {
                             Id = 3,
                             CorrrectAnswer = "C",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3963),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3964),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Landon",
                             OptD = "Rome",
                             QuizId = 3,
-                            Text = "What is the capital of England?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of England?"
                         },
                         new
                         {
                             Id = 4,
                             CorrrectAnswer = "B",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3965),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3965),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 4,
-                            Text = "What is the capital of Spain?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Spain?"
                         },
                         new
                         {
                             Id = 5,
                             CorrrectAnswer = "B",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3967),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3967),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 5,
-                            Text = "What is the capital of Spain?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Spain?"
                         },
                         new
                         {
                             Id = 6,
                             CorrrectAnswer = "B",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3969),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3969),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 6,
-                            Text = "What is the capital of Spain?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Spain?"
                         },
                         new
                         {
                             Id = 7,
                             CorrrectAnswer = "C",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3970),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3971),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 7,
-                            Text = "What is the capital of France?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of France?"
                         },
                         new
                         {
                             Id = 8,
                             CorrrectAnswer = "C",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3972),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3972),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 8,
-                            Text = "What is the capital of France?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of France?"
                         },
                         new
                         {
                             Id = 9,
                             CorrrectAnswer = "C",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3974),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3974),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 9,
-                            Text = "What is the capital of France?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of France?"
                         },
                         new
                         {
                             Id = 10,
                             CorrrectAnswer = "D",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3976),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3976),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 10,
-                            Text = "What is the capital of Italy?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Italy?"
                         },
                         new
                         {
                             Id = 11,
                             CorrrectAnswer = "D",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3978),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3978),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 11,
-                            Text = "What is the capital of Italy?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Italy?"
                         },
                         new
                         {
                             Id = 12,
                             CorrrectAnswer = "D",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3979),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3980),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 12,
-                            Text = "What is the capital of Italy?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Italy?"
                         },
                         new
                         {
                             Id = 13,
                             CorrrectAnswer = "A",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3981),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3982),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 13,
-                            Text = "What is the capital of Germany?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Germany?"
                         },
                         new
                         {
                             Id = 14,
                             CorrrectAnswer = "A",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3983),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3983),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 14,
-                            Text = "What is the capital of Germany?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Germany?"
                         },
                         new
                         {
                             Id = 15,
                             CorrrectAnswer = "A",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3985),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3985),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Madrid",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 15,
-                            Text = "What is the capital of Germany?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Germany?"
                         },
                         new
                         {
                             Id = 16,
                             CorrrectAnswer = "B",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3987),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3987),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Tokyo",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 16,
-                            Text = "What is the capital of Japan?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Japan?"
                         },
                         new
                         {
                             Id = 17,
                             CorrrectAnswer = "B",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3988),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3989),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Tokyo",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 17,
-                            Text = "What is the capital of Japan?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Japan?"
                         },
                         new
                         {
                             Id = 18,
                             CorrrectAnswer = "B",
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3990),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3990),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OptA = "Berlin",
                             OptB = "Tokyo",
                             OptC = "Paris",
                             OptD = "Rome",
                             QuizId = 18,
-                            Text = "What is the capital of Japan?",
-                            UpdatedBy = "System"
+                            Text = "What is the capital of Japan?"
                         });
                 });
 
@@ -1664,200 +1459,164 @@ namespace LanguageLearning.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3826),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3826),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 16,
-                            Title = "Basic English/ Greetings Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic English/ Greetings Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3827),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3828),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 17,
-                            Title = "Basic English/ Body Parts Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic English/ Body Parts Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3829),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3829),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 18,
-                            Title = "Basic English/ Sports Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic English/ Sports Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3830),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3830),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 10,
-                            Title = "Basic Spanish/ Greetings Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Spanish/ Greetings Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3831),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3832),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 11,
-                            Title = "Basic Spanish/ Body Parts Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Spanish/ Body Parts Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3833),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3833),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 12,
-                            Title = "Basic Spanish/ Sports Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Spanish/ Sports Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3834),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3835),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 13,
-                            Title = "Basic French/ Greetings Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic French/ Greetings Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3836),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3836),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 14,
-                            Title = "Basic French/ Body Parts Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic French/ Body Parts Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3837),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3837),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 15,
-                            Title = "Basic French/ Sports Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic French/ Sports Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3838),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3839),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 28,
-                            Title = "Basic Italian/ Greetings Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Italian/ Greetings Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3840),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3840),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 29,
-                            Title = "Basic Italian/ Body Parts Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Italian/ Body Parts Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3842),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3842),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 30,
-                            Title = "Basic Italian/ Sports Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Italian/ Sports Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3843),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3843),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 7,
-                            Title = "Basic German/ Greetings Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic German/ Greetings Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 14,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3844),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3845),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 8,
-                            Title = "Basic German/ Body Parts Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic German/ Body Parts Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 15,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3846),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3846),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 9,
-                            Title = "Basic German/ Sports Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic German/ Sports Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 16,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3847),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3848),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 31,
-                            Title = "Basic Japanese/ Greetings Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Japanese/ Greetings Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 17,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3849),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3849),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 32,
-                            Title = "Basic Japanese/ Body Parts Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Japanese/ Body Parts Vocabulary Quiz"
                         },
                         new
                         {
                             Id = 18,
-                            CreatedBy = "System",
-                            DateCreated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3850),
-                            DateUpdated = new DateTime(2026, 1, 16, 16, 47, 11, 918, DateTimeKind.Local).AddTicks(3850),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             LessonId = 33,
-                            Title = "Basic Japanese/ Sports Vocabulary Quiz",
-                            UpdatedBy = "System"
+                            Title = "Basic Japanese/ Sports Vocabulary Quiz"
                         });
                 });
 

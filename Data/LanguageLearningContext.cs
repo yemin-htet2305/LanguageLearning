@@ -24,6 +24,11 @@ namespace LanguageLearning.Data
             builder.ApplyConfiguration(new RoleSeed());
             builder.ApplyConfiguration(new UserRoleSeed());
             builder.ApplyConfiguration(new UserSeed());
+            builder.ApplyConfiguration(new LanguageSeed());
+            builder.ApplyConfiguration(new LessonSeed());
+            builder.ApplyConfiguration(new LessonContentSeed());
+            builder.ApplyConfiguration(new QuizSeed());
+            builder.ApplyConfiguration(new QuessionSeed());
 
         }
     }
