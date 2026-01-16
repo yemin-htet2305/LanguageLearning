@@ -29,6 +29,7 @@ namespace LanguageLearning.Data
             builder.ApplyConfiguration(new LessonContentSeed());
             builder.ApplyConfiguration(new QuizSeed());
             builder.ApplyConfiguration(new QuessionSeed());
+            builder.ApplyConfiguration(new PlanSeed());
 
         }
     }

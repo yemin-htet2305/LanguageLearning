@@ -13,7 +13,7 @@
 @using Microsoft.AspNetCore.Identity
 
 <h1 style="color:#854007;" class="mb-5 fs-1">Choose Your Plan</h1>
-<div class="d-flex justify-content-center align-content-center gap-5 flex-wrap w-100 flex-row-reverse">
+<div class="d-flex justify-content-center align-content-center gap-5 flex-wrap w-100 flex-row">
     @foreach(var plan in Plans)
     {
         var price = plan.Price;
@@ -25,7 +25,7 @@
                 <h3>$@plan.Price</h3>
             </div>
             <div class="card-body d-flex justify-content-around flex-column align-items-center">
-                <p>@plan.BillingCycle</p>
+                <h4>@plan.BillingCycle</h4>
                 <ul class="list-unstyled mt-3">
                     <li>✓ Advanced content</li>
                     <li>✓ Certificate included</li>
@@ -177,11 +177,20 @@
             {
                 await UserManager.RemoveFromRoleAsync(user, "User");
             }
-           
+
             // Add to Administrator role
             if (!await UserManager.IsInRoleAsync(user, "Premium"))
             {
                 var result = await UserManager.AddToRoleAsync(user, "Premium");
+                if (result.Succeeded)
+                {
+                    // Navigate to success page
+                    NavigationManager.NavigateTo("/checkoutsuccess");
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("notfound");
+                }
             }
             else
             {
@@ -190,7 +199,7 @@
         }
         else
         {
-            message = "User not found!";
+            NavigationManager.NavigateTo("notfound");
         }
 
     }

@@ -1,12 +1,97 @@
-﻿@page "/unit"
+﻿@page "/language/{languageName}/unit/{lessonId:int}"
 @using LanguageLearning.Components.Layout
 @using LanguageLearning.Domain
 @rendermode InteractiveServer
 @layout UserLayout
 @inject HttpClient httpClient
 
+<h1></h1>
+<div style="height:800px;" class="w-100 border border-3 d-flex align-content-center justify-content-start rounded-3">
+        <button type="button" class="btn" @onclick="PreviousCards"><i class="bi bi-arrow-left fs-3"></i></button>
+    @if (FilteredLessonContents.Any())
+    {
+        <div class="d-flex flex-column justify-content-around align-items-center w-100 gap-3 py-3">
+            <h1>@if(LessonId % 3 == 0)
+                {
+                    @if (currentIndex == 0)
+                    {
+                        <text>Football</text>
+                    }
+                    else if (currentIndex == 1)
+                    {
+                        <text>BasketBall</text>
+                    }
+                    else
+                    {
+                        <text>Golf</text>
+                    }
+                    
+                }else if(LessonId % 3 == 1)
+                {
+                    
+                    @if (currentIndex == 0)
+                    {
+                        <text>Good Morning</text>
+                    }
+                    else if (currentIndex == 1)
+                    {
+                        <text>Good Afternoon</text>
+                    }
+                    else
+                    {
+                        <text>Good Night</text>
+                    }
+
+                }
+                else
+                {
+                    @if (currentIndex == 0)
+                    {
+                        <text>Head</text>
+                    }
+                    else if (currentIndex == 1)
+                    {
+                        <text>Hand</text>
+                    }
+                    else
+                    {
+                        <text>Leg</text>
+                    }
+                }
+            </h1>
+            <img src="@FilteredLessonContents[currentIndex].ContentType" class="w-50 h-50" />
+            <h3>@FilteredLessonContents[currentIndex].ContentText </h3>
+        </div>
+    }
+        <button type="button" class="btn" @onclick="NextCards"><i class="bi bi-arrow-right fs-3"></i></button>
+</div>
+
 
 @code{
-    // [SupplyParameterFromQuery]
-    // private int Id { get; set; }
-}
+    [Parameter]
+    public string? LanguageName { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    List<LessonContent> LessonContents = new List<LessonContent>();
+    private int currentIndex = 0;
+
+    List<LessonContent> FilteredLessonContents => LessonContents?.Where(l => l.LessonId == LessonId).ToList() ?? new List<LessonContent>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        LessonContents = await httpClient.GetFromJsonAsync<List<LessonContent>>("api/lessoncontents") ?? new List<LessonContent>();
+
+    }
+    
+    private void NextCards()
+    {
+        currentIndex = (currentIndex + 1) % FilteredLessonContents.Count;
+    }
+    private void PreviousCards()
+    {
+        currentIndex = (currentIndex - 1 + FilteredLessonContents.Count) % FilteredLessonContents.Count;
+    }
+    
+} 
