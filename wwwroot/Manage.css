@@ -150,3 +150,8 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
+
+.c-card {
+    box-shadow: 5px 5px 5px #845007;
+    border: 1px solid #845007;
+}

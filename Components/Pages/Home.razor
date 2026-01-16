@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using LanguageLearning.Components.Layout
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @layout UserLayout
 
 <PageTitle>Home</PageTitle>
@@ -12,49 +13,44 @@
         </h1>
 
         <div class="language-grid">
-            <button class="language-btn" type="button">
-                <img src="https://flagcdn.com/w80/mx.png" alt="Mexico flag" />
-                <div class="language-text">
-                    <span class="language-name">Spanish</span>
-                    <span class="language-region">(Mexico)</span>
-                </div>
-            </button>
-
-            <button class="language-btn" type="button">
+            <a href=@(IsAuthorized ? "/language?id=10" : "/Account/Login") class="btn language-btn">
                 <img src="https://flagcdn.com/w80/es.png" alt="Spain flag" />
                 <div class="language-text">
                     <span class="language-name">Spanish</span>
-                    <span class="language-region">(Spain)</span>
                 </div>
-            </button>
-
-            <button class="language-btn" type="button">
+            </a>
+            <a href=@(IsAuthorized ? "/language?id=11" : "/Account/Login") class="btn language-btn">
                 <img src="https://flagcdn.com/w80/fr.png" alt="France flag" />
                 <div class="language-text">
                     <span class="language-name">French</span>
                 </div>
-            </button>
+            </a>
 
-            <button class="language-btn" type="button">
+            <a href=@(IsAuthorized ? "/language?id=9" : "/Account/Login") class="btn language-btn">
                 <img src="https://flagcdn.com/w80/de.png" alt="Germany flag" />
                 <div class="language-text">
                     <span class="language-name">German</span>
                 </div>
-            </button>
+            </a>
 
-            <button class="language-btn" type="button">
+            <a href=@(IsAuthorized ? "/language?id=16" : "/Account/Login") class="btn language-btn">
                 <img src="https://flagcdn.com/w80/it.png" alt="Italy flag" />
                 <div class="language-text">
                     <span class="language-name">Italian</span>
                 </div>
-            </button>
-
-            <button class="language-btn" type="button">
+            </a>
+            <a href=@(IsAuthorized ? "/language?id=17" : "/Account/Login") class="btn language-btn">
                 <img src="https://flagcdn.com/w80/jp.png" alt="Japan flag" />
                 <div class="language-text">
-                    <span class="language-name">Japan</span>
+                    <span class="language-name">Japanese</span>
                 </div>
-            </button>
+            </a>
+            <a href=@(IsAuthorized ? "/languages" : "/Account/Login") class="btn language-btn">
+                <i class="bi bi-plus-circle fs-3"></i>
+                <div class="language-text">
+                    <span class="language-name">More Languages</span>
+                </div>
+            </a>
 
         </div>
     </section>
@@ -70,5 +66,13 @@
 </div>
 
 @code{
+    private bool IsAuthorized = false;
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        IsAuthorized = user?.Identity != null && user.Identity.IsAuthenticated;
+    }
 
 }
+

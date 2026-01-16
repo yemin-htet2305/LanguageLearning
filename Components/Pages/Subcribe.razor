@@ -45,7 +45,7 @@
     }
 </div>
 <hr/>
-<div class="d-flex flex-row align-items-center justify-content-center w-100 mt-5 card" 
+<div class="d-flex flex-row align-items-center justify-content-center w-100 mt-5 rounded-1 c-card" 
      style="height:900px;color: #845007;">
     <div class="w-50 h-100  d-flex flex-column align-items-start gap-3 p-5" style="border-right: 1px solid black">
         <h3>Checkout</h3>
@@ -100,13 +100,15 @@
     </div>
     <div class="w-50 h-100  d-flex flex-column align-items-center justify-content-center p-5">
         <h1>Order Summary</h1>
-        <p class="mt-2">Original Price:      S$@selectedPlan.Price</p>
-        <p>Tax:                 S$@(selectedPlan.Price * 0.08)</p>
+        <p class="mt-2">Original Price:      S$@(selectedPlan is null? "0.00" : selectedPlan.Price)</p>
+        <p>Tax:                 S$@(selectedPlan is null ? "0.00" : selectedPlan.Price * 0.08)</p>
         <hr/>
-        <h3>Total:   S$@(selectedPlan.Price + selectedPlan.Price *0.08)</h3>
-        @if(IsAdmin || IsPremium)
+        <h3>Total:   S$@(selectedPlan is null ? "0.00" : selectedPlan.Price + selectedPlan.Price * 0.08)</h3>
+        @if (IsAdmin || IsPremium || selectedPlan is null)
         {
-            <h3 class="text-success mt-5">You are already a Premium User.</h3>
+            <h3 class="text-success mt-5">@(selectedPlan is null? "Please Selected Plan Before You Pay." :
+                            "You are already a Premium User.")
+        </h3>
         }
         else
         {
@@ -135,7 +137,7 @@
 
 
     List<Plan> Plans = new();
-    Plan selectedPlan = new Plan();
+    Plan? selectedPlan = null;
     private bool IsAdmin = false;
     private bool IsPremium = false;
     protected override async Task OnInitializedAsync()

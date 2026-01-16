@@ -2,6 +2,7 @@
 @inject LanguageLearningContext DbContext
 @using LanguageLearning.Data
 @using LanguageLearning.Domain
+@using Microsoft.AspNetCore.Identity
 @using Microsoft.EntityFrameworkCore
 
 <div class="d-flex align-content-center justify-content-center flex-column gap-5 w-100">
@@ -49,7 +50,7 @@
                 <th>UserName</th>
                 <th>Email</th>
                 <th>Id</th>
-                <th>Phone Number</th>
+                <th>Role</th>
             </tr>
         </thead>
         <tbody>
@@ -59,7 +60,7 @@
                     <td>@user.FirstName @user.LastName</td>
                     <td>@user.Email</td>
                     <td>@user.Id</td>
-                    <td>@user.PhoneNumber</td>
+                    <td>@GetUserRoles(user.Id)</td>
                 </tr>
             }
         </tbody>
@@ -70,11 +71,21 @@
     private List<LanguageLearningUser> users = new();
     private List<Language> languages = new();
     private List<Payment> payments = new();
+    private List<IdentityUserRole<string>> userroles = new();
+    private List<IdentityRole> roles = new();
 
     protected override async Task OnInitializedAsync()
     {
         users = await DbContext.Users.ToListAsync(); // Users is DbSet<LanguageLearningUser>
         languages = await DbContext.Language.ToListAsync();
         payments = await DbContext.Payment.ToListAsync();
+        userroles = await DbContext.UserRoles.ToListAsync();
+        roles = await DbContext.Roles.ToListAsync();
+    }
+    private string GetUserRoles(string userId)
+    {
+        var roleIds = userroles.Where(ur => ur.UserId == userId).Select(ur => ur.RoleId);
+        var roleNames = roles.Where(r => roleIds.Contains(r.Id)).Select(r => r.Name);
+        return string.Join(", ", roleNames);
     }
 }
