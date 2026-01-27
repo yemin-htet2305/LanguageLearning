@@ -1,0 +1,131 @@
+﻿.qbody {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.card {
+    box-shadow: 5px 5px 5px #845007;
+}
+
+    .card:hover {
+        border: 3px solid #845007;
+        background: #fbf7ef;
+    }
+.quiz-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    padding: 40px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.question {
+    margin-bottom: 35px;
+}
+
+    .question h3 {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option {
+    position: relative;
+    cursor: pointer;
+}
+
+    .option input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .option label {
+        display: block;
+        padding: 15px 20px;
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        color: #495057;
+    }
+
+        .option label:hover {
+            background: navy;
+            color: white;
+            border-color: navy;
+        }
+
+    .option input[type="radio"]:checked + label {
+        background: navy;
+        color: white;
+        border-color: navy;
+        font-weight: 500;
+    }
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #845007;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+}
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+.result {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background: #d4edda;
+    border: 2px solid #c3e6cb;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+    .result.show {
+        display: block;
+    }
+
+    .result h2 {
+        color: #155724;
+        margin-bottom: 10px;
+    }
+
+    .result p {
+        color: #155724;
+        font-size: 18px;
+    }

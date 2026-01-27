@@ -1,0 +1,107 @@
+﻿@page "/language/{languageName}/quiz/{lessonId:int}"
+@using LanguageLearning.Components.Layout
+@using LanguageLearning.Domain
+@rendermode InteractiveServer
+@layout UserLayout
+@inject HttpClient httpClient
+@inject NavigationManager NavigationManager
+
+<div class="qbody">
+    <div class="quiz-container card">
+        <h1 style="color: #845007" class="fs-2 fw-bold">@quiz.Title</h1>
+
+        <form id="quizForm">
+            @foreach (var question in filteredQuessions)
+            {
+                <div class="question">
+                    <h2 style="color: #854007">@question.Text</h2>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="@(question.Id)a" name="q@(question.Id)" value="A" @onchange="@(() => SetAnswer(question.Id, "A"))">
+                            <label for="@(question.Id)a">@question.OptA</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="@(question.Id)b" name="q@(question.Id)" value="B" @onchange="@(() => SetAnswer(question.Id, "B"))">
+                            <label for="@(question.Id)b">@question.OptB</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="@(question.Id)c" name="q@(question.Id)" value="C" @onchange="@(() => SetAnswer(question.Id, "C"))">
+                            <label for="@(question.Id)c">@question.OptC</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="@(question.Id)d" name="q@(question.Id)" value="D" @onchange="@(() => SetAnswer(question.Id, "D"))">
+                            <label for="@(question.Id)d">@question.OptD</label>
+                        </div>
+                    </div>
+                </div>
+            }
+            <button type="button" class="submit-btn" @onclick="@HandleSubmit">Submit Quiz</button>
+            <a style="background-color: #FF6961" class="btn submit-btn" href="@($"/language/{LanguageName}/unit/{LessonId}")">Go Back</a>
+        </form>
+        <div class="result" id="result" style="display: @(showResult ? "block" : "none")">
+            <h2>Your Score: @score / @filteredQuessions.Count (@scorePer%)</h2>
+            <p style="color: red"> @(doubleClicked ? "Plase Go Back To Try the quiz Again" : "")</p>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string? LanguageName { get; set; }
+
+    [Parameter]
+    public int LessonId { get; set; }
+
+    List<Quiz> Quizs = new List<Quiz>();
+    List<Quession> quessions = new List<Quession>();
+
+    Quiz quiz => Quizs.Where(q => q.LessonId == LessonId).FirstOrDefault() ?? new Quiz();
+    List<Quession> filteredQuessions => quessions.Where(q => q.QuizId == quiz.Id).ToList();
+
+
+    // Dictionary to store user's answers
+    private Dictionary<int, string> userAnswers = new Dictionary<int, string>();
+    private bool showResult = false;
+    private int score = 0;
+    private int scorePer = 0;
+    private bool doubleClicked = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Quizs = await httpClient.GetFromJsonAsync<List<Quiz>>("api/quizs") ?? new List<Quiz>();
+        quessions = await httpClient.GetFromJsonAsync<List<Quession>>("api/quessions") ?? new List<Quession>();
+    }
+
+    private void SetAnswer(int questionId, string answer)
+    {
+        userAnswers[questionId] = answer;
+    }
+
+    private async Task HandleSubmit()
+    {
+        if (showResult)
+        {
+            doubleClicked = true;
+        }
+        else
+        {
+            showResult = true;
+            score = 0;
+
+            for (int i = 0; i < filteredQuessions.Count; i++)
+            {
+                Console.WriteLine($"Question {i}: Correct={filteredQuessions[i].CorrrectAnswer}, User={userAnswers.GetValueOrDefault(filteredQuessions[i].Id, "N/A")}");
+
+                if (userAnswers.ContainsKey(filteredQuessions[i].Id) &&
+                   filteredQuessions[i].CorrrectAnswer == userAnswers[filteredQuessions[i].Id])
+                {
+                    score++;
+                }
+            }
+
+            scorePer = filteredQuessions.Count > 0 ? (score * 100) / filteredQuessions.Count : 0;
+
+        }
+    }
+}

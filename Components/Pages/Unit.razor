@@ -5,66 +5,23 @@
 @layout UserLayout
 @inject HttpClient httpClient
 
-<h1></h1>
+<link href="Manage.css" rel="stylesheet" />
+<h1 class="mb-5">@LanguageName</h1>
 <div style="height:800px;" class="w-100 border border-3 d-flex align-content-center justify-content-start rounded-3">
         <button type="button" class="btn" @onclick="PreviousCards"><i class="bi bi-arrow-left fs-3"></i></button>
     @if (FilteredLessonContents.Any())
     {
         <div class="d-flex flex-column justify-content-around align-items-center w-100 gap-3 py-3">
-            <h1>@if(LessonId % 3 == 0)
-                {
-                    @if (currentIndex == 0)
-                    {
-                        <text>Football</text>
-                    }
-                    else if (currentIndex == 1)
-                    {
-                        <text>BasketBall</text>
-                    }
-                    else
-                    {
-                        <text>Golf</text>
-                    }
-                    
-                }else if(LessonId % 3 == 1)
-                {
-                    
-                    @if (currentIndex == 0)
-                    {
-                        <text>Good Morning</text>
-                    }
-                    else if (currentIndex == 1)
-                    {
-                        <text>Good Afternoon</text>
-                    }
-                    else
-                    {
-                        <text>Good Night</text>
-                    }
-
-                }
-                else
-                {
-                    @if (currentIndex == 0)
-                    {
-                        <text>Head</text>
-                    }
-                    else if (currentIndex == 1)
-                    {
-                        <text>Hand</text>
-                    }
-                    else
-                    {
-                        <text>Leg</text>
-                    }
-                }
-            </h1>
+            <h1>Titles</h1>
             <img src="@FilteredLessonContents[currentIndex].ContentType" class="w-50 h-50" />
             <h3>@FilteredLessonContents[currentIndex].ContentText </h3>
         </div>
     }
         <button type="button" class="btn" @onclick="NextCards"><i class="bi bi-arrow-right fs-3"></i></button>
 </div>
+<a href="@($"/language/{LanguageName}/quiz/{LessonId}")" class="btn btn-primary mt-5 fs-3">
+    Start Quiz
+</a>
 
 
 @code{

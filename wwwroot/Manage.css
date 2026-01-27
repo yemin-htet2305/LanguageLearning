@@ -97,6 +97,11 @@
     color: #854007;
     text-decoration: none;
 }
+.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 .card {
     box-shadow: 5px 5px 5px #845007;
 }
@@ -155,3 +160,7 @@
     box-shadow: 5px 5px 5px #845007;
     border: 1px solid #845007;
 }
+.unit{
+    background-image: url("backgroung.webp");
+}
+

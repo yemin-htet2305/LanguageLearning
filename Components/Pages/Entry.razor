@@ -20,9 +20,18 @@
     <div class="row g-4">
         @foreach (var language in FilteredLanguages)
         {
-            <div class="col-12 col-md-6 col-lg-4">
-                <a href="@($"/language?id={language.Id}")" class="card-link w-25 rounded-3">
+            <div class="col-12 col-md-6 col-lg-4" style="position: relative;">
+                <a href="@($"/language?id={language.Id}")" class="card-link w-25 rounded-3"
+                   style="@(developedLanguageIds.Contains(language.Id) ? "" : "pointer-events: none; opacity: 0.5; cursor: not-allowed;")">
                 <Card Name=@language.Name Description=@language.Description />
+                    @if (!developedLanguageIds.Contains(language.Id))
+                    {
+                        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                                font-size: 1.5rem; font-weight: bold; color: #fff;
+                                background: rgba(0,0,0,0.6); pointer-events: none;">
+                            Coming Soon...
+                        </div>
+                    }
                 </a>
             </div>
         }
@@ -33,6 +42,8 @@
 @code {
     List<Language> Languages = new();
     string searchText = "";
+
+    List<int> developedLanguageIds = new() {3,4, 5, 6, 10,11 };
 
     // Computed property that filters based on searchText
     List<Language> FilteredLanguages => string.IsNullOrWhiteSpace(searchText)
