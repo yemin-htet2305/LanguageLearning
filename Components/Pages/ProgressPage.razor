@@ -1,30 +1,224 @@
 ﻿@page "/progress"
 @using LanguageLearning.Components.Layout
 @using LanguageLearning.Domain
+@using System.Security.Claims
 @using Microsoft.EntityFrameworkCore
-@inject HttpClient httpClient
+@attribute [Authorize(Roles = "User,Premium")]
 @layout UserLayout
 @inject AuthenticationStateProvider authenticationStateProvider
+@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
+@implements IAsyncDisposable
 
 <PageTitle>My Progress</PageTitle>
 
+<div class="container mt-4" style="color: #845007">
+    <h2 class="mb-4">My Learning Progress</h2>
 
-<div>{@userId}</div>
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Progress Table -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Recent Completed Lessons</h4>
+            </div>
+            <div class="card-body">
+                @if (userProgress.Any())
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Lesson ID</th>
+                                <th>Lesson Title</th>
+                                <th>Language</th>
+                                <th>Progress</th>
+                                <th>Completed Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var progress in userProgress.OrderByDescending(p => p.CompletedDate))
+                            {
+                                var lesson = allLessons.FirstOrDefault(l => l.Id == progress.LessonId);
+                                var language = allLanguages.FirstOrDefault(lang => lang.Id == lesson?.LanguageId);
+
+                                <tr>
+                                    <td>@progress.LessonId</td>
+                                    <td>@(lesson?.Title ?? "Unknown")</td>
+                                    <td>@(language?.Name ?? "Unknown")</td>
+                                    <td>
+                                        <span class="badge @(progress.IsCompleted ? "bg-success" : "bg-warning")">
+                                            @progress.ProgressPer.ToString("F0")%
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (progress.IsCompleted && progress.CompletedDate != default)
+                                        {
+                                            @progress.CompletedDate.ToString("MMM dd, yyyy")
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">In Progress</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted">No progress recorded yet.</p>
+                }
+            </div>
+        </div>
+
+        <!-- Language Progress Bars -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Progress by Language</h4>
+            </div>
+            <div class="card-body">
+                @if (languageProgressData.Any())
+                {
+                    @foreach (var langData in languageProgressData)
+                    {
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">@langData.LanguageName</h5>
+                                <span class="badge bg-primary">
+                                    @langData.CompletedLessons / @langData.TotalLessons Lessons
+                                </span>
+                            </div>
+
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar bg-success"
+                                     role="progressbar"
+                                     style="width: @langData.ProgressPercentage%"
+                                     aria-valuenow="@langData.ProgressPercentage"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    @langData.ProgressPercentage.ToString("F0")%
+                                </div>
+                            </div>
+
+                            <small class="text-muted">
+                                @if (langData.CompletedLessons == langData.TotalLessons)
+                                {
+                                    <span class="text-success">✓ All lessons completed!</span>
+                                }
+                                else
+                                {
+                                    <span>@(langData.TotalLessons - langData.CompletedLessons) lessons remaining</span>
+                                }
+                            </small>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted">Start learning to see your progress!</p>
+                }
+            </div>
+        </div>
+    }
+</div>
 
 @code {
     private string? userId;
+    private bool isLoading = true;
+    private LanguageLearning.Data.LanguageLearningContext context = default!;
+
+    private List<Progress> userProgress = new();
+    private List<Language> allLanguages = new();
+    private List<Lesson> allLessons = new();
+    private List<LanguageProgressData> languageProgressData = new();
 
     protected override async Task OnInitializedAsync()
     {
-        // Get user ID (THIS IS NEW)
-        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        // Get the userId claim
-        var userIdClaim = user.FindFirst("userId");
-        if (userIdClaim != null)
+        try
         {
-            userId = userIdClaim.Value;
+            isLoading = true;
+            context = await DbFactory.CreateDbContextAsync();
+
+            // Get user ID
+            var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            userId = user.FindFirst("userId")?.Value;
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                // Load all data
+                userProgress = await context.Progress
+                    .Where(p => p.UserId == userId)
+                    .ToListAsync();
+
+                allLanguages = await context.Language.ToListAsync();
+                allLessons = await context.Lesson.ToListAsync();
+
+                // Calculate progress by language
+                CalculateLanguageProgress();
+            }
         }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void CalculateLanguageProgress()
+    {
+        languageProgressData = new List<LanguageProgressData>();
+
+        foreach (var language in allLanguages)
+        {
+            var lessonsInLanguage = allLessons.Where(l => l.LanguageId == language.Id).ToList();
+            var totalLessons = lessonsInLanguage.Count;
+
+            if (totalLessons > 0)
+            {
+                // Check if user has at least one progress record for this language
+                var hasProgress = userProgress.Any(p => lessonsInLanguage.Any(l => l.Id == p.LessonId));
+
+                if (hasProgress) // Only add if user has progress
+                {
+                    var completedLessons = userProgress
+                        .Where(p => p.IsCompleted && lessonsInLanguage.Any(l => l.Id == p.LessonId))
+                        .Count();
+
+                    var progressPercentage = (double)completedLessons / totalLessons * 100;
+
+                    languageProgressData.Add(new LanguageProgressData
+                    {
+                        LanguageName = language.Name,
+                        TotalLessons = totalLessons,
+                        CompletedLessons = completedLessons,
+                        ProgressPercentage = progressPercentage
+                    });
+                }
+            }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (context != null)
+        {
+            await context.DisposeAsync();
+        }
+    }
+
+    private class LanguageProgressData
+    {
+        public string LanguageName { get; set; } = "";
+        public int TotalLessons { get; set; }
+        public int CompletedLessons { get; set; }
+        public double ProgressPercentage { get; set; }
     }
 }
