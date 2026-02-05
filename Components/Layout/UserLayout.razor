@@ -20,6 +20,11 @@
                     Upgrade To Premium
                 </NavLink>
             </AuthorizeView>
+            <AuthorizeView Roles="User,Premium">
+                <NavLink href="/progress" class="btn fs-5 px-3 py-1 fw-bold log-btn">
+                    My Progress
+                </NavLink>
+            </AuthorizeView>
             <AuthorizeView>
                 <NavLink href="/languages" class="btn fs-5 px-3 py-1 fw-bold log-btn">
                     Languages

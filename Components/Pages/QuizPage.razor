@@ -1,10 +1,13 @@
 ﻿@page "/language/{languageName}/quiz/{lessonId:int}"
 @using LanguageLearning.Components.Layout
 @using LanguageLearning.Domain
+@using Microsoft.EntityFrameworkCore
 @rendermode InteractiveServer
 @layout UserLayout
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 
 <div class="qbody">
     <div class="quiz-container card">
@@ -42,6 +45,12 @@
             <h2>Your Score: @score / @filteredQuessions.Count (@scorePer%)</h2>
             <p style="color: red"> @(doubleClicked ? "Plase Go Back To Try the quiz Again" : "")</p>
         </div>
+        @if (!string.IsNullOrEmpty(message))
+        {
+            <div class="alert @alertClass mt-3" role="alert">
+                @message
+            </div>
+        }
     </div>
 </div>
 
@@ -59,6 +68,12 @@
     Quiz quiz => Quizs.Where(q => q.LessonId == LessonId).FirstOrDefault() ?? new Quiz();
     List<Quession> filteredQuessions => quessions.Where(q => q.QuizId == quiz.Id).ToList();
 
+    private string? userId;
+    private LanguageLearning.Data.LanguageLearningContext? context = default!;
+
+    private string message = "";
+    private string alertClass = "";
+
 
     // Dictionary to store user's answers
     private Dictionary<int, string> userAnswers = new Dictionary<int, string>();
@@ -69,6 +84,14 @@
 
     protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        // Get the userId claim
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
         Quizs = await httpClient.GetFromJsonAsync<List<Quiz>>("api/quizs") ?? new List<Quiz>();
         quessions = await httpClient.GetFromJsonAsync<List<Quession>>("api/quessions") ?? new List<Quession>();
     }
@@ -101,6 +124,44 @@
             }
 
             scorePer = filteredQuessions.Count > 0 ? (score * 100) / filteredQuessions.Count : 0;
+            if (scorePer > 50)
+            {
+                context = DbFactory.CreateDbContext();
+                var existingProgress = await context.Progress.FirstOrDefaultAsync(p => p.LessonId == LessonId && p.UserId == userId);
+                if(existingProgress != null)
+                {
+                    // Already exists
+                    message = "You have already passed!";
+                    alertClass = "alert-info";
+                }
+                else
+                {
+                    var progress = new Progress
+                    {
+                        ProgressPer = scorePer,
+                        IsCompleted = true,
+                        CompletedDate = scorePer >= 50 ? DateTime.Now : default,
+                        LessonId = LessonId,
+                        UserId = userId,
+                        CreatedBy = userId,
+                        UpdatedBy = userId,
+                        DateCreated = DateTime.Now,
+                        DateUpdated = DateTime.Now
+                    };
+                    await context.Progress.AddAsync(progress);
+                    await context.SaveChangesAsync();
+
+                    // Successfully posted
+                    message = "You Passed!";
+                    alertClass = "alert-success";
+                }
+            }
+            else
+            {
+                // Failed
+                message = "You Failed! Try again";
+                alertClass = "alert-danger";
+            }
 
         }
     }

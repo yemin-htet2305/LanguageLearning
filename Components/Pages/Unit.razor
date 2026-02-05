@@ -6,20 +6,22 @@
 @inject HttpClient httpClient
 
 <link href="Manage.css" rel="stylesheet" />
-<h1 class="mb-5">@LanguageName</h1>
+<h1 style="color: #845007" class="mb-5 fw-bolder fs-1">@LanguageName</h1>
 <div style="height:800px;" class="w-100 border border-3 d-flex align-content-center justify-content-start rounded-3">
         <button type="button" class="btn" @onclick="PreviousCards"><i class="bi bi-arrow-left fs-3"></i></button>
     @if (FilteredLessonContents.Any())
     {
         <div class="d-flex flex-column justify-content-around align-items-center w-100 gap-3 py-3">
-            <h1>Titles</h1>
+            <h1 style="color: #845007" class="fw-bold fs-1">
+                @FilteredLessonContents[currentIndex].ContentType[..^4]
+                </h1>
             <img src="@FilteredLessonContents[currentIndex].ContentType" class="w-50 h-50" />
-            <h3>@FilteredLessonContents[currentIndex].ContentText </h3>
+            <h3 style="color: #845007" class="fw-bold fs-3" >@FilteredLessonContents[currentIndex].ContentText </h3>
         </div>
-    }
+    }   
         <button type="button" class="btn" @onclick="NextCards"><i class="bi bi-arrow-right fs-3"></i></button>
 </div>
-<a href="@($"/language/{LanguageName}/quiz/{LessonId}")" class="btn btn-primary mt-5 fs-3">
+<a href="@($"/language/{LanguageName}/quiz/{LessonId}")" class="btn log-btn mt-5 fs-4 fw-bold">
     Start Quiz
 </a>
 

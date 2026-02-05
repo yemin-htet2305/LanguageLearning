@@ -1,0 +1,30 @@
+﻿@page "/progress"
+@using LanguageLearning.Components.Layout
+@using LanguageLearning.Domain
+@using Microsoft.EntityFrameworkCore
+@inject HttpClient httpClient
+@layout UserLayout
+@inject AuthenticationStateProvider authenticationStateProvider
+
+<PageTitle>My Progress</PageTitle>
+
+
+<div>{@userId}</div>
+
+@code {
+    private string? userId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Get user ID (THIS IS NEW)
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        // Get the userId claim
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
+    }
+}
