@@ -7,6 +7,8 @@
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 
 @if (Language is null)
 {
@@ -28,7 +30,9 @@ else{<div class="lp-page w-100">
                 {
                     var lesson = FilteredLessons[i];
                     var isLocked = i > 0 && (!IsAdmin && !IsPremium);
-
+                    var existingProgress = context != null
+                    ? context.Progress.FirstOrDefaultAsync(p => p.LessonId == lesson.Id && p.UserId == userId)
+                    : null;
                     <div class="lesson-row">
                         <div class="lesson-left">
                             <h1 class="lesson-title">
@@ -46,7 +50,7 @@ else{<div class="lp-page w-100">
                         @if (!isLocked)
                         {
                             <a href="@($"/language/{Language.Name}/unit/{lesson.Id}")" class="btn start-btn">
-                                Start lesson
+                                @(existingProgress != null ? "Finished" : "Start Lesson")
                             </a>
                         }
                         else
@@ -61,22 +65,6 @@ else{<div class="lp-page w-100">
                     </div>
                     <div class="divider"></div>
                 }
-
-       
-
-                @* @foreach(var lesson in FilteredLessons)
-                {
-                    <div class="lesson-row">
-                        <div class="lesson-left">
-                            <h1 class="lesson-title">@lesson.Title</h1>
-                            <h2 class="lesson-name">@lesson.Description</h2>
-
-                        </div>
-
-                        <button class="start-btn">Start lesson</button>
-                    </div>
-                    <div class= "divider" ></div>
-                } *@
 
         </section>
 
@@ -97,13 +85,21 @@ else{<div class="lp-page w-100">
 
     List<Lesson> FilteredLessons => Lessons?.Where(l => l.LanguageId == Id).ToList() ?? new List<Lesson>();
 
+    private string? userId;
+    private LanguageLearning.Data.LanguageLearningContext? context = default!;
+
     protected override async Task OnInitializedAsync()
     {
-
+        context = await DbFactory.CreateDbContextAsync();
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         IsAdmin = user.IsInRole("Administrator");
         IsPremium = user.IsInRole("Premium");
+        var userIdClaim = user.FindFirst("userId");
+        if (userIdClaim != null)
+        {
+            userId = userIdClaim.Value;
+        }
 
         // Only load from API if Language is not already bound from form
         if (Language is null)
