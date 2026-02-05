@@ -8,43 +8,41 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
+<h1 style="color: #845007;" class="fw-bold">Progresses Of Users</h1>
 
-<p>
-    <a href="progresses/create">Create New</a>
-</p>
 
 <QuickGrid Class="table" Items="FilteredProgresses" Pagination="paginationState">
-    <PropertyColumn Property="progress => progress.ProgressPer" Sortable="true"/>
-    <PropertyColumn Property="progress => progress.IsCompleted" Sortable="true"/>
-    <PropertyColumn Property="progress => progress.CompletedDate" Sortable="true" />
-    <PropertyColumn Property="progress => progress.LessonId" Sortable="true" />
-    <PropertyColumn Property="progress => progress.UserId" Sortable="true" >
+    <PropertyColumn Property="progress => progress.UserId" Sortable="true">
         <ColumnOptions>
             <div>
                 <input type="search" @bind="searchText" @bind:event="oninput" autofocus />
             </div>
         </ColumnOptions>
     </PropertyColumn>
-    <PropertyColumn Property="progress => progress.DateCreated" Sortable="true" />
-    <PropertyColumn Property="progress => progress.DateUpdated" Sortable="true" />
-    <PropertyColumn Property="progress => progress.CreatedBy" Sortable="true" />
-    <PropertyColumn Property="progress => progress.UpdatedBy" Sortable="true" />
-
-    <TemplateColumn Context="progress">
+    <PropertyColumn Property="progress => progress.LessonId" Sortable="true" />
+    <PropertyColumn Property="progress => progress.ProgressPer" Sortable="true"/>
+    <PropertyColumn Property="progress => progress.IsCompleted" Sortable="true"/>
+    <PropertyColumn Property="progress => progress.CompletedDate" Sortable="true" />
+    
+    
+    @* <TemplateColumn Context="progress">
         <a href="@($"admin/progresses/edit?id={progress.Id}")">Edit</a> |
         <a href="@($"admin/progresses/details?id={progress.Id}")">Details</a> |
         <a href="@($"admin/progresses/delete?id={progress.Id}")">Delete</a>
-    </TemplateColumn>
+    </TemplateColumn> *@
 </QuickGrid>
-<Paginator State="paginationState" />
+<div style="color: #845007;">
+    <Paginator State="paginationState" />
+</div>
 
 @code {
     PaginationState paginationState = new PaginationState { ItemsPerPage = 5 };
 
     List<Progress> Progresses = new();
     string searchText = "";
-    IQueryable<Progress> FilteredProgresses => Progresses.Where(p => p.UserId.Contains(searchText)).AsQueryable();
+    IQueryable<Progress> FilteredProgresses => Progresses
+    .Where(p => (p.UserId ?? "").Contains(searchText))
+    .AsQueryable();
 
     protected override async Task OnInitializedAsync()
     {

@@ -30,9 +30,8 @@ else{<div class="lp-page w-100">
                 {
                     var lesson = FilteredLessons[i];
                     var isLocked = i > 0 && (!IsAdmin && !IsPremium);
-                    var existingProgress = context != null
-                    ? context.Progress.FirstOrDefaultAsync(p => p.LessonId == lesson.Id && p.UserId == userId)
-                    : null;
+                    var existingProgress = userProgress.FirstOrDefault(p => p.LessonId == lesson.Id);
+                    
                     <div class="lesson-row">
                         <div class="lesson-left">
                             <h1 class="lesson-title">
@@ -75,6 +74,7 @@ else{<div class="lp-page w-100">
 @code{
     private Language? Language;
 
+    private List<Progress> userProgress = new();
     private List<Lesson> Lessons;
 
     private bool IsAdmin = false;
@@ -112,6 +112,12 @@ else{<div class="lp-page w-100">
             }
         }
         Lessons = await httpClient.GetFromJsonAsync<List<Lesson>>($"api/lessons") ?? new List<Lesson>();
+        if (!string.IsNullOrEmpty(userId))
+        {
+            userProgress = await context.Progress
+                .Where(p => p.UserId == userId)
+                .ToListAsync();
+        }
     }
 }
 
