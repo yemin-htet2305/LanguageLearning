@@ -1,4 +1,4 @@
-﻿@page "/language/{languageName}/quiz/{lessonId:int}"
+﻿@page "/language/{languageId:int}/quiz/{lessonId:int}"
 @using LanguageLearning.Components.Layout
 @using LanguageLearning.Domain
 @using Microsoft.EntityFrameworkCore
@@ -39,7 +39,7 @@
                 </div>
             }
             <button type="button" class="submit-btn" @onclick="@HandleSubmit">Submit Quiz</button>
-            <a style="background-color: #FF6961" class="btn submit-btn" href="@($"/language/{LanguageName}/unit/{LessonId}")">Go Back</a>
+            <a style="background-color: #FF6961" class="btn submit-btn" href="@($"/language/{LanguageId}/unit/{LessonId}")">Go Back</a>
         </form>
         <div class="result" id="result" style="display: @(showResult ? "block" : "none")">
             <h2>Your Score: @score / @filteredQuessions.Count (@scorePer%)</h2>
@@ -57,7 +57,7 @@
 
 @code {
     [Parameter]
-    public string? LanguageName { get; set; }
+    public int LanguageId { get; set; }
 
     [Parameter]
     public int LessonId { get; set; }

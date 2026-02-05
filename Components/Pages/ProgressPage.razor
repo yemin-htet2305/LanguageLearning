@@ -35,7 +35,6 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Lesson ID</th>
                                 <th>Lesson Title</th>
                                 <th>Language</th>
                                 <th>Progress</th>
@@ -49,7 +48,6 @@
                                 var language = allLanguages.FirstOrDefault(lang => lang.Id == lesson?.LanguageId);
 
                                 <tr>
-                                    <td>@progress.LessonId</td>
                                     <td>@(lesson?.Title ?? "Unknown")</td>
                                     <td>@(language?.Name ?? "Unknown")</td>
                                     <td>
