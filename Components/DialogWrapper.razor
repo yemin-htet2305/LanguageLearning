@@ -2,11 +2,14 @@
 @inject NavigationManager Navigation
 
 <link href="Manage.css" rel="stylesheet" />
+
+<!-- Getting Started button -->
 <button type="button" class="btn log-btn fs-5 fw-bold px-3 py-1"
 @onclick="OpenDialog">
     Getting Started
 </button>
 
+<!-- Welcome modal dialog -->
 @if (isDialogOpen)
 {
     <div class="modal fade show" style="display: block;" tabindex="-1" @onclick="CloseDialog">
@@ -31,24 +34,29 @@
 }
 
 @code {
+    // Modal state
     private bool isDialogOpen = false;
 
+    // Open modal
     private void OpenDialog()
     {
         isDialogOpen = true;
     }
 
+    // Close modal
     private void CloseDialog()
     {
         isDialogOpen = false;
     }
 
+    // Navigate to sign in page
     private void HandleSignIn()
     {
         Navigation.NavigateTo("/Account/Login");
         isDialogOpen = false;
     }
 
+    // Navigate to registration page
     private void HandleRegister()
     {
         Navigation.NavigateTo("/Account/Register");

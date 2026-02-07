@@ -9,10 +9,11 @@
     </div>
 
     <main>
+        <!-- Top Navigation Bar: User Authentication Controls -->
         <div class="top-row px-4">
-           
             <AuthorizeView>
             <Authorized>
+                <!-- Logged In User Menu -->
                 <div class="nav-item px-3">
                     <NavLink class="log-link" href="Account/Manage">
                         <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
@@ -43,12 +44,14 @@
         </AuthorizeView>
         </div>
 
+        <!-- Main Content Area -->
         <article class="content d-flex align-items-center justify-content-start flex-column">
             @Body
         </article>
     </main>
 </div>
 
+<!-- Error Notification UI -->
 <div id="blazor-error-ui">
     An unhandled error has occurred.
     <a href="" class="reload">Reload</a>

@@ -14,6 +14,7 @@
 @using System.ComponentModel.DataAnnotations
 
 <h1 style="color:#854007;" class="mb-5 fs-1">Choose Your Plan</h1>
+<!-- Plan Selection Cards -->
 <div class="d-flex justify-content-center align-content-center gap-5 flex-wrap w-100 flex-row">
     @foreach(var plan in Plans)
     {
@@ -46,6 +47,8 @@
     }
 </div>
 <hr/>
+
+<!-- Checkout Section -->
 <div class="d-flex flex-row align-items-center justify-content-center w-100 mt-5 rounded-1 c-card" 
      style="height:900px;color: #845007;">
     <div class="w-50 h-100  d-flex flex-column align-items-start gap-3 p-5" style="border-right: 1px solid black">
@@ -57,6 +60,7 @@
                 <i class="bi bi-globe"></i>  <p class="d-inline">Singapore</p>
             </div>
         </div>
+        <!-- Credit Card Payment Form -->
         <h3 class="mt-5">Credit Card Payment</h3>
         <div class="d-flex align-items-center justify-content-center w-100">
             <div class="w-100 bg-transparent">
@@ -99,6 +103,7 @@
             </div>
         </div>
     </div>
+    <!-- Right Side: Order Summary -->
     <div class="w-50 h-100  d-flex flex-column align-items-center justify-content-center p-5">
         <h1>Order Summary</h1>
         <p class="mt-2">Original Price:      S$@(selectedPlan is null? "0.00" : selectedPlan.Price)</p>
@@ -155,6 +160,9 @@
         }
         Plans = await httpClient.GetFromJsonAsync<List<Plan>>("api/plans") ?? new List<Plan>();
     }
+
+    // Handles payment submission and role upgrade
+    // Saves payment record and upgrades user from "User" role to "Premium" role
     private async Task AddPayment()
     {
         //Set the userId to the CreatedBy and UpdatedBy fields.
@@ -204,6 +212,8 @@
         }
 
     }
+
+    // Handles plan selection and populates payment form with plan details
     private async Task PurchasePlan(int planId)
     {
         selectedPlan = Plans.FirstOrDefault(p => p.Id == planId);

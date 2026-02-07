@@ -1,9 +1,17 @@
-﻿* {
+﻿/* 
+    UserLayout Styles - Student-facing layout styling
+    Provides fixed navigation bar, gradient background, and responsive design
+    Used by: Home, Course, Lesson, Quiz, and Progress pages
+*/
+
+/* Global Reset */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Main Layout Container */
 .user-layout {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-top: 70px;
@@ -11,6 +19,7 @@
     background: linear-gradient(120deg, #fafafa 0%, #fff8f0 50%, #ffefd5 100%);
 }
 
+/* Fixed Top Navigation Bar */
 .navbar {
     background: white;
     padding: 0 2rem;
@@ -32,8 +41,8 @@
     gap: 1.25rem;
 }
 
- 
 
+/* Navigation Links */
 .nav-link {
     color: #845007;
     text-decoration: none;
@@ -79,6 +88,7 @@
     display: block;
 }
 
+/* Main Content Area */
 .user-content {
     padding-top: 80px;
     min-height: 100vh;
@@ -97,6 +107,7 @@
         line-height: 1.6;
     }
 
+/* Navigation Buttons */
 .nav-button {
     background: #2563eb;
     color: white;

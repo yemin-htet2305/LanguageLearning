@@ -1,7 +1,9 @@
-﻿.trans-bg {
+﻿/* Semi-transparent light gray background */
+.trans-bg {
     background-color: rgba(211, 211, 211, 0.3);
 }
 
+/* Login/action button styling */
 .log-btn {
     background-color: rgba(211, 211, 211, 1);
     color: #845007;
@@ -13,10 +15,12 @@
         font: bold;
     }
 
+/* Yin-yang icon size */
 .bi-yin-yang {
     font-size: 50px;
 }
 
+/* Login/action link styling */
 .log-link {
     color: #845007;
     text-decoration: none;
@@ -26,99 +30,120 @@
         color: navy;
     }
 
+/* Close button hover effect */
 .close-btn:hover {
     background-color: gray;
 }
+
+/* Navigation button styling */
 .nav-btn {
     color: #845007;
     text-align: left;
 }
-.nav-btn:hover {
-    background-color: #845007;
-    color: white;
-    font: bold;
-}
 
+    .nav-btn:hover {
+        background-color: #845007;
+        color: white;
+        font: bold;
+    }
+    /* Active navigation button state */
     .nav-btn.active {
         background-color: #845007;
         color: white;
         font: bold;
     }
 
-
-
+/* Table styling */
 .table {
     color: #845007;
 }
-    
+    /* Table cell line height */
     .table td {
         line-height: 5;
     }
 
-.edit-btn{
+/* Edit button styling */
+.edit-btn {
     background-color: dimgrey;
     color: ivory;
 }
- .edit-btn:hover{
-     background-color: black;
-     color:ivory;
- }
 
- .detail-btn{
-     background-color: yellow;
-     color: black;
- }
+    .edit-btn:hover {
+        background-color: black;
+        color: ivory;
+    }
+
+/* Detail/view button styling */
+.detail-btn {
+    background-color: yellow;
+    color: black;
+}
+
     .detail-btn:hover {
         background-color: darkgoldenrod;
         color: black;
     }
 
+/* Delete button styling */
 .delete-btn {
     background-color: indianred;
     color: ivory;
 }
+
     .delete-btn:hover {
         background-color: darkred;
         color: ivory;
     }
 
+/* Create/add button styling */
 .create-btn {
     background-color: forestgreen;
     color: ivory;
     margin-right: 200px;
 }
+
     .create-btn:hover {
         background-color: khaki;
         color: #845007;
     }
+
+/* Card link styling */
 .card-link {
     background-color: #f4f6f8;
     border: 1px solid #e7e5e4;
     color: #854007;
     text-decoration: none;
 }
+
+/* Disabled element styling */
 .disabled {
-        pointer-events: none;
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Card component styling */
 .card {
     box-shadow: 5px 5px 5px #845007;
 }
-.card:hover{
-    border: 3px solid #845007;
-    background: #fbf7ef;
-}
 
+    .card:hover {
+        border: 3px solid #845007;
+        background: #fbf7ef;
+    }
+
+/* Search input styling */
 .entry-search {
     color: #845007;
     border: 1px solid #845007;
     box-shadow: 5px 5px 5px #845007;
 }
+
     .entry-search:focus {
         border: 2px solid #845007;
     }
 
+/* Footer bar styling */
 .footer-bar {
     background: navy;
     padding: 0 2rem;
@@ -128,14 +153,17 @@
     color: white;
 }
 
+/* Footer link styling */
 .foot-link {
     color: white;
     text-decoration: none;
 }
+
     .foot-link:hover {
         color: #845007;
     }
 
+/* Purchase/action button styling */
 .purchase-btn {
     align-self: center;
     background: navy;
@@ -156,11 +184,13 @@
         cursor: not-allowed;
     }
 
+/* Custom card styling */
 .c-card {
     box-shadow: 5px 5px 5px #845007;
     border: 1px solid #845007;
 }
-.unit{
+
+/* Unit page background */
+.unit {
     background-image: url("backgroung.webp");
 }
-

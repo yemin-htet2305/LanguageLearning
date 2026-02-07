@@ -1,15 +1,19 @@
 ﻿@rendermode InteractiveServer
 @inject NavigationManager Navigation
 
+
+<!-- Language card component -->
     <div class="card text-start w-100">
-        @* Option 1: Using @($"...") *@
+    <!-- Country flag image -->
         <img src="@($"https://flagcdn.com/w320/{Description}.png")"
              class="card-img-top" 
              style="height:230px; border-bottom: 1px solid #845007;"/>
+    <!-- Card content -->
    <div class="card-body">
         <h3 class="card-title">@Name</h3>
         <hr />
         <h5 class="card-texttext-center">Click To Learn @Name!</h5>
+        <!-- Premium badge and rating -->
         <div class="d-flex justify-content-around align-content-center">
                 <p class="fw-bolder">Premium</p>
                 <p>Rating: ⭐⭐⭐⭐⭐</p>

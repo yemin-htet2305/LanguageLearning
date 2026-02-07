@@ -7,8 +7,11 @@
 
 <link href="Manage.css" rel="stylesheet" />
 
+<!-- Lesson content carousel with navigation -->
 <div style="height:800px;" class="w-100 border border-3 d-flex align-content-center justify-content-start rounded-3">
+    <!-- Previous button -->
         <button type="button" class="btn" @onclick="PreviousCards"><i class="bi bi-arrow-left fs-3"></i></button>
+    <!-- Display current lesson content -->
     @if (FilteredLessonContents.Any())
     {
         <div class="d-flex flex-column justify-content-around align-items-center w-100 gap-3 py-3">
@@ -18,14 +21,18 @@
             <img src="@FilteredLessonContents[currentIndex].ContentType" class="w-50 h-50" />
             <h3 style="color: #845007" class="fw-bold fs-3" >@FilteredLessonContents[currentIndex].ContentText </h3>
         </div>
-    }   
+    }
+
+    <!-- Next button -->
         <button type="button" class="btn" @onclick="NextCards"><i class="bi bi-arrow-right fs-3"></i></button>
 </div>
+<!-- Quiz navigation (authorized users only) -->
 <AuthorizeView>
     <a href="@($"/language/{LanguageId}/quiz/{LessonId}")" class="btn log-btn mt-5 fs-4 fw-bold">
         Start Quiz
     </a>
 </AuthorizeView>
+<!-- Back to language page -->
 <a style="background-color: #FF6961" class="btn submit-btn mt-5" href="@($"/language?id={LanguageId}")">Go Back</a>
 
 
@@ -36,22 +43,27 @@
     [Parameter]
     public int LessonId { get; set; }
 
+    // Data storage
     List<LessonContent> LessonContents = new List<LessonContent>();
     private int currentIndex = 0;
 
+    // Filter lesson contents by current lesson ID
     List<LessonContent> FilteredLessonContents => LessonContents?.Where(l => l.LessonId == LessonId).ToList() ?? new List<LessonContent>();
 
     
+    // Initialize component and fetch data
     protected override async Task OnInitializedAsync()
     {
         LessonContents = await httpClient.GetFromJsonAsync<List<LessonContent>>("api/lessoncontents") ?? new List<LessonContent>();
  
     }
     
+    // Navigate to next card
     private void NextCards()
     {
         currentIndex = (currentIndex + 1) % FilteredLessonContents.Count;
     }
+    // Navigate to previous card
     private void PreviousCards()
     {
         currentIndex = (currentIndex - 1 + FilteredLessonContents.Count) % FilteredLessonContents.Count;

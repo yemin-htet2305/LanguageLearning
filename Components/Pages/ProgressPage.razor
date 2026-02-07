@@ -190,7 +190,7 @@
                         .Where(p => p.IsCompleted && lessonsInLanguage.Any(l => l.Id == p.LessonId))
                         .Count();
 
-                    var progressPercentage = (double)completedLessons / totalLessons * 100;
+                    var progressPercentage = (double)completedLessons / totalLessons * 100;// Calculate percentage
 
                     languageProgressData.Add(new LanguageProgressData
                     {

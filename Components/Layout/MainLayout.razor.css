@@ -1,3 +1,9 @@
+/* 
+    MainLayout Styles - Admin dashboard layout styling
+    Provides responsive design for sidebar navigation and top authentication bar
+*/
+
+/* Base Layout Structure */
 .page {
     position: relative;
     display: flex;
@@ -8,10 +14,12 @@ main {
     flex: 1;
 }
 
+/* Sidebar Navigation */
 .sidebar {
     background-color: #f7f7f7;
 }
 
+/* Top Navigation Bar */
 .top-row {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
@@ -36,6 +44,7 @@ main {
         text-overflow: ellipsis;
     }
 
+/* Mobile Responsive Design (Small Screens) */
 @media (max-width: 640.98px) {
     .top-row {
         justify-content: space-between;
@@ -46,6 +55,7 @@ main {
     }
 }
 
+/* Desktop Responsive Design (Large Screens) */
 @media (min-width: 641px) {
     .page {
         flex-direction: row;
@@ -76,6 +86,7 @@ main {
     }
 }
 
+/* Error UI Banner */
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

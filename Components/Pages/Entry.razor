@@ -7,15 +7,18 @@
 
 <link href="Manage.css" rel="stylesheet" />
 
+<!-- Page header -->
 <div class="d-flex align-items-center justify-content-center flex-column">
     <h1 style="color:#845007">Build Language Skills </h1>
     <h2 style="color:#845007">Master Language You Want To Learn With Us</h2>
 </div>
+<!-- Search bar -->
 <div class="w-100 h-25 d-flex align-items-center justify-content-center">
     <input style="outline: none; box-shadow: none;"
         class="my-3 rounded-2 w-25 h-100 fs-4 entry-search" 
     type="search" @bind="searchText" @bind:event="oninput" placeholder="Search" autofocus />
 </div>
+<!-- Language cards grid -->
 <div class="container"> 
     <div class="row g-4">
         @foreach (var language in FilteredLanguages)
@@ -40,16 +43,19 @@
 
 
 @code {
+    // Data storage
     List<Language> Languages = new();
     string searchText = "";
 
+    // IDs of languages that are currently available
     List<int> developedLanguageIds = new() {3,4, 5, 6, 10,11 };
 
-    // Computed property that filters based on searchText
+    // Filter languages based on search text
     List<Language> FilteredLanguages => string.IsNullOrWhiteSpace(searchText)
         ? Languages
         : Languages.Where(l => l.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
+    // Initialize component and fetch languages
     protected override async Task OnInitializedAsync()
     {
         Languages = await httpClient.GetFromJsonAsync<List<Language>>("api/languages") ?? new List<Language>();

@@ -7,11 +7,13 @@
 <link href="css/home.css" rel="stylesheet" /> 
 
 <div class="home-container">
+    <!-- Left Section: Language Selection Grid -->
     <section class="left-section">
         <h1 class="main-heading">
             Which is <span class="highlight">language</span> do<br />you want to learn?
         </h1>
 
+        <!-- Language Grid: Shows popular languages with flag icons -->
         <div class="language-grid">
             <a href=@(IsAuthorized ? "/language?id=4" : "/Account/Login") class="btn language-btn">
                 <img src="https://flagcdn.com/w80/es.png" alt="Spain flag" />
@@ -55,6 +57,7 @@
         </div>
     </section>
 
+    <!-- Right Section: Hero Image -->
     <section class="right-section">
         <img src="language-learning.jpeg"
              alt="Language learning illustration"
@@ -66,6 +69,8 @@
 </div>
 
 @code{
+    @* /// Checks user authentication status on page load
+/// Redirects unauthorized users to login when they select a language *@
     private bool IsAuthorized = false;
     protected override async Task OnInitializedAsync()
     {

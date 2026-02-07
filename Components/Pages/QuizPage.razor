@@ -13,6 +13,7 @@
     <div class="quiz-container card">
         <h1 style="color: #845007" class="fs-2 fw-bold">@quiz.Title</h1>
 
+        <!-- Quiz Form: Multiple Choice Questions -->
         <form id="quizForm">
             @foreach (var question in filteredQuessions)
             {
@@ -45,6 +46,8 @@
             <h2>Your Score: @score / @filteredQuessions.Count (@scorePer%)</h2>
             <p style="color: red"> @(doubleClicked ? "Plase Go Back To Try the quiz Again" : "")</p>
         </div>
+
+        <!-- Alert Messages (Pass/Fail/Already Completed) -->
         @if (!string.IsNullOrEmpty(message))
         {
             <div class="alert @alertClass mt-3" role="alert">
@@ -62,6 +65,7 @@
     [Parameter]
     public int LessonId { get; set; }
 
+    // Data collections
     List<Quiz> Quizs = new List<Quiz>();
     List<Quession> quessions = new List<Quession>();
 
@@ -82,6 +86,9 @@
     private int scorePer = 0;
     private bool doubleClicked = false;
 
+
+    // Initializes quiz data and retrieves authenticated user ID
+    // Loads quiz and question data from API
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthStateProvider.GetAuthenticationStateAsync();
@@ -96,11 +103,15 @@
         quessions = await httpClient.GetFromJsonAsync<List<Quession>>("api/quessions") ?? new List<Quession>();
     }
 
+    // Stores user's selected answer for each question
     private void SetAnswer(int questionId, string answer)
     {
         userAnswers[questionId] = answer;
     }
 
+    // Handles quiz submission and scoring logic
+    // Calculates score, saves progress to database if passed (>50%)
+    // Prevents duplicate progress entries and double submissions
     private async Task HandleSubmit()
     {
         if (showResult)

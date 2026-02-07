@@ -4,12 +4,15 @@
 
 <link href="Manage.css" rel="stylesheet" />
 <div class="user-layout">
+    <!-- Top Navigation Bar -->
     <nav class="navbar">
         
         <div class="nav-container">
-           
+
+            <!-- Brand Logo -->
            <a class="log-link fs-4 text-center fw-bold" href="">OurLingua <i class="bi bi-brilliance fs-2"></i></a>
-            
+
+            <!-- Role-Based Navigation Menu -->
             <AuthorizeView Roles="Administrator">
                 <NavLink href="/admin/dashboard" class="btn fs-5 px-3 py-1 fw-bold log-btn">
                     DashBoard
@@ -30,6 +33,7 @@
                     Languages
                 </NavLink>
             </AuthorizeView>
+            <!-- Authentication Controls -->
             <div class="d-flex align-items-end justify-content-center gap-2">
                 <AuthorizeView>
                     <NotAuthorized>

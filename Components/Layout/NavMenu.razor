@@ -7,8 +7,10 @@
     </div>
 </div>
 
+<!-- Navigation Menu Toggle -->
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
+<!-- Navigation Links -->
 <div class="nav-scrollable border-top border-1" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column gap-2">
         <div class="px-3 mt-3 mb-2">
@@ -16,6 +18,7 @@
                 <i class="bi bi-speedometer fs-5"></i> DashBoard
             </NavLink>
         </div>
+        <!-- Admin-Only Menu Items: CRUD operations for system management -->
         <AuthorizeView Roles="Administrator">
             <div class="px-3 mb-2">
                 <NavLink class="btn nav-btn w-100" href="admin/languages">

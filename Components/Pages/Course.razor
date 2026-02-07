@@ -10,6 +10,9 @@
 @using Microsoft.EntityFrameworkCore
 @inject IDbContextFactory<LanguageLearning.Data.LanguageLearningContext> DbFactory
 
+@* Course Page - Displays lessons for a selected language
+Features: Role-based access (Premium/Admin unlock all lessons), progress tracking, lesson locking *@
+
 @if (Language is null)
 {
     <p>Loading...</p>
@@ -88,11 +91,15 @@ else{<div class="lp-page w-100">
     private string? userId;
     private LanguageLearning.Data.LanguageLearningContext? context = default!;
 
+    /// Initializes course data, user authentication, and progress tracking
+    /// Checks user roles (Admin/Premium) to determine lesson access
     protected override async Task OnInitializedAsync()
     {
         context = await DbFactory.CreateDbContextAsync();
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
+
+        // Check user roles for premium content access
         IsAdmin = user.IsInRole("Administrator");
         IsPremium = user.IsInRole("Premium");
         var userIdClaim = user.FindFirst("userId");
@@ -112,6 +119,7 @@ else{<div class="lp-page w-100">
             }
         }
         Lessons = await httpClient.GetFromJsonAsync<List<Lesson>>($"api/lessons") ?? new List<Lesson>();
+        // Load user's progress for completed lessons
         if (!string.IsNullOrEmpty(userId))
         {
             userProgress = await context.Progress

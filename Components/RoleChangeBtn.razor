@@ -6,38 +6,41 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
-
+<!-- Button to upgrade user role to Premium -->
 <button @onclick="ChangeToPremium" class="btn btn-primary">Make Me Admin</button>
 
+<!-- Display status message -->
 @if (!string.IsNullOrEmpty(message))
 {
     <div class="alert alert-info mt-3">@message</div>
 }
 
 @code {
+    // Status message
     private string message = "";
 
+    // Change current user's role to Premium
     private async Task ChangeToPremium()
     {
         try
         {
+            // Get current authenticated user
             var authState = await AuthState.GetAuthenticationStateAsync();
             var user = await UserManager.GetUserAsync(authState.User);
 
             if (user != null)
             {
-                // Remove from User role
+                // Remove from User role if assigned
                 if (await UserManager.IsInRoleAsync(user, "User"))
                 {
                     await UserManager.RemoveFromRoleAsync(user, "User");
                 }
-                //Remove from Admin role
+                // Remove from Administrator role if assigned
                 if (await UserManager.IsInRoleAsync(user, "Administrator"))
                 {
                     await UserManager.RemoveFromRoleAsync(user, "Administrator");
                 }
-
-                // Add to Administrator role
+                // Add to Premium role if not already assigned
                 if (!await UserManager.IsInRoleAsync(user, "Premium"))
                 {
                     var result = await UserManager.AddToRoleAsync(user, "Premium");
